@@ -8,7 +8,6 @@ import { AgmCoreModule } from '@agm/core';
 
 import { LandingComponent } from './landing/landing.component';
 import { LoginComponent } from './login/login.component';
-import { ProfileComponent } from './profile/profile.component';
 import { ExamplesComponent } from './examples.component';
 
 @NgModule({
@@ -26,7 +25,6 @@ import { ExamplesComponent } from './examples.component';
         LandingComponent,
         LoginComponent,
         ExamplesComponent,
-        ProfileComponent
-    ]
+    ],
 })
 export class ExamplesModule { }
