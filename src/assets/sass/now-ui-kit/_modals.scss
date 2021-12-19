@@ -78,7 +78,6 @@
             max-width: 255px;
             margin: 0 auto;
         }
-
         .modal-profile{
             width: 70px;
             height: 70px;
@@ -118,6 +117,7 @@
             &.modal-profile-info{
                 background-color: $info-color;
             }
+
         }
 
         .modal-footer{

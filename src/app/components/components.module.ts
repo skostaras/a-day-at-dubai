@@ -35,6 +35,6 @@ import { ProfileComponent } from './profile/profile.component';
         NgbdModalBasic,
         ProfileComponent
     ],
-    exports: [ComponentsComponent]
+    exports: [ComponentsComponent, NgbdModalBasic]
 })
 export class ComponentsModule { }

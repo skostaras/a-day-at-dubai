@@ -12,16 +12,16 @@ export class BasicelementsComponent implements OnInit {
 
   tagItems = ['Minimal', 'Light', 'New', 'Friends'];
 
-  dropdownList = [];
+  dropdownList: any = [];
   selectedItems = [];
   dropdownSettings = {};
 
-  dropdownList1 = [];
+  dropdownList1: any = [];
   selectedItems1 = [];
   dropdownSettings1 = {};
 
-  focus;
-  focus1;
+  focus: any;
+  focus1: any;
 
   constructor() { }
 

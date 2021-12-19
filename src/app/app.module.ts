@@ -14,6 +14,7 @@ import { NavbarComponent } from './shared/navbar/navbar.component';
     declarations: [
         AppComponent,
         NavbarComponent,
+
     ],
     imports: [
         BrowserAnimationsModule,
@@ -22,9 +23,9 @@ import { NavbarComponent } from './shared/navbar/navbar.component';
         RouterModule,
         AppRoutingModule,
         ComponentsModule,
-        ExamplesModule
+        ExamplesModule,
+
     ],
-    providers: [],
-    bootstrap: [AppComponent]
+    bootstrap: [AppComponent],
 })
 export class AppModule { }
