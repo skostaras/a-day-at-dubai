@@ -1,5 +1,9 @@
 import { Component, Input, TemplateRef, ViewChild } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { FormGroup, FormControl, Validators } from '@angular/forms'
+import { EndpointService } from 'app/services/http-service';
+import { iif, Subject } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
     selector: 'app-ngbd-modal-component',
@@ -13,7 +17,22 @@ export class NgbdModalBasic {
     focus: any;
     focus1: any;
 
-    constructor(private modalService: NgbModal) { }
+    loginForm = new FormGroup({
+        username: new FormControl(null, Validators.required),
+        password: new FormControl(null, Validators.required),
+      })
+
+    private subject = new Subject();
+
+    constructor(private modalService: NgbModal, private endpointService: EndpointService) { 
+        this.subject
+        .asObservable()
+        .pipe(
+          switchMap(value => this.endpointService.postLogin(value))
+        )
+        .subscribe(result => null)
+  
+    }
 
     ngOnInit() {
         var body = document.getElementsByTagName('body')[0];
@@ -29,6 +48,12 @@ export class NgbdModalBasic {
 
         var navbar = document.getElementsByTagName('nav')[0];
         navbar.classList.remove('navbar-transparent');
+    }
+
+    onSubmit() {
+        console.log(this.loginForm.get("username").value);
+        console.log(this.loginForm.get("password").value);
+        this.subject.next(this.loginForm.value);
     }
 
     open(content: any, type: string, modalDimension: string | undefined) {
