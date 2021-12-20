@@ -4,6 +4,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms'
 import { EndpointService } from 'app/services/http-service';
 import { iif, Subject } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
+import { AuthenticationService } from 'app/services/authentication-service';
 
 @Component({
     selector: 'app-ngbd-modal-component',
@@ -24,14 +25,15 @@ export class NgbdModalBasic {
 
     private subject = new Subject();
 
-    constructor(private modalService: NgbModal, private endpointService: EndpointService) { 
+    constructor(private modalService: NgbModal, 
+        private endpointService: EndpointService,
+        private authenticationService: AuthenticationService) { 
         this.subject
         .asObservable()
         .pipe(
-          switchMap(value => this.endpointService.postLogin(value))
+          switchMap(value => this.authenticationService.postLogin(value))
         )
         .subscribe(result => null)
-  
     }
 
     ngOnInit() {

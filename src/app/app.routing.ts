@@ -8,6 +8,7 @@ import { LandingComponent } from './examples/landing/landing.component';
 import { LoginComponent } from './examples/login/login.component';
 import { NucleoiconsComponent } from './components/nucleoicons/nucleoicons.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { AuthGuard } from './services/authGuard';
 
 const routes: Routes = [
     { path: '', redirectTo: 'index', pathMatch: 'full' },
@@ -15,7 +16,9 @@ const routes: Routes = [
     { path: 'nucleoicons', component: NucleoiconsComponent },
     { path: 'examples/landing', component: LandingComponent },
     { path: 'examples/login', component: LoginComponent },
-    { path: 'examples/profile', component: ProfileComponent }
+    { path: 'examples/profile', component: ProfileComponent },
+    { path: '**', redirectTo: '' }
+    // { path: '/adminDummy', component: FormEditComponentDummy , canActivate: [AuthGuard]}
 ];
 
 @NgModule({
@@ -24,7 +27,7 @@ const routes: Routes = [
         BrowserModule,
         RouterModule.forRoot(routes)
     ],
-    exports: [
+    exports: [RouterModule
     ],
 })
 export class AppRoutingModule { }

@@ -9,7 +9,9 @@ import { ExamplesModule } from './examples/examples.module';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { BasicAuthInterceptor } from './services/auth-interceptor';
+import { ErrorInterceptor } from './services/error-interceptor';
 
 @NgModule({
     declarations: [
@@ -28,6 +30,10 @@ import { HttpClientModule } from '@angular/common/http';
         ExamplesModule,
         HttpClientModule,
 
+    ],
+    providers: [
+        { provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true },
+        { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     ],
     bootstrap: [AppComponent],
 })
