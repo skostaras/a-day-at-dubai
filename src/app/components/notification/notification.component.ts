@@ -43,6 +43,7 @@ export class NotificationComponent {
     public closeAlert(alert: IAlert) {
         const index: number = this.alerts.indexOf(alert);
         this.alerts.splice(index, 1);
+
     }
 }
 

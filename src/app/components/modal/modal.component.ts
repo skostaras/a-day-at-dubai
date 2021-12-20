@@ -15,7 +15,7 @@ export class NgbdModalBasic {
     closeResult: string | undefined;
 
     //TODO muast be saved in localstorage
-    currentUsername: string = null;
+    currentUsername: string = '';
 
     data: Date = new Date();
     focus: any;
@@ -24,22 +24,25 @@ export class NgbdModalBasic {
     loginForm = new FormGroup({
         username: new FormControl(null, Validators.required),
         password: new FormControl(null, Validators.required),
-      })
+    })
 
     private subject = new Subject();
 
 
     //TODO logout make current null
 
-    constructor(private modalService: NgbModal, 
+    constructor(private modalService: NgbModal,
         private endpointService: EndpointService,
-        private authenticationService: AuthenticationService) { 
+        private authenticationService: AuthenticationService) {
         this.subject
-        .asObservable()
-        .pipe(
-          switchMap(value => this.authenticationService.postLogin(value))
-        )
-        .subscribe(user => {this.currentUsername = this.loginForm.get("username").value})
+            .asObservable()
+            .pipe(
+                switchMap(value => this.authenticationService.postLogin(value))
+            )
+            .subscribe(user => {
+                this.currentUsername = this.loginForm.get("username").value,
+                    this.modalService.dismissAll();
+            })
     }
 
     ngOnInit() {
