@@ -7,11 +7,11 @@ import { switchMap } from 'rxjs/operators';
 import { AuthenticationService, User } from 'app/services/authentication-service';
 
 @Component({
-    selector: 'app-ngbd-modal-component',
-    templateUrl: './modal.component.html',
-    styleUrls: ['./modal.component.scss']
+    selector: 'app-login-component',
+    templateUrl: './login.component.html',
+    styleUrls: ['./login.component.scss']
 })
-export class NgbdModalBasic {
+export class LoginComponent {
     closeResult: string | undefined;
 
     //TODO muast be saved in localstorage

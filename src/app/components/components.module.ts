@@ -12,7 +12,7 @@ import { TypographyComponent } from './typography/typography.component';
 import { NucleoiconsComponent } from './nucleoicons/nucleoicons.component';
 import { ComponentsComponent } from './components.component';
 import { NotificationComponent } from './notification/notification.component';
-import { NgbdModalBasic } from './modal/modal.component';
+import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -24,7 +24,7 @@ import { HttpClientModule } from '@angular/common/http';
         TypographyComponent,
         NucleoiconsComponent,
         NotificationComponent,
-        NgbdModalBasic,
+        LoginComponent,
         ProfileComponent
     ],
     imports: [
@@ -37,6 +37,6 @@ import { HttpClientModule } from '@angular/common/http';
         JwBootstrapSwitchNg2Module,
         HttpClientModule,
     ],
-    exports: [ComponentsComponent, NgbdModalBasic]
+    exports: [ComponentsComponent, LoginComponent]
 })
 export class ComponentsModule { }
