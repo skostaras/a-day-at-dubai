@@ -1,0 +1,85 @@
+<div class="wrapper">
+    <div class="page-header clear-filter" filter-color="orange">
+        <div class="page-header-image " data-rellax-speed="-7" style="background-image: url('assets/img/header.jpg');">
+
+        </div>
+        <div class="container">
+            <div class="content-center brand">
+                <img class="n-logo" src="assets/img/logo-white.png" alt="">
+                <h1 class="h1-seo">A Day At Dubai</h1>
+                <h3>A beautiful Bootstrap 4 UI kit. Yours free.</h3>
+            </div>
+            <h6 class="category category-absolute">Designed by
+                <a href="https://invisionapp.com/" target="_blank">
+                    <img src="assets/img/invision-white-slim.png" class="invision-logo" />
+                </a>. Coded by
+                <a href="https://www.creative-tim.com" target="_blank">
+                    <img src="assets/img/creative-tim-white-slim2.png" class="creative-tim-logo" />
+                </a>.
+            </h6>
+        </div>
+    </div>
+
+    <div class="main">
+        <app-profile></app-profile>
+
+        <app-typography></app-typography>
+
+        <div class="section section-download" id="#download-section" data-background-color="black">
+            <div class="container">
+                <br>
+                <div class="row justify-content-md-center sharing-area text-center">
+                    <div class="text-center col-md-12 col-lg-8">
+                        <h3>Thank you for supporting us!</h3>
+                    </div>
+                    <div class="text-center col-md-12 col-lg-8">
+                        <a target="_blank" href="https://www.linkedin.com/company-beta/9430489/"
+                            class="btn btn-neutral btn-icon btn-linkedin btn-lg btn-round" rel="tooltip"
+                            title="Follow us">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a target="_blank" href="https://github.com/creativetimofficial/now-ui-kit-angular"
+                            class="btn btn-neutral btn-icon btn-github btn-round btn-lg" rel="tooltip"
+                            title="Star on Github">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer" data-background-color="black">
+        <div class="container">
+            <nav>
+                <ul>
+                    <li>
+                        <a href="https://www.creative-tim.com">
+                            Creative Tim
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.creative-tim.com/about-us">
+                            About Us
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://blog.creative-tim.com">
+                            Blog
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/creativetimofficial/now-ui-kit/blob/master/LICENSE.md">
+                            MIT License
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="copyright">
+                &copy;
+                {{data | date: 'yyyy'}}, Designed by
+                <a href="https://www.invisionapp.com" target="_blank">Invision</a>. Coded by
+                <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a>.
+            </div>
+        </div>
+    </footer>
+</div>
