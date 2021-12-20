@@ -14,6 +14,7 @@ import { AuthenticationService, User } from 'app/services/authentication-service
 export class NgbdModalBasic {
     closeResult: string | undefined;
 
+    //TODO muast be saved in localstorage
     currentUsername: string = null;
 
     data: Date = new Date();
