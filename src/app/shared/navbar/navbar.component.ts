@@ -1,5 +1,8 @@
 import { Component, OnInit, ElementRef, Input } from '@angular/core';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { AuthenticationService } from '../../services/authentication-service';
+import { Subject } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
     selector: 'app-navbar',
@@ -10,11 +13,35 @@ export class NavbarComponent implements OnInit {
     private toggleButton: any;
     private sidebarVisible: boolean;
 
-    constructor(public location: Location, private element: ElementRef) {
+    constructor(public location: Location, private element: ElementRef,
+        private authenticationService: AuthenticationService
+    ) {
         this.sidebarVisible = false;
     }
 
+    //TODO dummy
+    private logoutSubject = new Subject();
+
+    test() {
+        console.log("test");
+
+        this.logoutSubject.next()
+
+    }
+
     ngOnInit() {
+        this.logoutSubject
+            .asObservable()
+            .pipe(
+                switchMap(value => this.authenticationService.logout())
+            )
+            .subscribe(user => {
+                // this.currentUsername = this.loginForm.get("username").value;
+                // localStorage.setItem("username", this.currentUsername);
+                // this.modalService.dismissAll();
+                // this.notificationService.successNotification(this.currentUsername + ' you are now logged in.');
+            })
+
         const navbar: HTMLElement = this.element.nativeElement;
         this.toggleButton = navbar.getElementsByClassName('navbar-toggler')[0];
     }

@@ -44,7 +44,7 @@ export class LoginComponent {
         this.subject
             .asObservable()
             .pipe(
-                switchMap(value => this.authenticationService.postLogin(value))
+                switchMap(formValue => this.authenticationService.postLogin(formValue))
             )
             .subscribe(user => {
                 this.currentUsername = this.loginForm.get("username").value;

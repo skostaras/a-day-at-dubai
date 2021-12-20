@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
+import { NotificationService } from './notification.service';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
@@ -10,10 +11,12 @@ export class AuthenticationService {
     public user: Observable<User>;
 
     private loginUrl = 'https://frontend-5325.instashop.ae/api/users/login';
+    private logoutUrl = 'https://frontend-5325.instashop.ae/api/users/logout';
 
     constructor(
         private router: Router,
-        private http: HttpClient
+        private http: HttpClient,
+        private notificationService: NotificationService
     ) {
         this.userSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('user')));
         this.user = this.userSubject.asObservable();
@@ -57,11 +60,24 @@ export class AuthenticationService {
     }
 
     logout() {
-        // remove user from local storage to log user out
-        localStorage.removeItem('user');
-        localStorage.removeItem('username');
-        this.userSubject.next(null);
-        this.router.navigate(['/']);
+        console.log("logout");
+
+        return this.http.get<any>(this.logoutUrl, {}).pipe(
+            map(
+                message => {
+                    this.notificationService.infoNotification(message.message);
+
+                    // remove user from local storage to log user out
+                    localStorage.removeItem('user');
+                    localStorage.removeItem('username');
+                    this.userSubject.next(null);
+                    this.router.navigate(['/']);
+                }
+
+
+            )
+        )
+
     }
 }
 

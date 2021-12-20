@@ -38,6 +38,20 @@ export class NotificationService {
         this.subject.next({ alert: errorAlert });
     }
 
+    infoNotification(message: string) {
+
+        let infoAlert: IAlert;
+        infoAlert = {
+            id: 3,
+            type: 'info',
+            strong: 'Heads up',
+            message: message,
+            icon: 'travel_info',
+        }
+
+        this.subject.next({ alert: infoAlert });
+    }
+
     getAlert(): Observable<any> {
         return this.subject.asObservable();
     }

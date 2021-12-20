@@ -18,7 +18,17 @@ export class ErrorInterceptor implements HttpInterceptor {
                 this.authenticationService.logout();
             }
 
-            this.notificationService.errorNotification(err.error.errorMessage.message);
+            let errorMessage = ''
+
+            //TODO fix this for error logout
+            if (err.error.errorMessage) {
+                errorMessage = err.errorMessage;
+            } else if (err.errorMessage.message) {
+                errorMessage = err.error.errorMessage.message;
+            }
+
+            this.notificationService.errorNotification(errorMessage);
+
 
             const error = err.error.message || err.statusText;
             return throwError(error);
