@@ -11,7 +11,6 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { TypographyComponent } from './typography/typography.component';
 import { NucleoiconsComponent } from './nucleoicons/nucleoicons.component';
 import { ComponentsComponent } from './components.component';
-import { NotificationComponent } from './notification/notification.component';
 import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -23,7 +22,6 @@ import { HttpClientModule } from '@angular/common/http';
         NavigationComponent,
         TypographyComponent,
         NucleoiconsComponent,
-        NotificationComponent,
         LoginComponent,
         ProfileComponent
     ],

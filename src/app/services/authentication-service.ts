@@ -35,6 +35,8 @@ export class AuthenticationService {
     // }
 
     postLogin(data: any) {
+        console.log("postLogin");
+
         return this.http.post<any>(this.loginUrl, data).pipe(
             map(
                 user => {

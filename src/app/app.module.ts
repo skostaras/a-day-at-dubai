@@ -12,11 +12,13 @@ import { NavbarComponent } from './shared/navbar/navbar.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BasicAuthInterceptor } from './services/auth-interceptor';
 import { ErrorInterceptor } from './services/error-interceptor';
+import { NotificationComponent } from './components/notification/notification.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         NavbarComponent,
+        NotificationComponent
 
     ],
     imports: [

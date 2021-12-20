@@ -6,6 +6,7 @@ import { iif, Subject } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { AuthenticationService, User } from 'app/services/authentication-service';
 import { IAlert } from '../notification/notification.component';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
     selector: 'app-login-component',
@@ -20,7 +21,6 @@ export class LoginComponent {
     data: Date = new Date();
     focus: any;
     focus1: any;
-    alert: IAlert;
 
     loginForm = new FormGroup({
         username: new FormControl(null, Validators.required),
@@ -35,7 +35,12 @@ export class LoginComponent {
     constructor(
         private modalService: NgbModal,
         private endpointService: EndpointService,
-        private authenticationService: AuthenticationService) {
+        private authenticationService: AuthenticationService,
+        private notificationService: NotificationService) {
+        this.subscribeToSubject();
+    }
+
+    subscribeToSubject() {
         this.subject
             .asObservable()
             .pipe(
@@ -45,7 +50,7 @@ export class LoginComponent {
                 this.currentUsername = this.loginForm.get("username").value;
                 localStorage.setItem("username", this.currentUsername);
                 this.modalService.dismissAll();
-                this.createSuccessAlert();
+                this.notificationService.successNotification(this.currentUsername + ' you are now logged in.');
             })
     }
 
@@ -70,9 +75,17 @@ export class LoginComponent {
     }
 
     onSubmit() {
-        console.log(this.loginForm.get("username").value);
-        console.log(this.loginForm.get("password").value);
+        console.log(this.loginForm.value);
+
         this.subject.next(this.loginForm.value);
+
+        //TODO check this if it's ok after logout
+        // this.subject.unsubscribe();
+        this.subscribeToSubject();
+        // this.loginForm.markAsPristine();
+        // this.loginForm.markAsUntouched();
+        this.loginForm.reset();
+
     }
 
     open(content: any, type: string, modalDimension: string | undefined) {
@@ -96,15 +109,6 @@ export class LoginComponent {
             });
         }
 
-    }
-
-    //TODO doens;'t work
-    createSuccessAlert() {
-        this.alert.icon = 'ui-1_check';
-        this.alert.id = 1;
-        this.alert.type = "success";
-        this.alert.strong = "Success";
-        this.alert.message = this.currentUsername + " you are now logged in."
     }
 
     private getDismissReason(reason: any): string {
