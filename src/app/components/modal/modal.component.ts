@@ -4,7 +4,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms'
 import { EndpointService } from 'app/services/http-service';
 import { iif, Subject } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
-import { AuthenticationService } from 'app/services/authentication-service';
+import { AuthenticationService, User } from 'app/services/authentication-service';
 
 @Component({
     selector: 'app-ngbd-modal-component',
@@ -13,6 +13,8 @@ import { AuthenticationService } from 'app/services/authentication-service';
 })
 export class NgbdModalBasic {
     closeResult: string | undefined;
+
+    currentUsername: string = null;
 
     data: Date = new Date();
     focus: any;
@@ -25,6 +27,9 @@ export class NgbdModalBasic {
 
     private subject = new Subject();
 
+
+    //TODO logout make current null
+
     constructor(private modalService: NgbModal, 
         private endpointService: EndpointService,
         private authenticationService: AuthenticationService) { 
@@ -33,7 +38,7 @@ export class NgbdModalBasic {
         .pipe(
           switchMap(value => this.authenticationService.postLogin(value))
         )
-        .subscribe(result => null)
+        .subscribe(user => {this.currentUsername = this.loginForm.get("username").value})
     }
 
     ngOnInit() {

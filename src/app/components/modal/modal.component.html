@@ -1,7 +1,7 @@
 <li class="nav-item">
     <a class="nav-link" style="cursor: pointer;" (click)="open(modal_mini, 'modal_mini', 'sm')">
         <i class="now-ui-icons users_circle-08"></i>
-        <p>User</p>
+        <p [innerHTML]="currentUsername!=null?currentUsername:'Login'"></p>
     </a>
 </li>
 

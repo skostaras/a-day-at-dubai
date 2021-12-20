@@ -34,12 +34,12 @@ export class AuthenticationService {
     //         }));
     // }
 
-    postLogin(data: any): Observable<boolean> {
+    postLogin(data: any) {
         return this.http.post<any>(this.loginUrl, data).pipe(
             map(
                 user => {
                     localStorage.setItem('user', JSON.stringify(user));
-                    return true;
+                    return user;
                 }
 
 
