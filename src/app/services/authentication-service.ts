@@ -46,7 +46,7 @@ export class AuthenticationService {
             )
             // catchError(error => {
             //     console.log(error);
-                
+
             //     console.log(error.errorMessage.message);
             //     return of(false);
             // })
@@ -57,8 +57,9 @@ export class AuthenticationService {
     logout() {
         // remove user from local storage to log user out
         localStorage.removeItem('user');
+        localStorage.removeItem('username');
         this.userSubject.next(null);
-        this.router.navigate(['/login']);
+        this.router.navigate(['/']);
     }
 }
 

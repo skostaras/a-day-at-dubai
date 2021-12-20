@@ -5,6 +5,7 @@ import { EndpointService } from 'app/services/http-service';
 import { iif, Subject } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { AuthenticationService, User } from 'app/services/authentication-service';
+import { IAlert } from '../notification/notification.component';
 
 @Component({
     selector: 'app-login-component',
@@ -12,14 +13,14 @@ import { AuthenticationService, User } from 'app/services/authentication-service
     styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
-    closeResult: string | undefined;
 
-    //TODO muast be saved in localstorage
+    closeResult: string | undefined;
     currentUsername: string = '';
 
     data: Date = new Date();
     focus: any;
     focus1: any;
+    alert: IAlert;
 
     loginForm = new FormGroup({
         username: new FormControl(null, Validators.required),
@@ -31,7 +32,8 @@ export class LoginComponent {
 
     //TODO logout make current null
 
-    constructor(private modalService: NgbModal,
+    constructor(
+        private modalService: NgbModal,
         private endpointService: EndpointService,
         private authenticationService: AuthenticationService) {
         this.subject
@@ -40,12 +42,18 @@ export class LoginComponent {
                 switchMap(value => this.authenticationService.postLogin(value))
             )
             .subscribe(user => {
-                this.currentUsername = this.loginForm.get("username").value,
-                    this.modalService.dismissAll();
+                this.currentUsername = this.loginForm.get("username").value;
+                localStorage.setItem("username", this.currentUsername);
+                this.modalService.dismissAll();
+                this.createSuccessAlert();
             })
     }
 
     ngOnInit() {
+        const username = localStorage.getItem("username");
+        if (username) {
+            this.currentUsername = username;
+        }
         var body = document.getElementsByTagName('body')[0];
         body.classList.add('login-page');
 
@@ -88,6 +96,15 @@ export class LoginComponent {
             });
         }
 
+    }
+
+    //TODO doens;'t work
+    createSuccessAlert() {
+        this.alert.icon = 'ui-1_check';
+        this.alert.id = 1;
+        this.alert.type = "success";
+        this.alert.strong = "Success";
+        this.alert.message = this.currentUsername + " you are now logged in."
     }
 
     private getDismissReason(reason: any): string {

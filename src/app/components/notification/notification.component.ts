@@ -11,6 +11,8 @@ export class NotificationComponent {
     public alerts: Array<IAlert> = [];
     private backup: Array<IAlert>;
 
+    @Input() alert: IAlert;
+
     constructor() {
         this.alerts.push({
             id: 1,
