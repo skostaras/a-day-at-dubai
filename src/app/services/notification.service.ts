@@ -33,7 +33,7 @@ export class NotificationService {
             type: 'danger',
             strong: 'Error',
             message: message,
-            icon: 'ui-1_simple-remove',
+            icon: 'business_bulb-63',
         }
 
         this.subject.next({ alert: errorAlert });

@@ -60,7 +60,7 @@ export class AuthenticationService {
 
     }
 
-    logout() {
+    getLogout() {
         console.log("logout");
 
         let token = '';

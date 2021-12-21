@@ -5,7 +5,6 @@ import { EndpointService } from 'app/services/http-service';
 import { iif, Subject } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { AuthenticationService, User } from 'app/services/authentication-service';
-import { IAlert } from '../notification/notification.component';
 import { NotificationService } from '../../services/notification.service';
 
 @Component({
@@ -17,6 +16,7 @@ export class LoginComponent {
 
     closeResult: string | undefined;
     currentUsername: string = '';
+    loggedIn = false;
 
     data: Date = new Date();
     focus: any;
@@ -27,41 +27,31 @@ export class LoginComponent {
         password: new FormControl(null, Validators.required),
     })
 
-    private subject = new Subject();
-
-
-    //TODO logout make current null
+    private loginFormSubject = new Subject();
+    private logoutSubject = new Subject();
 
     constructor(
         private modalService: NgbModal,
         private endpointService: EndpointService,
         private authenticationService: AuthenticationService,
         private notificationService: NotificationService) {
-        this.subscribeToSubject();
-    }
-
-    subscribeToSubject() {
-        this.subject
-            .asObservable()
-            .pipe(
-                switchMap(formValue => this.authenticationService.postLogin(formValue))
-            )
-            .subscribe(user => {
-                this.currentUsername = this.loginForm.get("username").value;
-                localStorage.setItem("username", this.currentUsername);
-                this.modalService.dismissAll();
-                this.notificationService.successNotification(this.currentUsername + ' you are now logged in.');
-                
-                // this.loginForm.markAsPristine();
-                // this.loginForm.markAsUntouched();
-                this.loginForm.reset();
-            })
+        this.subscribeToLoginFormSubject();
+        this.subscribeToLogoutSubject();
     }
 
     ngOnInit() {
+
+        if (this.authenticationService.userValue) {
+            this.loggedIn = true;
+        } else {
+            this.loggedIn = false;
+        }
+
         const username = localStorage.getItem("username");
         if (username) {
             this.currentUsername = username;
+        } else {
+            this.currentUsername = '';
         }
         var body = document.getElementsByTagName('body')[0];
         body.classList.add('login-page');
@@ -78,17 +68,55 @@ export class LoginComponent {
         navbar.classList.remove('navbar-transparent');
     }
 
-    onSubmit() {
-        console.log(this.loginForm.value);
+    subscribeToLoginFormSubject() {
+        this.loginFormSubject
+            .asObservable()
+            .pipe(
+                switchMap(formValue => this.authenticationService.postLogin(formValue))
+            )
+            .subscribe(user => {
+                this.loggedIn = true;
+                this.currentUsername = this.loginForm.get("username").value;
+                localStorage.setItem("username", this.currentUsername);
+                this.modalService.dismissAll();
+                this.notificationService.successNotification(this.currentUsername + ' Successfully Logged In.');
 
-        this.subject.next(this.loginForm.value);
-        this.subscribeToSubject();
+                // this.loginForm.markAsPristine();
+                // this.loginForm.markAsUntouched();
+                this.loginForm.reset();
+            })
+    }
 
-        //TODO check this if it's ok after logout
-        // this.subject.unsubscribe();
-  
+    subscribeToLogoutSubject() {
+        this.logoutSubject
+            .asObservable()
+            .pipe(
+                switchMap(value => this.authenticationService.getLogout())
+            )
+            .subscribe(user => {
+                this.loggedIn = false;
+                // this.currentUsername = this.loginForm.get("username").value;
+                // localStorage.setItem("username", this.currentUsername);
+                // this.modalService.dismissAll();
+                // this.notificationService.successNotification(this.currentUsername + ' you are now logged in.');
+            })
 
     }
+
+    login() {
+        console.log(this.loginForm.value);
+        this.loginFormSubject.next(this.loginForm.value);
+        this.subscribeToLoginFormSubject();
+    }
+
+    logout() {
+        if (confirm("Are you sure you want to logout?")) {
+            console.log("logout");
+            this.logoutSubject.next();
+            this.subscribeToLogoutSubject();
+        }
+    }
+
 
     open(content: any, type: string, modalDimension: string | undefined) {
         if (modalDimension === 'sm' && type === 'modal_mini') {
