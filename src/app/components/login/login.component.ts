@@ -1,10 +1,9 @@
-import { Component, Input, TemplateRef, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormControl, Validators } from '@angular/forms'
-import { EndpointService } from 'app/services/http-service';
-import { iif, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
-import { AuthenticationService, User } from 'app/services/authentication-service';
+import { AuthenticationService } from 'app/services/authentication-service';
 import { NotificationService } from '../../services/notification.service';
 
 @Component({
@@ -18,7 +17,6 @@ export class LoginComponent {
     currentUsername: string = '';
     loggedIn = false;
 
-    data: Date = new Date();
     focus: any;
     focus1: any;
 
@@ -32,7 +30,6 @@ export class LoginComponent {
 
     constructor(
         private modalService: NgbModal,
-        private endpointService: EndpointService,
         private authenticationService: AuthenticationService,
         private notificationService: NotificationService) {
         this.subscribeToLoginFormSubject();
@@ -53,18 +50,19 @@ export class LoginComponent {
         } else {
             this.currentUsername = '';
         }
-        var body = document.getElementsByTagName('body')[0];
+
+        let body = document.getElementsByTagName('body')[0];
         body.classList.add('login-page');
 
-        var navbar = document.getElementsByTagName('nav')[0];
+        let navbar = document.getElementsByTagName('nav')[0];
         navbar.classList.add('navbar-transparent');
     }
 
     ngOnDestroy() {
-        var body = document.getElementsByTagName('body')[0];
+        let body = document.getElementsByTagName('body')[0];
         body.classList.remove('login-page');
 
-        var navbar = document.getElementsByTagName('nav')[0];
+        let navbar = document.getElementsByTagName('nav')[0];
         navbar.classList.remove('navbar-transparent');
     }
 
@@ -72,7 +70,7 @@ export class LoginComponent {
         this.loginFormSubject
             .asObservable()
             .pipe(
-                switchMap(formValue => this.authenticationService.postLogin(formValue))
+                switchMap(formValue => this.authenticationService.loginRequest(formValue))
             )
             .subscribe(user => {
                 this.loggedIn = true;
@@ -80,9 +78,6 @@ export class LoginComponent {
                 localStorage.setItem("username", this.currentUsername);
                 this.modalService.dismissAll();
                 this.notificationService.successNotification(this.currentUsername + ' Successfully Logged In.');
-
-                // this.loginForm.markAsPristine();
-                // this.loginForm.markAsUntouched();
                 this.loginForm.reset();
             })
     }
@@ -91,27 +86,21 @@ export class LoginComponent {
         this.logoutSubject
             .asObservable()
             .pipe(
-                switchMap(value => this.authenticationService.getLogout())
+                switchMap(value => this.authenticationService.logoutRequest())
             )
-            .subscribe(user => {
+            .subscribe(message => {
                 this.loggedIn = false;
-                // this.currentUsername = this.loginForm.get("username").value;
-                // localStorage.setItem("username", this.currentUsername);
-                // this.modalService.dismissAll();
-                // this.notificationService.successNotification(this.currentUsername + ' you are now logged in.');
+                this.notificationService.successNotification(message.message);
             })
-
     }
 
     login() {
-        console.log(this.loginForm.value);
         this.loginFormSubject.next(this.loginForm.value);
         this.subscribeToLoginFormSubject();
     }
 
     logout() {
         if (confirm("Are you sure you want to logout?")) {
-            console.log("logout");
             this.logoutSubject.next();
             this.subscribeToLogoutSubject();
         }

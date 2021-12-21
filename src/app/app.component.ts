@@ -3,7 +3,7 @@ import { Router, NavigationEnd } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/filter';
 import { DOCUMENT } from '@angular/common';
-import { LocationStrategy, PlatformLocation, Location } from '@angular/common';
+import { Location } from '@angular/common';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { AuthenticationService, User } from './services/authentication-service';
 
@@ -23,7 +23,7 @@ export class AppComponent implements OnInit {
         public location: Location,
         private authenticationService: AuthenticationService
     ) {
-        this.authenticationService.user.subscribe(x => this.user = x);
+        this.authenticationService.user.subscribe(user => this.user = user);
     }
 
     ngOnInit() {
@@ -51,7 +51,4 @@ export class AppComponent implements OnInit {
         });
     }
 
-    logout() {
-        this.authenticationService.getLogout();
-    }
 }
