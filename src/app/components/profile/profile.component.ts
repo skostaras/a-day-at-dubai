@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import * as Rellax from 'rellax';
+import { Component, Input, OnInit } from '@angular/core';
+import { Landmark } from '../../models/landmark';
 
 @Component({
   selector: 'app-profile',
@@ -15,10 +15,12 @@ export class ProfileComponent implements OnInit {
   focus: any;
   focus1: any;
 
+  @Input()
+  landmarks: Landmark[];
+
   constructor() { }
 
   ngOnInit() {
-    var rellaxHeader = new Rellax('.rellax-header');
 
     var body = document.getElementsByTagName('body')[0];
     body.classList.add('profile-page');

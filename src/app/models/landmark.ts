@@ -4,7 +4,7 @@ export class Landmark {
     updatedAt: string;
     location: [number];
     url: string;
-    hort_info: string;
+    short_info: string;
     photo: {
         __type: string;
         name: string;

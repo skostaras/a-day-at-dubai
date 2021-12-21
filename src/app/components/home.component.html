@@ -21,7 +21,8 @@
     </div>
 
     <div class="main">
-        <app-profile></app-profile>
+
+        <app-profile [landmarks]="allLandmarks$ |async"></app-profile>
 
         <app-typography></app-typography>
 
