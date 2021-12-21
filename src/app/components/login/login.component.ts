@@ -51,6 +51,10 @@ export class LoginComponent {
                 localStorage.setItem("username", this.currentUsername);
                 this.modalService.dismissAll();
                 this.notificationService.successNotification(this.currentUsername + ' you are now logged in.');
+                
+                // this.loginForm.markAsPristine();
+                // this.loginForm.markAsUntouched();
+                this.loginForm.reset();
             })
     }
 
@@ -78,13 +82,11 @@ export class LoginComponent {
         console.log(this.loginForm.value);
 
         this.subject.next(this.loginForm.value);
+        this.subscribeToSubject();
 
         //TODO check this if it's ok after logout
         // this.subject.unsubscribe();
-        this.subscribeToSubject();
-        // this.loginForm.markAsPristine();
-        // this.loginForm.markAsUntouched();
-        this.loginForm.reset();
+  
 
     }
 

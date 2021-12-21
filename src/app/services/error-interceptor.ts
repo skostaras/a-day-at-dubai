@@ -13,18 +13,18 @@ export class ErrorInterceptor implements HttpInterceptor {
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         return next.handle(request).pipe(catchError(err => {
 
-            if (err.status === 401) {
-                // auto logout if 401 response returned from api
-                this.authenticationService.logout();
-            }
+            console.log(err);
 
             let errorMessage = ''
 
-            //TODO fix this for error logout
-            if (err.error.errorMessage) {
-                errorMessage = err.errorMessage;
-            } else if (err.errorMessage.message) {
+            if (typeof err.error != 'undefined' && typeof err.error.errorMessage != 'undefined' && typeof err.error.errorMessage.message !='undefined') {
                 errorMessage = err.error.errorMessage.message;
+            } else if (typeof err.errorMessage != 'undefined' && typeof err.errorMessage.message !='undefined') {
+                errorMessage = err.errorMessage.message;
+            } else if (typeof err.error != 'undefined' && typeof err.error.message !='undefined') {
+                errorMessage = err.error.message
+            } else if (typeof err.error != 'undefined' && typeof err.error.errorMessage !='undefined') {
+                errorMessage = err.error.errorMessage
             }
 
             this.notificationService.errorNotification(errorMessage);

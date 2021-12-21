@@ -24,6 +24,7 @@ export class NotificationService {
         this.subject.next({ alert: successAlert });
     }
 
+    //TODO change icon because it looks like X close
     errorNotification(message: string) {
 
         let errorAlert: IAlert;

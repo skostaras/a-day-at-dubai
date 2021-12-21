@@ -25,25 +25,31 @@ export class NavbarComponent implements OnInit {
     test() {
         console.log("test");
 
-        this.logoutSubject.next()
+        this.logoutSubject.next();
+        this.subscribeToLogoutSubject();
 
     }
 
     ngOnInit() {
-        this.logoutSubject
-            .asObservable()
-            .pipe(
-                switchMap(value => this.authenticationService.logout())
-            )
-            .subscribe(user => {
-                // this.currentUsername = this.loginForm.get("username").value;
-                // localStorage.setItem("username", this.currentUsername);
-                // this.modalService.dismissAll();
-                // this.notificationService.successNotification(this.currentUsername + ' you are now logged in.');
-            })
+        this.subscribeToLogoutSubject();
 
         const navbar: HTMLElement = this.element.nativeElement;
         this.toggleButton = navbar.getElementsByClassName('navbar-toggler')[0];
+    }
+
+    subscribeToLogoutSubject() {
+        this.logoutSubject
+        .asObservable()
+        .pipe(
+            switchMap(value => this.authenticationService.logout())
+        )
+        .subscribe(user => {
+            // this.currentUsername = this.loginForm.get("username").value;
+            // localStorage.setItem("username", this.currentUsername);
+            // this.modalService.dismissAll();
+            // this.notificationService.successNotification(this.currentUsername + ' you are now logged in.');
+        })
+
     }
 
     sidebarOpen() {

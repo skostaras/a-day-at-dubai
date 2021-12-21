@@ -44,6 +44,7 @@ export class AuthenticationService {
             map(
                 user => {
                     localStorage.setItem('user', JSON.stringify(user));
+                    this.userSubject.next(user);
                     return user;
                 }
 
@@ -61,6 +62,19 @@ export class AuthenticationService {
 
     logout() {
         console.log("logout");
+
+        let token = '';
+
+        const activeUser = JSON.parse(localStorage.getItem("user"));
+        if (activeUser) {
+            token = activeUser.sessionToken;
+        }
+
+        console.log(token);
+
+        console.log(this.userValue);
+        console.log(this.userSubject.value);
+        
 
         return this.http.get<any>(this.logoutUrl, {}).pipe(
             map(
