@@ -10,14 +10,14 @@ import { BasicelementsComponent } from './basicelements/basicelements.component'
 import { NavigationComponent } from './navigation/navigation.component';
 import { TypographyComponent } from './typography/typography.component';
 import { NucleoiconsComponent } from './nucleoicons/nucleoicons.component';
-import { ComponentsComponent } from './components.component';
+import { HomeComponent } from './home.component';
 import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
     declarations: [
-        ComponentsComponent,
+        HomeComponent,
         BasicelementsComponent,
         NavigationComponent,
         TypographyComponent,
@@ -35,6 +35,6 @@ import { HttpClientModule } from '@angular/common/http';
         JwBootstrapSwitchNg2Module,
         HttpClientModule,
     ],
-    exports: [ComponentsComponent, LoginComponent]
+    exports: [HomeComponent, LoginComponent]
 })
 export class ComponentsModule { }

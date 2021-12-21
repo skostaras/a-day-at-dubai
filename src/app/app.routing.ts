@@ -3,7 +3,7 @@ import { CommonModule, } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
 
-import { ComponentsComponent } from './components/components.component';
+import { HomeComponent } from './components/home.component';
 import { LandingComponent } from './examples/landing/landing.component';
 import { NucleoiconsComponent } from './components/nucleoicons/nucleoicons.component';
 import { ProfileComponent } from './components/profile/profile.component';
@@ -11,7 +11,7 @@ import { AuthGuard } from './services/authGuard';
 
 const routes: Routes = [
     { path: '', redirectTo: 'index', pathMatch: 'full' },
-    { path: 'index', component: ComponentsComponent },
+    { path: 'index', component: HomeComponent },
     { path: 'nucleoicons', component: NucleoiconsComponent },
     { path: 'examples/landing', component: LandingComponent },
     { path: 'examples/profile', component: ProfileComponent },
