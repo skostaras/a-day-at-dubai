@@ -3,7 +3,7 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormControl, Validators } from '@angular/forms'
 import { Subject } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
-import { AuthenticationService } from 'app/services/authentication-service';
+import { HttpService } from 'app/services/http.service';
 import { NotificationService } from '../../services/notification.service';
 
 @Component({
@@ -30,7 +30,7 @@ export class LoginComponent {
 
     constructor(
         private modalService: NgbModal,
-        private authenticationService: AuthenticationService,
+        private authenticationService: HttpService,
         private notificationService: NotificationService) {
         this.subscribeToLoginFormSubject();
         this.subscribeToLogoutSubject();

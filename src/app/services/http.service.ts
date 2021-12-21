@@ -3,14 +3,17 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { User } from 'app/models/user';
+import { Landmark } from '../models/landmark';
 
 @Injectable({ providedIn: 'root' })
-export class AuthenticationService {
+export class HttpService {
     private userSubject: BehaviorSubject<User>;
     public user: Observable<User>;
 
     private loginUrl = 'https://frontend-5325.instashop.ae/api/users/login';
     private logoutUrl = 'https://frontend-5325.instashop.ae/api/users/logout';
+    private allLandmarksUrl = 'https://frontend-5325.instashop.ae/api/landmarks';
 
     constructor(
         private router: Router,
@@ -25,7 +28,7 @@ export class AuthenticationService {
     }
 
     loginRequest(data: any) {
-        return this.http.post<any>(this.loginUrl, data).pipe(
+        return this.http.post<User>(this.loginUrl, data).pipe(
             map(
                 user => {
                     localStorage.setItem('user', JSON.stringify(user));
@@ -50,9 +53,18 @@ export class AuthenticationService {
         )
     }
 
-}
+    getAllLandmarks(): Observable<Landmark[]> {
+        return this.http.get<Landmark[]>(this.allLandmarksUrl, {}).pipe(
+            map(
+                landmarks => {
+                    return landmarks;
+                }
+            )
+        )
+    }
 
-export class User {
-    userId: string;
-    sessionToken: string;
+    getall() {
+        return this.http.get<any>(this.allLandmarksUrl);
+    }
+
 }

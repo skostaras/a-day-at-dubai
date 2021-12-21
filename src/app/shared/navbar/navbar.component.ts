@@ -1,6 +1,6 @@
 import { Component, OnInit, ElementRef, Input } from '@angular/core';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
-import { AuthenticationService } from '../../services/authentication-service';
+import { HttpService } from '../../services/http.service';
 import { Subject } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
@@ -14,7 +14,7 @@ export class NavbarComponent implements OnInit {
     private sidebarVisible: boolean;
 
     constructor(public location: Location, private element: ElementRef,
-        private authenticationService: AuthenticationService
+        private authenticationService: HttpService
     ) {
         this.sidebarVisible = false;
     }

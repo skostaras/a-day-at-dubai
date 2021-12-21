@@ -5,7 +5,8 @@ import 'rxjs/add/operator/filter';
 import { DOCUMENT } from '@angular/common';
 import { Location } from '@angular/common';
 import { NavbarComponent } from './shared/navbar/navbar.component';
-import { AuthenticationService, User } from './services/authentication-service';
+import { HttpService } from './services/http.service';
+import { User } from './models/user';
 
 @Component({
     selector: 'app-root',
@@ -21,7 +22,7 @@ export class AppComponent implements OnInit {
     constructor(private renderer: Renderer2,
         private router: Router, @Inject(DOCUMENT,) private document: any, private element: ElementRef,
         public location: Location,
-        private authenticationService: AuthenticationService
+        private authenticationService: HttpService
     ) {
         this.authenticationService.user.subscribe(user => this.user = user);
     }

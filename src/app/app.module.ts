@@ -10,8 +10,8 @@ import { ExamplesModule } from './examples/examples.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { BasicAuthInterceptor } from './services/auth-interceptor';
-import { ErrorInterceptor } from './services/error-interceptor';
+import { AuthInterceptor } from './services/auth.interceptor';
+import { ErrorInterceptor } from './services/error.interceptor';
 import { NotificationComponent } from './components/notification/notification.component';
 
 @NgModule({
@@ -34,7 +34,7 @@ import { NotificationComponent } from './components/notification/notification.co
 
     ],
     providers: [
-        { provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true },
+        { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     ],
     bootstrap: [AppComponent],

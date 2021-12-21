@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { AuthenticationService } from './authentication-service';
+import { HttpService } from './http.service';
 
 @Injectable()
-export class BasicAuthInterceptor implements HttpInterceptor {
-    constructor(private authenticationService: AuthenticationService) { }
+export class AuthInterceptor implements HttpInterceptor {
+    constructor(private authenticationService: HttpService) { }
 
     private baseUrl = 'https://frontend-5325.instashop.ae/api/';
 
