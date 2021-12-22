@@ -6,7 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './components/home.component';
 import { LandingComponent } from './examples/landing/landing.component';
 import { NucleoiconsComponent } from './components/nucleoicons/nucleoicons.component';
-import { ProfileComponent } from './components/profile/profile.component';
+import { AllLandmarksComponent } from './components/all-landmarks/all-landmarks.component';
 import { AuthGuard } from './services/authGuard';
 
 const routes: Routes = [
@@ -14,7 +14,7 @@ const routes: Routes = [
     { path: 'index', component: HomeComponent },
     { path: 'nucleoicons', component: NucleoiconsComponent },
     { path: 'examples/landing', component: LandingComponent },
-    { path: 'examples/profile', component: ProfileComponent },
+    { path: 'examples/profile', component: AllLandmarksComponent },
     { path: '**', redirectTo: '' }
     // { path: '/adminDummy', component: FormEditComponentDummy , canActivate: [AuthGuard]}
 ];

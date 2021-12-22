@@ -2,11 +2,11 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Landmark } from '../../models/landmark';
 
 @Component({
-  selector: 'app-profile',
-  templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss']
+  selector: 'app-all-landmarks',
+  templateUrl: './all-landmarks.component.html',
+  styleUrls: ['./all-landmarks.component.scss']
 })
-export class ProfileComponent implements OnInit {
+export class AllLandmarksComponent implements OnInit {
   zoom: number = 14;
   lat: number = 44.445248;
   lng: number = 26.099672;

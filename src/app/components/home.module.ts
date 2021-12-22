@@ -12,7 +12,7 @@ import { TypographyComponent } from './typography/typography.component';
 import { NucleoiconsComponent } from './nucleoicons/nucleoicons.component';
 import { HomeComponent } from './home.component';
 import { LoginComponent } from './login/login.component';
-import { ProfileComponent } from './profile/profile.component';
+import { AllLandmarksComponent } from './all-landmarks/all-landmarks.component';
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
@@ -23,7 +23,7 @@ import { HttpClientModule } from '@angular/common/http';
         TypographyComponent,
         NucleoiconsComponent,
         LoginComponent,
-        ProfileComponent
+        AllLandmarksComponent
     ],
     imports: [
         CommonModule,
