@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Landmark } from '../../models/landmark';
 import { Observable, of } from 'rxjs';
-import { map, switchMap, take, tap } from 'rxjs/operators';
+import { map, switchMap, take, tap, catchError } from 'rxjs/operators';
 import { LandmarkWithDescription } from 'app/models/landmark-with-description';
 import { HttpService } from 'app/services/http.service';
 
@@ -24,6 +24,7 @@ export class LandmarkOverviewComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private httpService: HttpService,
+    private router: Router,
   ) { }
 
   ngOnInit() {
@@ -63,11 +64,13 @@ export class LandmarkOverviewComponent implements OnInit {
           console.log(landmark);
           // console.log(this.landmarkWithDescription$.subscribe(data => data));
 
-        }
+        }, (error) => {
+          this.router.navigateByUrl('/home');
+        },
       )
+    } else {
+      this.router.navigateByUrl('/home');
     }
-
-
 
 
     // this.route.paramMap.pipe(

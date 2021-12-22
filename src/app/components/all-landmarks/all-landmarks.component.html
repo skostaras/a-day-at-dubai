@@ -25,7 +25,8 @@
 
                                                 <div class="col-md-6"
                                                     style="display: flex; justify-content: center; align-items: center;">
-                                                    <a [href]="'/landmark/' + landmark.objectId"
+                                                    <a [routerLink]="'/landmark'"
+                                                        [queryParams]="{id: landmark.objectId}"
                                                         title="Click for more info">
                                                         <img [src]="landmark.photo_thumb.url"
                                                             [alt]="landmark.photo_thumb.name"
@@ -34,7 +35,8 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <!-- <button onclick="location.href='/landmark/${landmark.objectId}'" -->
-                                                    <button (click)="goToLandmark(landmark)"
+                                                    <button [routerLink]="'/landmark'"
+                                                        [queryParams]="{id: landmark.objectId}"
                                                         class="btn btn-link btn-info" style="padding-left: 0;"
                                                         title="Click for more info">
                                                         <h3 style="margin-bottom: 0;">{{landmark.title}}</h3>

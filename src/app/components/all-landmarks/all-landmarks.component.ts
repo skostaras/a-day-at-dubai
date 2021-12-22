@@ -37,9 +37,5 @@ export class AllLandmarksComponent implements OnInit {
     navbar.classList.remove('navbar-transparent');
   }
 
-  goToLandmark(landmark) {
-    this.router.navigate(['/landmark'], { state: landmark });
-    // this.router.navigate(['/landmark/' + landmark.objectId]);
-  }
 
 }
