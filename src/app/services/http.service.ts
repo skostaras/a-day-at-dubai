@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import { User } from 'app/models/user';
 import { Landmark } from '../models/landmark';
 
@@ -29,7 +29,7 @@ export class HttpService {
 
     loginRequest(data: any) {
         return this.http.post<User>(this.loginUrl, data).pipe(
-            map(
+            tap(
                 user => {
                     localStorage.setItem('user', JSON.stringify(user));
                     this.userSubject.next(user);
@@ -41,7 +41,7 @@ export class HttpService {
 
     logoutRequest() {
         return this.http.get<any>(this.logoutUrl, {}).pipe(
-            map(
+            tap(
                 message => {
                     localStorage.removeItem('user');
                     localStorage.removeItem('username');
@@ -54,17 +54,7 @@ export class HttpService {
     }
 
     getAllLandmarks(): Observable<Landmark[]> {
-        return this.http.get<Landmark[]>(this.allLandmarksUrl, {}).pipe(
-            map(
-                landmarks => {
-                    return landmarks;
-                }
-            )
-        )
-    }
-
-    getall() {
-        return this.http.get<any>(this.allLandmarksUrl);
+        return this.http.get<Landmark[]>(this.allLandmarksUrl, {});
     }
 
 }

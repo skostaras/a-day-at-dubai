@@ -58,28 +58,35 @@ export class HomeComponent implements OnInit, OnDestroy {
 
         // let hello = this.httpService.getall();
 
-        merge()
-            .pipe(
-                startWith({}),
-                switchMap(() => {
-                    return this.httpService.getAllLandmarks();
-                }),
-                // map(data => {
-                //     if (data === null) {
-                //         // this.loadingJokes = false;
-                //         return [];
-                //     }
-                //     this.allLandmarks$ = of(data);
-                //     return data;
-                // }),
-            )
-            .subscribe(landmarks => {
-                this.allLandmarks$ = of(landmarks);
-                console.log(landmarks);
+        // merge()
+        //     .pipe(
+        //         startWith({}),
+        //         switchMap(() => {
+        //             return this.httpService.getAllLandmarks();
+        //         }),
+        //         // map(data => {
+        //         //     if (data === null) {
+        //         //         // this.loadingJokes = false;
+        //         //         return [];
+        //         //     }
+        //         //     this.allLandmarks$ = of(data);
+        //         //     return data;
+        //         // }),
+        //     )
+        //     .subscribe(landmarks => {
+        //         this.allLandmarks$ = of(landmarks);
+        //         console.log(landmarks);
 
-                // this.jokes = data;
-                // this.loadingJokes = false;
-            }
+        //         // this.jokes = data;
+        //         // this.loadingJokes = false;
+        //     }
+        //     );
+
+
+            this.httpService.getAllLandmarks().subscribe(
+                landmarks => {
+                    this.allLandmarks$ = of(landmarks);
+                }
             );
 
 
