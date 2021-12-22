@@ -5,6 +5,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { User } from 'app/models/user';
 import { Landmark } from '../models/landmark';
+import { LandmarkWithDescription } from 'app/models/landmark-with-description';
 
 @Injectable({ providedIn: 'root' })
 export class HttpService {
@@ -55,6 +56,10 @@ export class HttpService {
 
     getAllLandmarks(): Observable<Landmark[]> {
         return this.http.get<Landmark[]>(this.allLandmarksUrl, {});
+    }
+
+    getLandmarkById(objectId): Observable<LandmarkWithDescription> {
+        return this.http.get<LandmarkWithDescription>(this.allLandmarksUrl + '/' + objectId, {});
     }
 
 }

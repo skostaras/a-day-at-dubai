@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Landmark } from '../../models/landmark';
 
 @Component({
@@ -18,7 +19,9 @@ export class AllLandmarksComponent implements OnInit {
   @Input()
   landmarks: Landmark[];
 
-  constructor() { }
+  constructor(
+    private router: Router,
+  ) { }
 
   ngOnInit() {
 
@@ -32,6 +35,11 @@ export class AllLandmarksComponent implements OnInit {
     body.classList.remove('profile-page');
     var navbar = document.getElementsByTagName('nav')[0];
     navbar.classList.remove('navbar-transparent');
+  }
+
+  goToLandmark(landmark) {
+    this.router.navigate(['/landmark'], { state: landmark });
+    // this.router.navigate(['/landmark/' + landmark.objectId]);
   }
 
 }

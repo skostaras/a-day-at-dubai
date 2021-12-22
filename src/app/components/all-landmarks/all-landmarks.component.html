@@ -23,13 +23,23 @@
                                         <div class="col-md-10 ml-auto mr-auto">
                                             <div class="row">
 
-                                                <div class="col-md-6" style="display: flex; justify-content: center;">
-                                                    <img [src]="landmark.photo_thumb.url"
-                                                        [alt]="landmark.photo_thumb.name" class="rounded img-raised">
-
+                                                <div class="col-md-6"
+                                                    style="display: flex; justify-content: center; align-items: center;">
+                                                    <a [href]="'/landmark/' + landmark.objectId"
+                                                        title="Click for more info">
+                                                        <img [src]="landmark.photo_thumb.url"
+                                                            [alt]="landmark.photo_thumb.name"
+                                                            class="rounded img-raised">
+                                                    </a>
                                                 </div>
                                                 <div class="col-md-6">
-                                                    <h3>{{landmark.title}}</h3>
+                                                    <!-- <button onclick="location.href='/landmark/${landmark.objectId}'" -->
+                                                    <button (click)="goToLandmark(landmark)"
+                                                        class="btn btn-link btn-info" style="padding-left: 0;"
+                                                        title="Click for more info">
+                                                        <h3 style="margin-bottom: 0;">{{landmark.title}}</h3>
+                                                    </button>
+
                                                     <p>{{landmark.short_info}}</p>
                                                 </div>
 

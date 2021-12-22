@@ -10,9 +10,10 @@ import { AllLandmarksComponent } from './components/all-landmarks/all-landmarks.
 import { AuthGuard } from './services/authGuard';
 
 const routes: Routes = [
-    { path: '', redirectTo: 'index', pathMatch: 'full' },
-    { path: 'index', component: HomeComponent },
+    { path: '', redirectTo: 'home', pathMatch: 'full' },
+    { path: 'home', component: HomeComponent },
     { path: 'nucleoicons', component: NucleoiconsComponent },
+    // { path: 'landmark', component: LandmarkOverviewComponent, data: { landmark: null } },
     { path: 'landmark', component: LandmarkOverviewComponent },
     { path: 'examples/profile', component: AllLandmarksComponent },
     { path: '**', redirectTo: '' }
@@ -25,7 +26,8 @@ const routes: Routes = [
         BrowserModule,
         RouterModule.forRoot(routes)
     ],
-    exports: [RouterModule
+    exports: [
+        RouterModule
     ],
 })
 export class AppRoutingModule { }
