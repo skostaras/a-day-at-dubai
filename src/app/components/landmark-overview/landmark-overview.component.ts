@@ -27,6 +27,25 @@ export class LandmarkOverviewComponent implements OnInit {
     private router: Router,
   ) { }
 
+  zoom = 12
+  center: google.maps.LatLngLiteral
+  options: google.maps.MapOptions = {
+    mapTypeId: 'hybrid',
+    zoomControl: false,
+    scrollwheel: false,
+    disableDoubleClickZoom: true,
+    maxZoom: 15,
+    minZoom: 8,
+  }
+
+  zoomIn() {
+    if (this.zoom < this.options.maxZoom) this.zoom++
+  }
+
+  zoomOut() {
+    if (this.zoom > this.options.minZoom) this.zoom--
+  }
+
   ngOnInit() {
 
     // this.route.data.pipe(take(1)).subscribe((landmark) => {
@@ -60,9 +79,21 @@ export class LandmarkOverviewComponent implements OnInit {
       this.httpService.getLandmarkById(landmarkId).subscribe(
         landmark => {
           this.landmarkWithDescription$ = of(landmark);
-          // console.log(this.landmarkWithDescription$);
           console.log(landmark);
-          // console.log(this.landmarkWithDescription$.subscribe(data => data));
+
+          // navigator.geolocation.getCurrentPosition((position) => {
+          //   this.center = {
+          //     lat: position.coords.latitude,
+          //     lng: position.coords.longitude,
+          //   }
+          // })
+
+          this.center = {
+            lat: landmark.location[0],
+            lng: landmark.location[1],
+          }
+
+
 
         }, (error) => {
           this.router.navigateByUrl('/home');
