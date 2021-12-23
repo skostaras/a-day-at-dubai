@@ -3,7 +3,8 @@
     <div class="wrapper">
         <div class="page-header page-header-small">
             <div class="page-header-image rellax-header" data-rellax-speed="-8"
-                [style.background]="'url(' + landmarkWithDescription.photo.url + ')'">
+                [style.background]="'url(' + landmarkWithDescription.photo.url + ')'"
+                [style.background-position-x]="'center'" [style.background-position-y]="'center'">
             </div>
             <div class="container">
                 <div class="content-center">
@@ -37,8 +38,10 @@
                 <div class="section-story-overview">
                     <div class="row">
                         <div class="col-md-6">
-                            <div class="image-container image-left"
-                                style="background-image: url('assets/img/login.jpg')">
+                            <div class="image-container image-left">
+                                <img class="image-container image-left" [src]="randomImageSource"
+                                    alt="generic dubai image"
+                                    style="opacity: 30%; object-fit: cover; width: fit-content;">
                                 <!-- First image on the left side -->
                                 <p class="blockquote blockquote-primary" style="width: unset;">
                                     {{landmarkWithDescription.short_info}}
@@ -48,10 +51,12 @@
                             <!-- Second image on the left side of the article -->
                             <div class="image-container" style="display: flex; justify-content: center;">
                                 <ngx-apple-maps id="map" style="display: block; width: 800px; height: 400px;"
-                                    [options]="options" [settings]="settings">
-                                    <!-- 
-                                <ngx-apple-maps-annotation [latitude]="latitude" [longitude]="longitude" [options]="annotationOptions">
-                                </ngx-apple-maps-annotation> -->
+                                    [options]="options" [settings]="settings" (onLoaded)="onLoaded($event)">
+
+                                    <ngx-apple-maps-annotation [latitude]="latitude" [longitude]="longitude"
+                                        [options]="annotationOptions">
+                                    </ngx-apple-maps-annotation>
+
                                 </ngx-apple-maps>
 
                             </div>
@@ -59,10 +64,9 @@
                         </div>
                         <div class="col-md-5">
                             <!-- First image on the right side, above the article -->
-                            <img class="image-container image-right" [src]="landmarkWithDescription.photo.url"
-                                [alt]="landmarkWithDescription.photo_thumb.name"
-                                style="background-image: url('assets/img/bg1.jpg'); margin-left:unset;">
-                            <h3>So what does the new record for the lowest level of winter ice actually mean</h3>
+                            <img class="image-container image-right" [src]="landmarkWithDescription.photo_thumb.url"
+                                [alt]="landmarkWithDescription.photo_thumb.name" style="margin-left:unset;">
+                            <h3>More info on {{landmarkWithDescription.title}}</h3>
                             <div class="separator separator-primary"></div>
                             <p style="text-align: justify;">{{landmarkWithDescription.description}}
                             </p>
@@ -135,45 +139,6 @@
                 </div>
             </div>
         </div>
-        <div class="section section-contact-us text-center">
-            <div class="container">
-                <h2 class="title">Want to work with us?</h2>
-                <p class="description">Your project is very important to us.</p>
-                <div class="row">
-                    <div class="col-lg-6 text-center col-md-8 ml-auto mr-auto">
-                        <div class="input-group input-lg" [ngClass]="{'input-group-focus':focus===true}">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">
-                                    <i class="now-ui-icons users_circle-08"></i>
-                                </span>
-                            </div>
-                            <input type="text" class="form-control" placeholder="Left Font Awesome Icon"
-                                (focus)="focus=true" (blur)="focus=false">
-                        </div>
-                        <div class="input-group input-lg" [ngClass]="{'input-group-focus':focus1===true}">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">
-                                    <i class="now-ui-icons ui-1_email-85"></i>
-                                </span>
-                            </div>
-                            <input type="text" class="form-control" placeholder="Left Font Awesome Icon"
-                                (focus)="focus1=true" (blur)="focus1=false">
-                        </div>
-                        <div class="textarea-container">
-                            <textarea class="form-control" name="name" rows="4" cols="80"
-                                placeholder="Type a message..."></textarea>
-                        </div>
-                        <div class="send-button">
-                            <a href="#pablo" class="btn btn-primary btn-round btn-block btn-lg">Send Message</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- <div id="map" style=" width: 100%;
-        height: 600px;"></div> -->
-
 
         <footer class="footer footer-default">
             <div class="container">

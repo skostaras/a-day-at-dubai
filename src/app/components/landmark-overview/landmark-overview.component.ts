@@ -6,7 +6,6 @@ import { map, switchMap, take, tap, catchError } from 'rxjs/operators';
 import { LandmarkWithDescription } from 'app/models/landmark-with-description';
 import { HttpService } from 'app/services/http.service';
 import { AnnotationConstructorOptionsInterface, MapConstructorOptions, MapKitInitOptions } from 'ngx-apple-maps/lib/declarations';
-import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'app-landmark-overview',
@@ -16,8 +15,6 @@ import { DOCUMENT } from '@angular/common';
 export class LandmarkOverviewComponent implements OnInit {
   focus;
   focus1;
-
-  // landmark$: Observable<Landmark>
 
   map
   landmarkWithDescription$: Observable<LandmarkWithDescription>;
@@ -31,97 +28,67 @@ export class LandmarkOverviewComponent implements OnInit {
     },
     JWT: 'eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjQ1S0Q2SzhaVzgifQ.eyJpc3MiOiJXSjM2MzM3NE1ZIiwiaWF0IjoxNjQwMjY1Nzg0LCJleHAiOjE2NzE3NTM2MDB9.IXwpGhGhHI5WFFK5UXvtIXJVjYoPJIKoV4m94Wa9IGmhc4SXvyZs4NPBdEtqbO0hL81drJHXs6cGEEEPsjJzaw' // Json Web token
   }
-  annotationOptions: AnnotationConstructorOptionsInterface = {}
-  latitude = 55.27439
-  longitude = 25.19649
+  annotationOptions: AnnotationConstructorOptionsInterface = {
+    title: ""
+  }
+  latitude = 0
+  longitude = 0
 
-  settings: MapConstructorOptions;
+  settings: MapConstructorOptions = {
+    center: { // center of the map
+      latitude: 0,
+      longitude: 0
+    },
+    mapType: 'hybrid', // 'mutedStandard' | 'standard' | 'satellite' | 'hybrid'
+    padding: { // map padding
+      top: 10,
+      right: 10,
+      bottom: 0,
+      left: 0
+    },
+    isRotationEnabled: true,
+    showsCompass: 'adaptive', // 'adaptive' (showing always and on the touch screen devices hides if rotationElabled: false and rotation: 0) | 'hidden' | 'visible'
+    isScrollEnabled: true, // A Boolean value that determines whether the user may scroll the map with a pointing device or with gestures on a touchscreen.
+    showsScale: 'adaptive', // 'adaptive' | 'hidden' | 'visible' https://developer.apple.com/documentation/mapkitjs/mapkit/map/2973941-showsscale?changes=latest_minor
+    showsUserLocation: false,
+    tracksUserLocation: false,
+    showsUserLocationControl: true
+  }
+
+  randomImageSource = '';
 
   constructor(
     private route: ActivatedRoute,
     private httpService: HttpService,
     private router: Router,
-    private _renderer2: Renderer2,
-    @Inject(DOCUMENT) private _document: Document
   ) { }
 
   onLoaded(e) {
+    console.log("hello");
+
     this.map = e;
+    this.map.zoom = 10;
     this.map.addEventListener('select', (event) => {
       console.log('event ', event);
     });
+
+    this.map.addEventListener('zoom-end', (event) => {
+      // console.log('event ', event);
+      console.log(this.map.zoom);
+
+    });
   }
-
-  tokenID = "eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjQ1S0Q2SzhaVzgifQ.eyJpc3MiOiJXSjM2MzM3NE1ZIiwiaWF0IjoxNjQwMjY1Nzg0LCJleHAiOjE2NzE3NTM2MDB9.IXwpGhGhHI5WFFK5UXvtIXJVjYoPJIKoV4m94Wa9IGmhc4SXvyZs4NPBdEtqbO0hL81drJHXs6cGEEEPsjJzaw";
-
-  private loadScript() {
-    let chatScript = document.createElement("script");
-    chatScript.type = "text/javascript";
-    chatScript.async = true;
-    chatScript.src = "../../../assets/js/mapkitimpl.js";
-    document.body.appendChild(chatScript);
-
-  }
-
-
-
 
   ngOnInit() {
-
-    setTimeout(() => {
-      // this.loadScript();
-    }, 2000);
+    // this.map = document.getElementById("map");
 
 
-    // console.log(this.options);
 
 
-    //     let script = this._renderer2.createElement('script');
-    //     script.type = `application/ld+json`;
-    //     script.text = `
-    //     {
-    //       "@context": "https://schema.org"
-    //       const tokenID = "eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjQ1S0Q2SzhaVzgifQ.eyJpc3MiOiJXSjM2MzM3NE1ZIiwiaWF0IjoxNjQwMjY1Nzg0LCJleHAiOjE2NzE3NTM2MDB9.IXwpGhGhHI5WFFK5UXvtIXJVjYoPJIKoV4m94Wa9IGmhc4SXvyZs4NPBdEtqbO0hL81drJHXs6cGEEEPsjJzaw";
-
-    // mapkit.init({
-    //     authorizationCallback: function (done) {
-    //         done(tokenID);
-    //     }
-    // });
-
-    // var map = new mapkit.Map("map");
-    //     }
-    //   `;
-
-    //   setTimeout(() => {
-    //     this._renderer2.appendChild(this._document.body, script);  
-    //   }, 1800);
 
 
-    // this.route.data.pipe(take(1)).subscribe((landmark) => {
-    //   console.log(landmark); // do something with the data
-    // });
-
-    // this.landmark = history.state;
-    // console.log(this.landmark);
-
-    // this.route.paramMap.pipe(
-    //   map(params => {
-    //     let landmarkId = of(params.get('id'));
-    //     console.log(landmarkId);
-
-
-    //     this.httpService.getLandmarkById(landmarkId).subscribe(
-    //       landmark => {
-    //         this.landmarkWithDescription$ = of(landmark);
-    //       }
-    //     ),
-    //       tap(_ => console.log(this.landmarkWithDescription$)
-    //       )
-
-    //     // return this.httpService.getLandmarkById(landmarkId).subscribe(data => return);
-    //   })
-    // );
+    let randomInt = this.getRandomInt(1, 6);
+    this.randomImageSource = 'assets/img/dubai' + randomInt + '.jpg';
 
     let landmarkId = this.route.snapshot.queryParams['id'];
 
@@ -129,7 +96,20 @@ export class LandmarkOverviewComponent implements OnInit {
       this.httpService.getLandmarkById(landmarkId).subscribe(
         landmark => {
           this.landmarkWithDescription$ = of(landmark);
+
+          this.latitude = landmark.location[1];
+          this.settings.center.latitude = landmark.location[1];
+
+          this.longitude = landmark.location[0];
+          this.settings.center.longitude = landmark.location[0];
+
+          this.annotationOptions.title = landmark.title;
+
           console.log(landmark);
+
+          setTimeout(() => {
+            console.log(this.map.getAnnotations());
+          }, 2000);
 
         }, (error) => {
           this.router.navigateByUrl('/home');
@@ -140,51 +120,18 @@ export class LandmarkOverviewComponent implements OnInit {
     }
 
 
-    // this.route.paramMap.pipe(
-    //   switchMap((params: ParamMap) =>
-    //     of(params.get('id'))
-    //   )
-    // ).subscribe(landmarkId => {
-    //   console.log(landmarkId);
-
-    //   this.httpService.getLandmarkById(landmarkId).subscribe(
-    //     landmark => {
-    //       this.landmarkWithDescription$ = of(landmark);
-    //     }
-    //   ),
-    //     tap(_ => console.log(this.landmarkWithDescription$)
-    //     )
-
-    // });
-
-
-
-
-
-    // this.route.paramMap.pipe(
-    //   map(params => {
-    //     let landmarkId = params.get('id');
-    //     console.log(landmarkId);
-
-
-    //     this.httpService.getLandmarkById(landmarkId).subscribe(
-    //       landmark => {
-    //         this.landmarkWithDescription$ = of(landmark);
-    //       }
-    //     ),
-    //       tap(_ => console.log(this.landmarkWithDescription$)
-    //       )
-    //   })
-    // );
-
-
-
-
     var body = document.getElementsByTagName('body')[0];
     body.classList.add('landing-page');
     var navbar = document.getElementsByTagName('nav')[0];
     navbar.classList.add('navbar-transparent');
   }
+
+  getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
+  }
+
   ngOnDestroy() {
     var body = document.getElementsByTagName('body')[0];
     body.classList.remove('landing-page');
