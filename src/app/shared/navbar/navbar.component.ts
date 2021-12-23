@@ -12,14 +12,23 @@ import { switchMap } from 'rxjs/operators';
 export class NavbarComponent implements OnInit {
     private toggleButton: any;
     private sidebarVisible: boolean;
+    loggedIn = false;
 
     constructor(public location: Location, private element: ElementRef,
-        private authenticationService: HttpService
+        private httpService: HttpService
     ) {
         this.sidebarVisible = false;
+
+        this.httpService.userValue
     }
 
     ngOnInit() {
+        if (this.httpService.userValue) {
+            this.loggedIn = true;
+        } else {
+            this.loggedIn = false;
+        }
+
         const navbar: HTMLElement = this.element.nativeElement;
         this.toggleButton = navbar.getElementsByClassName('navbar-toggler')[0];
     }

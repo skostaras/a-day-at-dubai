@@ -27,14 +27,12 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-8 ml-auto mr-auto text-center">
-                        <h2 class="title">Who we are?</h2>
-                        <h5 class="description">According to the National Oceanic and Atmospheric Administration, Ted,
-                            Scambos, NSIDClead scentist, puts the potentially record low maximum sea ice extent tihs
-                            year
-                            down to low ice extent in the Pacific and a late drop in ice extent in the Barents Sea.</h5>
+                        <h2 class="title">Basic Info</h2>
+                        <h5 class="description" [innerText]="landmarkWithDescription.short_info" style="color: unset;">
+                        </h5>
                     </div>
                 </div>
-                <div class="separator separator-primary"></div>
+                <!-- <div class="separator separator-primary"></div> -->
                 <div class="section-story-overview">
                     <div class="row">
                         <div class="col-md-6">
@@ -43,13 +41,14 @@
                                     alt="generic dubai image"
                                     style="opacity: 30%; object-fit: cover; width: fit-content;">
                                 <!-- First image on the left side -->
-                                <p class="blockquote blockquote-primary" style="width: unset;">
+                                <!-- <p class="blockquote blockquote-primary" style="width: unset;">
                                     {{landmarkWithDescription.short_info}}
                                     <br>
-                                </p>
+                                </p> -->
                             </div>
                             <!-- Second image on the left side of the article -->
-                            <div class="image-container" style="display: flex; justify-content: center;">
+                            <div class="image-container"
+                                style="display: flex; justify-content: center; margin-top: 222px;">
                                 <ngx-apple-maps id="map" style="display: block; width: 800px; height: 400px;"
                                     [options]="options" [settings]="settings" (onLoaded)="onLoaded($event)">
 
@@ -64,8 +63,14 @@
                         </div>
                         <div class="col-md-5">
                             <!-- First image on the right side, above the article -->
+
                             <img class="image-container image-right" [src]="landmarkWithDescription.photo_thumb.url"
                                 [alt]="landmarkWithDescription.photo_thumb.name" style="margin-left:unset;">
+                            <!-- <div class="text-center">
+                                <a class="btn btn-primary btn-icon btn-round" style="display: flex; justify-content: center; align-content: center;" >
+                                    <i class="fas fa-image"></i>
+                                </a>
+                            </div> -->
                             <h3>More info on {{landmarkWithDescription.title}}</h3>
                             <div class="separator separator-primary"></div>
                             <p style="text-align: justify;">{{landmarkWithDescription.description}}

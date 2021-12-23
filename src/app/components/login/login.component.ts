@@ -30,7 +30,7 @@ export class LoginComponent {
 
     constructor(
         private modalService: NgbModal,
-        private authenticationService: HttpService,
+        private httpService: HttpService,
         private notificationService: NotificationService) {
         this.subscribeToLoginFormSubject();
         this.subscribeToLogoutSubject();
@@ -38,7 +38,7 @@ export class LoginComponent {
 
     ngOnInit() {
 
-        if (this.authenticationService.userValue) {
+        if (this.httpService.userValue) {
             this.loggedIn = true;
         } else {
             this.loggedIn = false;
@@ -70,7 +70,7 @@ export class LoginComponent {
         this.loginFormSubject
             .asObservable()
             .pipe(
-                switchMap(formValue => this.authenticationService.loginRequest(formValue))
+                switchMap(formValue => this.httpService.loginRequest(formValue))
             )
             .subscribe(user => {
                 this.loggedIn = true;
@@ -86,7 +86,7 @@ export class LoginComponent {
         this.logoutSubject
             .asObservable()
             .pipe(
-                switchMap(value => this.authenticationService.logoutRequest())
+                switchMap(value => this.httpService.logoutRequest())
             )
             .subscribe(message => {
                 this.loggedIn = false;

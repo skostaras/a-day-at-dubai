@@ -52,7 +52,7 @@ export class LandmarkOverviewComponent implements OnInit {
     showsScale: 'adaptive', // 'adaptive' | 'hidden' | 'visible' https://developer.apple.com/documentation/mapkitjs/mapkit/map/2973941-showsscale?changes=latest_minor
     showsUserLocation: false,
     tracksUserLocation: false,
-    showsUserLocationControl: true
+    showsUserLocationControl: false
   }
 
   randomImageSource = '';
@@ -67,7 +67,7 @@ export class LandmarkOverviewComponent implements OnInit {
     console.log("hello");
 
     this.map = e;
-    this.map.zoom = 10;
+    this.map.zoom = 11;
     this.map.addEventListener('select', (event) => {
       console.log('event ', event);
     });
