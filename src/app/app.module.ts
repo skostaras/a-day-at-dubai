@@ -6,7 +6,6 @@ import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/home.module';
 import { ExamplesModule } from './examples/examples.module';
-import { GoogleMapsModule } from '@angular/google-maps'
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
@@ -32,7 +31,6 @@ import { NotificationComponent } from './components/notification/notification.co
         ComponentsModule,
         ExamplesModule,
         HttpClientModule,
-        GoogleMapsModule,
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

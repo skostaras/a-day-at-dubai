@@ -1,6 +1,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "paths": { "@angular/*": ["./node_modules/@angular/*"] },
     "importHelpers": true,
     "outDir": "./dist/out-tsc",
     "baseUrl": "src",
@@ -18,5 +19,8 @@
       "dom"
     ],
     "module": "es2015"
+  },
+  "angularCompilerOptions": {
+    "enableIvy": false,
   }
 }
