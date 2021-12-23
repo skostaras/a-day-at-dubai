@@ -5,7 +5,7 @@ import { Observable, of } from 'rxjs';
 import { map, switchMap, take, tap, catchError } from 'rxjs/operators';
 import { LandmarkWithDescription } from 'app/models/landmark-with-description';
 import { HttpService } from 'app/services/http.service';
-import { MapConstructorOptions, MapKitInitOptions } from 'ngx-apple-maps/lib/declarations';
+import { AnnotationConstructorOptionsInterface, MapConstructorOptions, MapKitInitOptions } from 'ngx-apple-maps/lib/declarations';
 import { DOCUMENT } from '@angular/common';
 
 @Component({
@@ -27,13 +27,13 @@ export class LandmarkOverviewComponent implements OnInit {
   options: MapKitInitOptions = {
     language: 'en', // default browser language
     callback: (data, error) => {
-    //   // return map event
+      //   // return map event
     },
     JWT: 'eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjQ1S0Q2SzhaVzgifQ.eyJpc3MiOiJXSjM2MzM3NE1ZIiwiaWF0IjoxNjQwMjY1Nzg0LCJleHAiOjE2NzE3NTM2MDB9.IXwpGhGhHI5WFFK5UXvtIXJVjYoPJIKoV4m94Wa9IGmhc4SXvyZs4NPBdEtqbO0hL81drJHXs6cGEEEPsjJzaw' // Json Web token
   }
-
-  latitude = '55.27439'
-  longitude = '25.19649'
+  annotationOptions: AnnotationConstructorOptionsInterface = {}
+  latitude = 55.27439
+  longitude = 25.19649
 
   settings: MapConstructorOptions;
 
@@ -62,7 +62,7 @@ export class LandmarkOverviewComponent implements OnInit {
     document.body.appendChild(chatScript);
 
   }
-  
+
 
 
 
