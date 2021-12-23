@@ -187,6 +187,15 @@
             </div>
         </div>
 
+        <!-- <div id="map" style=" width: 100%;
+        height: 600px;"></div> -->
+
+        <ngx-apple-maps [options]="options" [settings]="settings" >
+
+            <ngx-apple-maps-annotation [latitude]="latitude" [longitude]="longitude"  (onLoaded)="onLoaded($event)"></ngx-apple-maps-annotation>
+        </ngx-apple-maps>
+
+
         <footer class="footer footer-default">
             <div class="container">
                 <nav>

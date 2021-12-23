@@ -5,7 +5,6 @@ import { NouisliderModule } from 'ng2-nouislider';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { JwBootstrapSwitchNg2Module } from 'jw-bootstrap-switch-ng2';
 
-import { LandmarkOverviewComponent } from '../components/landmark-overview/landmark-overview.component';
 import { ExamplesComponent } from './examples.component';
 
 @NgModule({
@@ -17,7 +16,6 @@ import { ExamplesComponent } from './examples.component';
         JwBootstrapSwitchNg2Module,
     ],
     declarations: [
-        LandmarkOverviewComponent,
         ExamplesComponent,
     ],
 })

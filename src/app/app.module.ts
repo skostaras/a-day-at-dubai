@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app.routing';
-import { ComponentsModule } from './components/home.module';
+import { HomeModule } from './components/home.module';
 import { ExamplesModule } from './examples/examples.module';
 
 import { AppComponent } from './app.component';
@@ -13,14 +13,16 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './services/auth.interceptor';
 import { ErrorInterceptor } from './services/error.interceptor';
 import { NotificationComponent } from './components/notification/notification.component';
+import { AppleMapsModule } from 'ngx-apple-maps';
+import { OverviewModule } from './components/landmark-overview/overview.module';
 
 @NgModule({
     declarations: [
         AppComponent,
         NavbarComponent,
-        NotificationComponent
-
+        NotificationComponent,
     ],
+
     imports: [
         BrowserAnimationsModule,
         NgbModule,
@@ -28,10 +30,13 @@ import { NotificationComponent } from './components/notification/notification.co
         ReactiveFormsModule,
         RouterModule,
         AppRoutingModule,
-        ComponentsModule,
+        HomeModule,
         ExamplesModule,
         HttpClientModule,
+        AppleMapsModule,
+        OverviewModule
     ],
+
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },

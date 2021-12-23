@@ -14,6 +14,7 @@ import { HomeComponent } from './home.component';
 import { LoginComponent } from './login/login.component';
 import { AllLandmarksComponent } from './all-landmarks/all-landmarks.component';
 import { HttpClientModule } from '@angular/common/http';
+// import { AppleMapsModule } from 'ngx-apple-maps';
 
 @NgModule({
     declarations: [
@@ -23,7 +24,8 @@ import { HttpClientModule } from '@angular/common/http';
         TypographyComponent,
         NucleoiconsComponent,
         LoginComponent,
-        AllLandmarksComponent
+        AllLandmarksComponent,
+        // AppleMapsModule
     ],
     imports: [
         CommonModule,
@@ -34,7 +36,8 @@ import { HttpClientModule } from '@angular/common/http';
         RouterModule,
         JwBootstrapSwitchNg2Module,
         HttpClientModule,
+        // AppleMapsModule,
     ],
     exports: [HomeComponent, LoginComponent]
 })
-export class ComponentsModule { }
+export class HomeModule { }
