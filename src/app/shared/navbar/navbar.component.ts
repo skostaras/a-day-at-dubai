@@ -69,4 +69,9 @@ export class NavbarComponent implements OnInit {
             return false;
         }
     }
+
+    isLoggedIn(loggedIn: boolean){
+        this.loggedIn = loggedIn;
+    }
+
 }

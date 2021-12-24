@@ -33,13 +33,17 @@
     </div>
     <div class="collapse navbar-collapse" id="example-navbar-primary">
       <ul class="navbar-nav ml-auto">
-        <li [hidden]="!loggedIn" class="nav-item active">
+        <li *ngIf="loggedIn" class="nav-item active">
           <a class="nav-link" href="#pablo">
             <i class="now-ui-icons ui-2_settings-90"></i>
             <p>Dashboard</p>
           </a>
         </li>
-        <app-login-component></app-login-component>
+        <app-login-component
+
+        (isLoggedIn)="isLoggedIn($event)"
+
+        ></app-login-component>
       </ul>
     </div>
   </div>

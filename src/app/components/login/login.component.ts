@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormControl, Validators } from '@angular/forms'
 import { Subject } from 'rxjs';
@@ -16,6 +16,8 @@ export class LoginComponent {
     closeResult: string | undefined;
     currentUsername: string = '';
     loggedIn = false;
+
+    @Output() isLoggedIn = new EventEmitter();
 
     //TODO output event emitter to navbar about login logout
     focus: any;
@@ -41,8 +43,10 @@ export class LoginComponent {
 
         if (this.httpService.userValue) {
             this.loggedIn = true;
+            this.isLoggedIn.emit(true);
         } else {
             this.loggedIn = false;
+            this.isLoggedIn.emit(false);
         }
 
         const username = localStorage.getItem("username");
@@ -74,11 +78,12 @@ export class LoginComponent {
                 switchMap(formValue => this.httpService.loginRequest(formValue))
             )
             .subscribe(user => {
-                this.loggedIn = true;
                 this.currentUsername = this.loginForm.get("username").value;
                 localStorage.setItem("username", this.currentUsername);
                 this.modalService.dismissAll();
                 this.notificationService.successNotification(this.currentUsername + ' Successfully Logged In.');
+                this.loggedIn = true;
+                this.isLoggedIn.emit(true);
                 this.loginForm.reset();
             })
     }
@@ -91,6 +96,7 @@ export class LoginComponent {
             )
             .subscribe(message => {
                 this.loggedIn = false;
+                this.isLoggedIn.emit(false);
                 this.notificationService.successNotification(message.message);
             })
     }

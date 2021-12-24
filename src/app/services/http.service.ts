@@ -47,7 +47,12 @@ export class HttpService {
                     localStorage.removeItem('user');
                     localStorage.removeItem('username');
                     this.userSubject.next(null);
-                    this.router.navigate(['/']);
+
+                    //TODO if user is in admin page
+                    if(this.router.url) {
+                        this.router.navigate(['/']);
+                    }
+                    
                     return message;
                 }
             )
