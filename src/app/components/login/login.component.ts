@@ -17,6 +17,7 @@ export class LoginComponent {
     currentUsername: string = '';
     loggedIn = false;
 
+    //TODO output event emitter to navbar about login logout
     focus: any;
     focus1: any;
 

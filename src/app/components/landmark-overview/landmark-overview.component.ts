@@ -12,6 +12,7 @@ import { AnnotationConstructorOptionsInterface, MapConstructorOptions, MapKitIni
   templateUrl: './landmark-overview.component.html',
   styleUrls: ['./landmark-overview.component.scss']
 })
+
 export class LandmarkOverviewComponent implements OnInit {
   focus;
   focus1;
