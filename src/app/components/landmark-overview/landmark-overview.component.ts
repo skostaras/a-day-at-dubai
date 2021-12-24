@@ -6,6 +6,7 @@ import { map, switchMap, take, tap, catchError } from 'rxjs/operators';
 import { LandmarkWithDescription } from 'app/models/landmark-with-description';
 import { HttpService } from 'app/services/http.service';
 import { AnnotationConstructorOptionsInterface, MapConstructorOptions, MapKitInitOptions } from 'ngx-apple-maps/lib/declarations';
+import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-landmark-overview',
@@ -62,32 +63,72 @@ export class LandmarkOverviewComponent implements OnInit {
     private route: ActivatedRoute,
     private httpService: HttpService,
     private router: Router,
+    private modalService: NgbModal,
   ) { }
 
-  onLoaded(e) {
-    console.log("hello");
+  closeResult: string;
 
+
+  open(content, type, modalDimension) {
+    console.log(content);
+    console.log(type);
+    console.log(modalDimension);
+
+    if (modalDimension === 'sm' && type === 'modal_mini') {
+      console.log("helloooooo");
+      this.modalService.open(content, { windowClass: 'modal-mini modal-primary', size: 'sm' }).result.then((result) => {
+        this.closeResult = `Closed with: ${result}`;
+      }, (reason) => {
+        this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      });
+    } else if (modalDimension == undefined && type === 'Login') {
+      console.log("helloooooo");
+      this.modalService.open(content, { windowClass: 'modal-login modal-primary' }).result.then((result) => {
+        this.closeResult = `Closed with: ${result}`;
+      }, (reason) => {
+        this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      });
+    } else {
+
+      console.log("helloooooo");
+
+
+      setTimeout(() => {
+        document.getElementsByClassName('modal-dialog')[0].classList.add('modal-xl');
+      }, 0);
+      this.modalService.open(content).result.then((result) => {
+
+
+
+
+
+        this.closeResult = `Closed with: ${result}`;
+      }, (reason) => {
+        this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      });
+    }
+
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
+  }
+
+  onLoaded(e) {
     this.map = e;
     this.map.zoom = 11;
     this.map.addEventListener('select', (event) => {
-      console.log('event ', event);
     });
 
-    this.map.addEventListener('zoom-end', (event) => {
-      // console.log('event ', event);
-      console.log(this.map.zoom);
-
-    });
   }
 
   ngOnInit() {
-    // this.map = document.getElementById("map");
-
-
-
-
-
-
     let randomInt = this.getRandomInt(1, 6);
     this.randomImageSource = 'assets/img/dubai' + randomInt + '.jpg';
 
