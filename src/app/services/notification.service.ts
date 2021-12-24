@@ -21,6 +21,10 @@ export class NotificationService {
         }
 
         this.subject.next({ alert: successAlert });
+
+        setTimeout(() => {
+            this.subject.next({ alert: null });
+        }, 5000);
     }
 
     errorNotification(message: string) {
@@ -34,7 +38,11 @@ export class NotificationService {
         }
 
         this.subject.next({ alert: errorAlert });
+        setTimeout(() => {
+            this.subject.next({ alert: null });
+        }, 8000);
     }
+
 
     infoNotification(message: string) {
         let infoAlert: IAlert;
@@ -47,6 +55,10 @@ export class NotificationService {
         }
 
         this.subject.next({ alert: infoAlert });
+
+        setTimeout(() => {
+            this.subject.next({ alert: null });
+        }, 5000);
     }
 
     getAlert(): Observable<any> {
