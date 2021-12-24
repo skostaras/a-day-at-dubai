@@ -27,7 +27,18 @@ export class AppComponent implements OnInit {
         this.authenticationService.user.subscribe(user => this.user = user);
     }
 
+    changeFavicon() {
+        let favIcon: HTMLLinkElement = document.querySelector('#appIcon');
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            favIcon.href ='assets/img/logo-white.png';
+        } else {
+            favIcon.href ='assets/img/logo-black.png'
+        }
+    }
+
     ngOnInit() {
+        this.changeFavicon();
+        
         var navbar: HTMLElement = this.element.nativeElement.children[0].children[0];
         this._router = this.router.events.filter(event => event instanceof NavigationEnd).subscribe((event: NavigationEnd) => {
             if (window.outerWidth > 991) {

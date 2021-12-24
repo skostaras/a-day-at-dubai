@@ -14,6 +14,7 @@ import { HomeComponent } from './home.component';
 import { LoginComponent } from './login/login.component';
 import { AllLandmarksComponent } from './all-landmarks/all-landmarks.component';
 import { HttpClientModule } from '@angular/common/http';
+import { FooterComponent } from 'app/shared/footer/footer.component';
 // import { AppleMapsModule } from 'ngx-apple-maps';
 
 @NgModule({
@@ -26,6 +27,7 @@ import { HttpClientModule } from '@angular/common/http';
         LoginComponent,
         AllLandmarksComponent,
         // AppleMapsModule
+        FooterComponent
     ],
     imports: [
         CommonModule,
