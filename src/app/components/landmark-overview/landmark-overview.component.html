@@ -9,31 +9,20 @@
             <div class="container">
                 <div class="content-center">
                     <h1 class="title">{{landmarkWithDescription.title}}</h1>
-                    <div class="text-center">
-                        <a href="#pablo" class="btn btn-primary btn-icon btn-round">
-                            <i class="fab fa-facebook-square"></i>
-                        </a>
-                        <a href="#pablo" class="btn btn-primary btn-icon btn-round">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="#pablo" class="btn btn-primary btn-icon btn-round">
-                            <i class="fab fa-google-plus"></i>
-                        </a>
-                    </div>
                 </div>
             </div>
         </div>
-        <div class="section section-about-us">
+        <div class="section" style="padding: 95px 0 30px 0">
             <div class="container">
                 <div class="row">
                     <div class="col-md-8 ml-auto mr-auto text-center">
-                        <h2 class="title">Basic Info</h2>
+                        <h3 class="title">What you should know</h3>
                         <h5 class="description" [innerText]="landmarkWithDescription.short_info" style="color: unset;">
                         </h5>
                     </div>
                 </div>
                 <!-- <div class="separator separator-primary"></div> -->
-                <div class="section-story-overview">
+                <div class="section-story-overview" style="padding-top: 65px; margin-top: 30px;">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="image-container image-left">
@@ -41,25 +30,20 @@
                                     alt="generic dubai image"
                                     style="opacity: 30%; object-fit: cover; width: fit-content;">
                                 <!-- First image on the left side -->
-                                <!-- <p class="blockquote blockquote-primary" style="width: unset;">
-                                    {{landmarkWithDescription.short_info}}
+
+                            </div>
+                            <div style="">
+                                <p class="blockquote blockquote-primary"
+                                    style="text-transform: unset; width: 220px;top: 575px;right: 55px;">
+                                    For detailed information on {{landmarkWithDescription.title}}, visit
+
+                                    <em><a [href]="landmarkWithDescription.url">{{landmarkWithDescription.url |
+                                            urlShortenPipe | urlShortenPipe}}</a></em>
+
                                     <br>
-                                </p> -->
+                                </p>
                             </div>
-                            <!-- Second image on the left side of the article -->
-                            <div class="image-container"
-                                style="display: flex; justify-content: center; margin-top: 222px;">
-                                <ngx-apple-maps id="map" style="display: block; width: 800px; height: 400px;"
-                                    [options]="options" [settings]="settings" (onLoaded)="onLoaded($event)">
 
-                                    <ngx-apple-maps-annotation [latitude]="latitude" [longitude]="longitude"
-                                        [options]="annotationOptions">
-                                    </ngx-apple-maps-annotation>
-
-                                </ngx-apple-maps>
-
-                            </div>
-                            <!-- <div class="image-container" style="background-image: url('assets/img/bg3.jpg')"></div> -->
                         </div>
                         <div class="col-md-5">
                             <!-- First image on the right side, above the article -->
@@ -68,17 +52,9 @@
                                 Launch Modal
                                </button> -->
                             <ng-template #classic let-c="close" let-d="dismiss">
-                                <!-- <div class="modal-header justify-content-center">
-                                       <button type="button" class="close" (click)="d('Cross click')">
-                                           <i class="now-ui-icons ui-1_simple-remove"></i>
-                                       </button>
-                                       <h4 class="title title-up">Modal title</h4>
-                                   </div> -->
                                 <div class="modal-body"
                                     style="background: black; padding: 5px; cursor: zoom-out; margin: 0;"
                                     (click)="d('Cross click')">
-                                    <!-- <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean. A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.
-                                       </p> -->
 
                                     <img [src]="landmarkWithDescription.photo.url"
                                         [alt]="landmarkWithDescription.photo.name">
@@ -89,87 +65,29 @@
                                 [src]="landmarkWithDescription.photo_thumb.url"
                                 [alt]="landmarkWithDescription.photo_thumb.name"
                                 style="margin-left:unset; cursor:zoom-in;">
-                            <!-- <div class="text-center">
-                                <a class="btn btn-primary btn-icon btn-round" style="display: flex; justify-content: center; align-content: center;" >
-                                    <i class="fas fa-image"></i>
-                                </a>
-                            </div> -->
-                            <h3>More info on {{landmarkWithDescription.title}}</h3>
-                            <div class="separator separator-primary"></div>
+                            <h3 class="" style="text-align: center;">Learn more
+                            </h3>
+                            <!-- <div class="separator separator-primary"></div> -->
                             <p style="text-align: justify;">{{landmarkWithDescription.description}}
                             </p>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-        <div class="section section-team text-center">
-            <div class="container">
-                <h2 class="title">Here is our team</h2>
-                <div class="team">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="team-player">
-                                <img src="assets/img/avatar.jpg" alt="Thumbnail Image"
-                                    class="rounded-circle img-fluid img-raised">
-                                <h4 class="title">Romina Hadid</h4>
-                                <p class="category text-primary">Model</p>
-                                <p class="description">You can write here details about one of your team members. You
-                                    can
-                                    give more details about what they do. Feel free to add some
-                                    <a href="#">links</a> for people to be able to follow them outside the site.
-                                </p>
-                                <a href="#pablo" class="btn btn-primary btn-icon btn-round"><i
-                                        class="fab fa-twitter"></i></a>
-                                <a href="#pablo" class="btn btn-primary btn-icon btn-round"><i
-                                        class="fab fa-instagram"></i></a>
-                                <a href="#pablo" class="btn btn-primary btn-icon btn-round"><i
-                                        class="fab fa-facebook-square"></i></a>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="team-player">
-                                <img src="assets/img/ryan.jpg" alt="Thumbnail Image"
-                                    class="rounded-circle img-fluid img-raised">
-                                <h4 class="title">Ryan Tompson</h4>
-                                <p class="category text-primary">Designer</p>
-                                <p class="description">You can write here details about one of your team members. You
-                                    can
-                                    give more details about what they do. Feel free to add some
-                                    <a href="#">links</a> for people to be able to follow them outside the site.
-                                </p>
-                                <a href="#pablo" class="btn btn-primary btn-icon btn-round"><i
-                                        class="fab fa-twitter"></i></a>
-                                <a href="#pablo" class="btn btn-primary btn-icon btn-round"><i
-                                        class="fab fa-linkedin"></i></a>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="team-player">
-                                <img src="assets/img/eva.jpg" alt="Thumbnail Image"
-                                    class="rounded-circle img-fluid img-raised">
-                                <h4 class="title">Eva Jenner</h4>
-                                <p class="category text-primary">Fashion</p>
-                                <p class="description">You can write here details about one of your team members. You
-                                    can
-                                    give more details about what they do. Feel free to add some
-                                    <a href="#">links</a> for people to be able to follow them outside the site.
-                                </p>
-                                <a href="#pablo" class="btn btn-primary btn-icon btn-round"><i
-                                        class="fab fa-google-plus"></i></a>
-                                <a href="#pablo" class="btn btn-primary btn-icon btn-round"><i
-                                        class="fab fa-youtube"></i></a>
-                                <a href="#pablo" class="btn btn-primary btn-icon btn-round"><i
-                                        class="fab fa-twitter"></i></a>
-                            </div>
-                        </div>
+                    <div class="row" style="display: flex; justify-content: center; margin-top: 62px;">
+                        <ngx-apple-maps id="map" style="display: block; width: 1000px; height: 500px;"
+                            [options]="options" [settings]="settings" (onLoaded)="onLoaded($event)">
+
+                            <ngx-apple-maps-annotation [latitude]="latitude" [longitude]="longitude"
+                                [options]="annotationOptions">
+                            </ngx-apple-maps-annotation>
+
+                        </ngx-apple-maps>
+
                     </div>
                 </div>
             </div>
         </div>
 
         <app-footer></app-footer>
-
 
     </div>
 

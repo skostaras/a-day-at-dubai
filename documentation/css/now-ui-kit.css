@@ -5102,7 +5102,7 @@ p {
 .blockquote small {
     color: #888888;
     font-size: 0.8571em;
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
 }
 
 .blockquote.blockquote-primary {

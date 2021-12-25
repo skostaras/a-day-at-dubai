@@ -4,7 +4,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app.routing';
-import { ExamplesModule } from './examples/examples.module';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
@@ -25,6 +24,7 @@ import { NucleoiconsComponent } from './components/nucleoicons/nucleoicons.compo
 import { LoginComponent } from './components/login/login.component';
 import { AllLandmarksComponent } from './components/all-landmarks/all-landmarks.component';
 import { FooterComponent } from './shared/footer/footer.component';
+import { UrlShortenPipe } from './shared/url-shorten-pipe';
 
 @NgModule({
     declarations: [
@@ -39,7 +39,8 @@ import { FooterComponent } from './shared/footer/footer.component';
         NucleoiconsComponent,
         LoginComponent,
         AllLandmarksComponent,
-        FooterComponent
+        FooterComponent,
+        UrlShortenPipe
     ],
 
     imports: [
@@ -49,7 +50,6 @@ import { FooterComponent } from './shared/footer/footer.component';
         ReactiveFormsModule,
         RouterModule,
         AppRoutingModule,
-        ExamplesModule,
         HttpClientModule,
         AppleMapsModule,
         CommonModule,
