@@ -19,7 +19,7 @@ export class NavbarComponent implements OnInit {
     ) {
         this.sidebarVisible = false;
 
-        this.httpService.userValue
+        // this.httpService.userValue
     }
 
     ngOnInit() {
@@ -70,7 +70,7 @@ export class NavbarComponent implements OnInit {
         }
     }
 
-    isLoggedIn(loggedIn: boolean){
+    isLoggedIn(loggedIn: boolean) {
         this.loggedIn = loggedIn;
     }
 

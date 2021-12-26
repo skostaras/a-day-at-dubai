@@ -20,11 +20,11 @@ import { HomeComponent } from './components/home.component';
 import { BasicelementsComponent } from './components/basicelements/basicelements.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { TypographyComponent } from './components/typography/typography.component';
-import { NucleoiconsComponent } from './components/nucleoicons/nucleoicons.component';
 import { LoginComponent } from './components/login/login.component';
 import { AllLandmarksComponent } from './components/all-landmarks/all-landmarks.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { UrlShortenPipe } from './shared/url-shorten-pipe';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 @NgModule({
     declarations: [
@@ -36,11 +36,11 @@ import { UrlShortenPipe } from './shared/url-shorten-pipe';
         BasicelementsComponent,
         NavigationComponent,
         TypographyComponent,
-        NucleoiconsComponent,
         LoginComponent,
         AllLandmarksComponent,
         FooterComponent,
-        UrlShortenPipe
+        UrlShortenPipe,
+        DashboardComponent
     ],
 
     imports: [

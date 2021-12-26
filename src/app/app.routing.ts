@@ -5,14 +5,14 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { HomeComponent } from './components/home.component';
 import { LandmarkOverviewComponent } from './components/landmark-overview/landmark-overview.component';
-import { NucleoiconsComponent } from './components/nucleoicons/nucleoicons.component';
 import { AllLandmarksComponent } from './components/all-landmarks/all-landmarks.component';
 import { AuthGuard } from './services/authGuard';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
     { path: 'home', component: HomeComponent },
-    { path: 'nucleoicons', component: NucleoiconsComponent },
+    { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
     // { path: 'landmark', component: LandmarkOverviewComponent, data: { landmark: null } },
     { path: 'landmark', component: LandmarkOverviewComponent },
     { path: 'examples/profile', component: AllLandmarksComponent },
