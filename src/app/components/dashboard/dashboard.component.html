@@ -1,16 +1,18 @@
 <div class="page-header" filter-color="orange">
     <div class="page-header-image" style="background-image:url(assets/img/dubatiAtDay.jpg)"></div>
     <div class="container">
-        <div class="col-md-4 content-center">
-            <div class="card card-login card-plain">
-                <form class="form" method="" action="">
-                    <div class="header header-primary text-center">
-                        <div class="logo-container" style="width: 150px;">
-                            <img src="assets/img/logo-white.png" alt="logo">
-                        </div>
-                    </div>
-                    <div class="content">
 
+        <div class="col-md-4 content-center">
+
+            <div class="card card-login card-plain" style="max-width: 600px">
+                <div class="header header-primary text-center">
+                    <div class="logo-container" style="width: 150px;">
+                        <img src="assets/img/logo-white.png" alt="logo">
+                    </div>
+                </div>
+                <form class="form" method="" action="">
+
+                    <div class="content">
 
                         <select class="custom-select"
                             style="border-radius: 30px; font-size: 0.8571em; background-color: rgba(255, 255, 255, 0.1); margin-bottom: 10px; color: white; height: 46px; border:none">
@@ -20,31 +22,79 @@
                             <option value="3">Three</option>
                         </select>
 
+                        <div class="input-group form-group-no-border input-lg row"
+                            style="display: flex; align-items: center;" [ngClass]="{'input-group-focus':focus===true}">
+                            <label class="col-sm-3 col-form-label" for="title">Title</label>
 
-                        <div class="input-group form-group-no-border input-lg"
-                            [ngClass]="{'input-group-focus':focus===true}">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"> <i class="now-ui-icons users_circle-08"></i></span>
+                            <div class="input-group col-sm-9" style="margin-bottom: 0; padding-right: 0;">
+                                <!-- <span class="input-group-text"> <i class="now-ui-icons users_circle-08"></i></span> -->
+
+
+                                <input type="text" class="form-control" id="title" placeholder="Title..."
+                                    (focus)="focus=true" (blur)="focus=false">
+
                             </div>
-                            <input type="text" class="form-control" placeholder="First Name..." (focus)="focus=true"
-                                (blur)="focus=false">
                         </div>
-                        <div class="input-group form-group-no-border input-lg"
-                            [ngClass]="{'input-group-focus':focus1===true}">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="now-ui-icons text_caps-small"></i></span>
+
+                        <div class="input-group form-group-no-border input-lg row"
+                            style="display: flex; align-items: center;" [ngClass]="{'input-group-focus':focus===true}">
+                            <label class="col-sm-3 col-form-label" for="title">Latitude</label>
+
+                            <div class="input-group col-sm-9" style="margin-bottom: 0; padding-right: 0;">
+                                <!-- <span class="input-group-text"> <i class="now-ui-icons users_circle-08"></i></span> -->
+
+                                <input type="number" class="form-control" id="title" placeholder="..."
+                                    (focus)="focus=true" (blur)="focus=false">
                             </div>
-                            <input type="text" placeholder="Last Name..." class="form-control" (focus)="focus1=true"
-                                (blur)="focus1=false" />
                         </div>
+
+
+                        <div class="input-group form-group-no-border input-lg row"
+                            style="display: flex; align-items: center;" [ngClass]="{'input-group-focus':focus===true}">
+                            <label class="col-sm-3 col-form-label" for="title">Longtitude</label>
+                            <div class="input-group col-sm-9" style="margin-bottom: 0; padding-right: 0;">
+                                <input type="number" class="form-control" id="title" placeholder="..."
+                                    (focus)="focus=true" (blur)="focus=false">
+                            </div>
+                        </div>
+
+                        <div class="input-group form-group-no-border input-lg row"
+                            style="display: flex; align-items: center;" [ngClass]="{'input-group-focus':focus===true}">
+                            <label class="col-sm-3 col-form-label" for="title">URL</label>
+                            <div class="input-group col-sm-9" style="margin-bottom: 0; padding-right: 0;">
+                                <input type="text" class="form-control" id="title" placeholder="..."
+                                    (focus)="focus=true" (blur)="focus=false">
+                            </div>
+                        </div>
+
+
+                        <div class="input-group form-group-no-border input-lg row"
+                            style="display: flex; align-items: center;" [ngClass]="{'input-group-focus':focus===true}">
+                            <label class="col-sm-3 col-form-label" for="title">Short Info</label>
+                            <div class="input-group col-sm-9" style="margin-bottom: 0; padding-right: 0;">
+                                <textarea class="form-control" style="border-radius: 30px;" id="title" placeholder="..."
+                                    (focus)="focus=true" (blur)="focus=false" rows="3"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="input-group form-group-no-border input-lg row"
+                            style="display: flex; align-items: center;" [ngClass]="{'input-group-focus':focus===true}">
+                            <label class="col-sm-3 col-form-label" for="title">Description</label>
+                            <div class="input-group col-sm-9" style="margin-bottom: 0; padding-right: 0;">
+                                <textarea class="form-control" style="border-radius: 30px;" id="title" placeholder="..."
+                                    (focus)="focus=true" (blur)="focus=false" rows="5"></textarea>
+                            </div>
+                        </div>
+
                     </div>
                     <div class="footer text-center">
-                        <a href="#pablo" class="btn btn-primary btn-round btn-lg btn-block">Get Started</a>
+                        <a href="#pablo" class="btn btn-primary btn-round btn-lg btn-block">Submit</a>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 
-    <app-footer></app-footer>
+
 </div>
+<app-footer></app-footer>
