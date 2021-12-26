@@ -1,9 +1,8 @@
 import { Component, Inject, OnInit, Renderer2, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { Landmark } from '../../models/landmark';
+import { LandmarkWithPhotos } from '../../models/landmark-with-photos';
 import { Observable, of } from 'rxjs';
-import { map, switchMap, take, tap, catchError } from 'rxjs/operators';
-import { LandmarkWithDescription } from 'app/models/landmark-with-description';
+import { LandmarkWithPhotosAndDescription } from 'app/models/landmark-with-photos-and-description';
 import { HttpService } from 'app/services/http.service';
 import { AnnotationConstructorOptionsInterface, MapConstructorOptions, MapKitInitOptions } from 'ngx-apple-maps/lib/declarations';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -19,7 +18,7 @@ export class LandmarkOverviewComponent implements OnInit {
   focus1;
 
   map
-  landmarkWithDescription$: Observable<LandmarkWithDescription>;
+  landmarkWithDescription$: Observable<LandmarkWithPhotosAndDescription>;
 
   landmarkId: string;
 

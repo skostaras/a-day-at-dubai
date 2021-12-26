@@ -2,9 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { NgbAccordionConfig } from '@ng-bootstrap/ng-bootstrap';
 import { HttpService } from '../services/http.service';
-import { Landmark } from '../models/landmark';
-import { merge, Observable, of } from 'rxjs';
-import { map, startWith, switchMap } from 'rxjs/operators';
+import { LandmarkWithPhotos } from '../models/landmark-with-photos';
+import { Observable, of } from 'rxjs';
 
 @Component({
     selector: 'app-components',
@@ -32,7 +31,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     focus1;
     focus2;
 
-    allLandmarks$: Observable<Landmark[]>;
+    allLandmarks$: Observable<LandmarkWithPhotos[]>;
 
     model: NgbDateStruct;
 
@@ -52,56 +51,13 @@ export class HomeComponent implements OnInit, OnDestroy {
         var body = document.getElementsByTagName('body')[0];
         body.classList.add('index-page');
 
-        // this.allLandmarks$ = this.httpService.getAllLandmarks().pipe(switchMap(landmarks => { console.log(landmarks) }));
-
-        // this.allLandmarks$ = this.httpService.getAllLandmarks();
-
-        // let hello = this.httpService.getall();
-
-        // merge()
-        //     .pipe(
-        //         startWith({}),
-        //         switchMap(() => {
-        //             return this.httpService.getAllLandmarks();
-        //         }),
-        //         // map(data => {
-        //         //     if (data === null) {
-        //         //         // this.loadingJokes = false;
-        //         //         return [];
-        //         //     }
-        //         //     this.allLandmarks$ = of(data);
-        //         //     return data;
-        //         // }),
-        //     )
-        //     .subscribe(landmarks => {
-        //         this.allLandmarks$ = of(landmarks);
-        //         console.log(landmarks);
-
-        //         // this.jokes = data;
-        //         // this.loadingJokes = false;
-        //     }
-        //     );
-
-
-            this.httpService.getAllLandmarks().subscribe(
-                landmarks => {
-                    this.allLandmarks$ = of(landmarks);
-                }
-            );
-
-
-
-
-
-        // this.getIds().pipe(
-        //     switchMap((id: string) => this.getNames(id))
-        //   ).subscribe((response) -> {
-        //     console.log(response)
-        //   })
+        this.httpService.getAllLandmarks().subscribe(
+            landmarks => {
+                this.allLandmarks$ = of(landmarks);
+            }
+        );
 
     }
-
-
 
     ngOnDestroy() {
         var navbar = document.getElementsByTagName('nav')[0];

@@ -19,7 +19,6 @@ export class LoginComponent {
 
     @Output() isLoggedIn = new EventEmitter();
 
-    //TODO output event emitter to navbar about login logout
     focus: any;
     focus1: any;
 

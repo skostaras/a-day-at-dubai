@@ -4,7 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { User } from 'app/models/user';
-import { Landmark } from '../models/landmark';
+import { LandmarkWithPhotos } from '../models/landmark-with-photos';
+import { LandmarkWithPhotosAndDescription } from 'app/models/landmark-with-photos-and-description';
 import { LandmarkWithDescription } from 'app/models/landmark-with-description';
 
 @Injectable({ providedIn: 'root' })
@@ -14,7 +15,7 @@ export class HttpService {
 
     private loginUrl = 'https://frontend-5325.instashop.ae/api/users/login';
     private logoutUrl = 'https://frontend-5325.instashop.ae/api/users/logout';
-    private allLandmarksUrl = 'https://frontend-5325.instashop.ae/api/landmarks';
+    private landmarksUrl = 'https://frontend-5325.instashop.ae/api/landmarks';
 
     constructor(
         private router: Router,
@@ -49,22 +50,26 @@ export class HttpService {
                     this.userSubject.next(null);
 
                     //TODO if user is in admin page
-                    if(this.router.url) {
+                    if (this.router.url) {
                         this.router.navigate(['/']);
                     }
-                    
+
                     return message;
                 }
             )
         )
     }
 
-    getAllLandmarks(): Observable<Landmark[]> {
-        return this.http.get<Landmark[]>(this.allLandmarksUrl, {});
+    editLandmarkRequest(objectId: string, body: LandmarkWithDescription) {
+        return this.http.put<LandmarkWithDescription>(this.landmarksUrl + '/' + objectId, body);
     }
 
-    getLandmarkById(objectId): Observable<LandmarkWithDescription> {
-        return this.http.get<LandmarkWithDescription>(this.allLandmarksUrl + '/' + objectId, {});
+    getAllLandmarks(): Observable<LandmarkWithPhotos[]> {
+        return this.http.get<LandmarkWithPhotos[]>(this.landmarksUrl, {});
+    }
+
+    getLandmarkById(objectId: string): Observable<LandmarkWithPhotosAndDescription> {
+        return this.http.get<LandmarkWithPhotosAndDescription>(this.landmarksUrl + '/' + objectId, {});
     }
 
 }

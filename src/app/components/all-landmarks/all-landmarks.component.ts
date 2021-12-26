@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Landmark } from '../../models/landmark';
+import { LandmarkWithPhotos } from '../../models/landmark-with-photos';
 
 @Component({
   selector: 'app-all-landmarks',
@@ -17,7 +17,7 @@ export class AllLandmarksComponent implements OnInit {
   focus1: any;
 
   @Input()
-  landmarks: Landmark[];
+  landmarks: LandmarkWithPhotos[];
 
   constructor(
     private router: Router,
