@@ -22,6 +22,8 @@ export class LoginComponent {
     focus: any;
     focus1: any;
 
+    //TODO disabled button doesn't work
+
     loginForm = new FormGroup({
         username: new FormControl(null, Validators.required),
         password: new FormControl(null, Validators.required),

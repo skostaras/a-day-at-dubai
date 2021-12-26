@@ -57,7 +57,8 @@
         </div>
         <div class="modal-footer">
             <span></span>
-            <button type="button" class="btn btn-link btn-neutral" (click)="c('Close click')">Close</button>
+            <button type="button" [disabled]="loginForm.invalid" class="btn btn-link btn-neutral"
+                (click)="c('Close click')">Close</button>
         </div>
     </div>
 </ng-template>

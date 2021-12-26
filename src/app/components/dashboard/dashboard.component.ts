@@ -6,6 +6,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { LandmarkWithPhotosAndDescription } from '../../models/landmark-with-photos-and-description';
 import { map, startWith, switchMap } from 'rxjs/operators';
 import { LandmarkWithDescription } from '../../models/landmark-with-description';
+import { NotificationService } from 'app/services/notification.service';
 
 @Component({
     selector: 'app-dashboard',
@@ -25,12 +26,12 @@ export class DashboardComponent implements OnInit {
     activeLandmarkId: string;
     editedLandmark: LandmarkWithDescription =
         {
-            title: '',
-            location: [],
-            url: '',
+            'title': '',
+            'location': [],
+            'url': '',
             'short_info': '',
-            description: '',
-            objectId: '',
+            'description': '',
+            'objectId': '',
         }
 
 
@@ -50,7 +51,7 @@ export class DashboardComponent implements OnInit {
 
     constructor(
         private httpService: HttpService,
-        formBuilder: FormBuilder,
+        private notificationService: NotificationService,
     ) {
 
     }
@@ -101,9 +102,16 @@ export class DashboardComponent implements OnInit {
             .pipe(
                 switchMap((editedLandmark: LandmarkWithDescription) => this.httpService.editLandmarkRequest(this.activeLandmarkId, editedLandmark)),
             )
-            .subscribe(user => {
+            .subscribe((response: any) => {
+                this.notificationService.successNotification(response.message);
+
+                // ??TODO fix on first submit !!!
+
+
+                // this.landmarkSelectionForm.setValue({
+                //     landmark: null
+                // })
                 // this.currentUsername = this.loginForm.get("username").value;
-                // localStorage.setItem("username", this.currentUsername);
                 // this.modalService.dismissAll();
                 // this.notificationService.successNotification(this.currentUsername + ' Successfully Logged In.');
                 // this.loggedIn = true;
