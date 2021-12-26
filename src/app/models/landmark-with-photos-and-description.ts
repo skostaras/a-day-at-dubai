@@ -1,5 +1,5 @@
 import { LandmarkWithPhotos } from './landmark-with-photos';
 
-export class LandmarkWithPhotosAndDescription extends LandmarkWithPhotos {
+export interface LandmarkWithPhotosAndDescription extends LandmarkWithPhotos {
     description: string;
 }

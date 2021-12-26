@@ -1,6 +1,6 @@
 import { Landmark } from "./landmark";
 
-export class LandmarkWithPhotos extends Landmark {
+export interface LandmarkWithPhotos extends Landmark {
     createdAt: string;
     updatedAt: string;
     photo: {

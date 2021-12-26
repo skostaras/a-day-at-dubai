@@ -1,4 +1,4 @@
-export class Landmark {
+export interface Landmark {
     title: string;
     location: number[];
     url: string;
