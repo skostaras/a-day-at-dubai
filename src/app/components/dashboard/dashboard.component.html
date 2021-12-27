@@ -1,21 +1,32 @@
-<div class="page-header" filter-color="orange">
+<div class="wrapper">
+<div class="page-header" style="height:130vh ;" filter-color="orange">
     <div class="page-header-image" style="background-image:url(assets/img/dubatiAtDay.jpg)"></div>
     <div class="container">
 
-        <div class="col-md-4 content-center">
+        <div class="col-md-4 content-center" style="">
 
-            <div class="card card-login card-plain" style="max-width: 600px">
+            <div class="card card-login card-plain" style="max-width: 600px; top: 50px;">
+
+
                 <div class="header header-primary text-center">
                     <div class="logo-container" style="width: 150px;">
-                        <img src="assets/img/logo-white.png" alt="logo">
+                        <img src="assets/img/logo-white.png" alt="logo" style="width: 70%;">
+                        <h4 style="width: max-content; margin-top: 0;">Edit Landmark</h4>
                     </div>
                 </div>
+
+                <!-- <div class="container">
+                    <div class="content-center brand">
+                        <img class="n-logo" src="assets/img/logo-white.png" alt="logo">
+                        <h1 class="h1-seo">Edit Landmark</h1>
+                    </div>
+                </div> -->
 
                 <form class="form" [formGroup]="landmarkSelectionForm">
                     <div *ngIf="allLandmarks$ | async as allLandmarks">
                         <select class="custom-select" formControlName="landmark"
                             (ngModelChange)="landmarkTrigger($event)"
-                            style="border-radius: 30px; font-size: 0.8571em; background-color: rgba(255, 255, 255, 0.1); margin-bottom: 10px; color: white; height: 46px; border:none">
+                            style="border-radius: 30px; font-size: 0.8571em; background-color: rgba(255, 255, 255, 0.1); margin-bottom: 60px; color: white; height: 46px; border:none">
                             <option value="null" disabled="true" [selected]="true">Select Landmark</option>
                             <option *ngFor="let landmark of allLandmarks" [value]="landmark.objectId">
                                 {{landmark.title}}</option>
@@ -92,7 +103,7 @@
                         </div>
 
                     </div>
-                    <div class="footer text-center">
+                    <div class="text-center" style="margin-bottom: 0">
                         <button type="submit" class="btn btn-primary btn-round btn-lg btn-block">Submit</button>
                     </div>
                 </form>
@@ -103,3 +114,5 @@
 
 </div>
 <app-footer></app-footer>
+
+</div>

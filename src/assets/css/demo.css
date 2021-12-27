@@ -433,7 +433,7 @@
 .components-page .wrapper>.header,
 .tutorial-page .wrapper>.header {
     height: 500px;
-    padding-top: 128px;
+    /* padding-top: 128px; */
     background-size: cover;
     background-position: center center;
 }
