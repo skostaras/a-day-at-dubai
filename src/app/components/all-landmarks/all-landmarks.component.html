@@ -1,58 +1,54 @@
 <div class="wrapper">
-    <div class="section" style="padding: 30px 0; padding-top: 65px">
+    <div class="section section-style">
         <div class="container">
             <h3 class="title">...a day you'll remember</h3>
-            <h5 class="description" style="margin-bottom: 35px;">OLargest. Tallest. Biggest. Dubai does everything to
+            <h5 class="description description-style ">Largest. Tallest. Biggest. Dubai does everything to
                 the extreme, standing out for its uber-modern design in a historically conservative country. The soaring
                 skyscrapers, palm-shaped islands, and golden beaches, paired with vibrant nightlife, luxury shopping,
                 and world-class dining, make the city a sight to behold and be explored. </h5>
 
-            <div style="display: flex; justify-content: center;">
-                <img src="assets/img/dubaiAtNight.jpg" class="rounded img-raised" style="width: 650px;">
+            <div class="image-style">
+                <img src="assets/img/dubaiFromSea.jpg" class="rounded img-raised" style="width: 650px;">
             </div>
-
 
             <div class="row">
                 <div class="col-md-12">
-                    <h3 class="title text-center" style="padding-top: 65px">Popular landmarks</h3>
-                    <h5 class="description" style="margin-bottom: 45px;">Dubai is
+                    <h3 class="title text-center popular-style">Popular landmarks</h3>
+                    <h5 class="description description-style2">Dubai is
                         filled with awe-inspiring landmarks that ooze luxury, history, and culture. All Dubai landmarks
                         are an
                         experience that one must indulge in when visiting this luxurious but small city. </h5>
 
                     <ng-container *ngFor="let landmark of landmarks, let i = index">
 
-                        <div class="row" style="margin-bottom: 30px; margin-top: 30px;">
+                        <div class="row row-style">
                             <div class="col-md-10 ml-auto mr-auto">
                                 <div class="row">
 
-                                    <div class="col-md-6"
-                                        style="display: flex; justify-content: center; align-items: center;">
+                                    <div class="col-md-6 landmark">
                                         <a [routerLink]="'/landmark'" [queryParams]="{id: landmark.objectId}"
                                             ngbTooltip="Click for more info" placement="right">
                                             <img [src]="landmark.photo_thumb.url" [alt]="landmark.photo_thumb.name"
                                                 class="rounded img-raised">
                                         </a>
                                     </div>
+
                                     <div class="col-md-6">
-                                        <!-- <button onclick="location.href='/landmark/${landmark.objectId}'" -->
                                         <button [routerLink]="'/landmark'" [queryParams]="{id: landmark.objectId}"
-                                            class="btn btn-link btn-info" style="padding-left: 0;"
+                                            class="btn btn-link btn-info button-padding landmark-style"
                                             ngbTooltip="Click for more info" placement="right">
-                                            <h3 style="margin-bottom: 0;">{{landmark.title}}</h3>
+                                            <h3>{{landmark.title}}</h3>
                                         </button>
-
-                                        <p style="text-align: justify;">{{landmark.short_info}}</p>
+                                        <p class="short-info">{{landmark.short_info}}</p>
                                     </div>
-
 
                                 </div>
                             </div>
                         </div>
 
                         <hr [hidden]="i==landmarks.length - 1">
-
                     </ng-container>
+
                 </div>
             </div>
         </div>

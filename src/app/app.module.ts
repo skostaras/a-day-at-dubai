@@ -22,7 +22,6 @@ import { AllLandmarksComponent } from './components/all-landmarks/all-landmarks.
 import { FooterComponent } from './shared/footer/footer.component';
 import { UrlShortenPipe } from './shared/url-shorten-pipe';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { ImageLoadedDirective } from './services/image-loaded.directive';
 
 @NgModule({
     declarations: [
@@ -36,7 +35,6 @@ import { ImageLoadedDirective } from './services/image-loaded.directive';
         FooterComponent,
         UrlShortenPipe,
         DashboardComponent,
-        ImageLoadedDirective,
     ],
 
     imports: [
