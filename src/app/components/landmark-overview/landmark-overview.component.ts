@@ -23,6 +23,8 @@ export class LandmarkOverviewComponent implements OnInit {
 
   landmarkId: string;
 
+  imageLoading = true;
+
   options: MapKitInitOptions = {
     language: 'en', // default browser language
     callback: (data, error) => {
