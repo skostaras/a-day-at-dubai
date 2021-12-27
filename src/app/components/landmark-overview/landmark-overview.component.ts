@@ -69,37 +69,22 @@ export class LandmarkOverviewComponent implements OnInit {
 
 
   open(content, type, modalDimension) {
-    console.log(content);
-    console.log(type);
-    console.log(modalDimension);
 
     if (modalDimension === 'sm' && type === 'modal_mini') {
-      console.log("helloooooo");
       this.modalService.open(content, { windowClass: 'modal-mini modal-primary', size: 'sm' }).result.then((result) => {
         this.closeResult = `Closed with: ${result}`;
       }, (reason) => {
         this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
       });
     } else if (modalDimension == undefined && type === 'Login') {
-      console.log("helloooooo");
       this.modalService.open(content, { windowClass: 'modal-login modal-primary' }).result.then((result) => {
         this.closeResult = `Closed with: ${result}`;
       }, (reason) => {
         this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
       });
     } else {
-
-      console.log("helloooooo");
-
-
-      setTimeout(() => {
-        document.getElementsByClassName('modal-dialog')[0].classList.add('modal-xl');
-      }, 0);
+      document.getElementsByClassName('modal-dialog')[0].classList.add('modal-xl');
       this.modalService.open(content).result.then((result) => {
-
-
-
-
 
         this.closeResult = `Closed with: ${result}`;
       }, (reason) => {
@@ -138,11 +123,11 @@ export class LandmarkOverviewComponent implements OnInit {
         landmark => {
           this.landmarkWithDescription$ = of(landmark);
 
-          this.latitude = landmark.location[1];
-          this.settings.center.latitude = landmark.location[1];
-
           this.longitude = landmark.location[0];
           this.settings.center.longitude = landmark.location[0];
+
+          this.latitude = landmark.location[1];
+          this.settings.center.latitude = landmark.location[1];
 
           this.annotationOptions.title = landmark.title;
 

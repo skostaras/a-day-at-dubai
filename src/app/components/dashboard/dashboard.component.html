@@ -52,6 +52,15 @@
                         </div>
 
                         <div class="input-group form-group-no-border input-lg row"
+                        style="display: flex; align-items: center;" [ngClass]="{'input-group-focus':focus===true}">
+                        <label class="col-sm-3 col-form-label" for="longitude">Longtitude</label>
+                        <div class="input-group col-sm-9" style="margin-bottom: 0; padding-right: 0;">
+                            <input type="number" formControlName="longtitude" step="0.00001" class="form-control"
+                                id="longitude" placeholder="..." (focus)="focus=true" (blur)="focus=false">
+                        </div>
+                    </div>
+
+                        <div class="input-group form-group-no-border input-lg row"
                             style="display: flex; align-items: center;" [ngClass]="{'input-group-focus':focus===true}">
                             <label class="col-sm-3 col-form-label" for="latitude">Latitude</label>
 
@@ -59,16 +68,6 @@
 
                                 <input type="number" formControlName="latitude" step="0.00001" class="form-control"
                                     id="latitude" placeholder="..." (focus)="focus=true" (blur)="focus=false">
-                            </div>
-                        </div>
-
-
-                        <div class="input-group form-group-no-border input-lg row"
-                            style="display: flex; align-items: center;" [ngClass]="{'input-group-focus':focus===true}">
-                            <label class="col-sm-3 col-form-label" for="longitude">Longtitude</label>
-                            <div class="input-group col-sm-9" style="margin-bottom: 0; padding-right: 0;">
-                                <input type="number" formControlName="longtitude" step="0.00001" class="form-control"
-                                    id="longitude" placeholder="..." (focus)="focus=true" (blur)="focus=false">
                             </div>
                         </div>
 
@@ -104,7 +103,7 @@
 
                     </div>
                     <div class="text-center" style="margin-bottom: 0">
-                        <button type="submit" class="btn btn-primary btn-round btn-lg btn-block">Submit</button>
+                        <button [ngClass]="activeLandmarkId !==null?'':'disabledCustom'" [disabled]="activeLandmarkId === null" type="submit" class="btn btn-primary btn-round btn-lg btn-block">Submit</button>
                     </div>
                 </form>
             </div>

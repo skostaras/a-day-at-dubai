@@ -499,3 +499,14 @@
         display: none !important;
     }
 }
+
+
+.disabledCustom {
+    cursor: not-allowed;
+    background-color: gray !important;
+}
+
+.disabledCustom:hover {
+    background-color: gray !important;
+    opacity: 0.65;
+}

@@ -46,7 +46,12 @@
                                 </div>
                             </div>
                             <div class="footer text-center">
-                                <button type="submit" class="btn btn-primary btn-round btn-lg btn-block">Login</button>
+                                <button type="submit" 
+                                [ngClass]="loginForm.invalid?'disabledCustom':''" 
+            
+
+                                [disabled]="loginForm.invalid" 
+                                class="btn btn-primary btn-round btn-lg btn-block">Login</button>
                             </div>
                         </form>
 
@@ -57,7 +62,9 @@
         </div>
         <div class="modal-footer">
             <span></span>
-            <button type="button" [disabled]="loginForm.invalid" class="btn btn-link btn-neutral"
+            <button type="button" 
+            
+            class="btn btn-link btn-neutral"
                 (click)="c('Close click')">Close</button>
         </div>
     </div>

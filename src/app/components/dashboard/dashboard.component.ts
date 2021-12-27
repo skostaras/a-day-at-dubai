@@ -23,7 +23,7 @@ export class DashboardComponent implements OnInit {
 
     allLandmarks$: Observable<LandmarkWithPhotos[]>;
     activeLandmark$: Observable<LandmarkWithPhotosAndDescription>;
-    activeLandmarkId: string;
+    activeLandmarkId: string = null;
     editedLandmark: LandmarkWithDescription =
         {
             'title': '',
@@ -40,19 +40,20 @@ export class DashboardComponent implements OnInit {
     })
 
     landmarkEditForm = new FormGroup({
-        title: new FormControl('', Validators.required),
-        latitude: new FormControl(null, Validators.required),
-        longtitude: new FormControl(null, Validators.required),
-        url: new FormControl('', Validators.required),
-        shortInfo: new FormControl('', Validators.required),
-        description: new FormControl('', Validators.required),
-        objectId: new FormControl('', Validators.required),
+        title: new FormControl(''),
+        longtitude: new FormControl(null),
+        latitude: new FormControl(null),
+        url: new FormControl(''),
+        shortInfo: new FormControl(''),
+        description: new FormControl(''),
+        objectId: new FormControl(''),
     })
 
     constructor(
         private httpService: HttpService,
         private notificationService: NotificationService,
     ) {
+        this.subscribeToEditFormSubject();
 
     }
 
@@ -68,8 +69,8 @@ export class DashboardComponent implements OnInit {
 
                     this.landmarkEditForm.setValue({
                         title: landmark.title,
-                        latitude: landmark.location[0],
-                        longtitude: landmark.location[1],
+                        longtitude: landmark.location[0],
+                        latitude: landmark.location[1],
                         url: landmark.url,
                         shortInfo: landmark.short_info,
                         description: landmark.description,
@@ -82,18 +83,19 @@ export class DashboardComponent implements OnInit {
     }
 
     submitEdit() {
+        let activeLandmarkTitle = this.landmarkEditForm.get('title').value;
+        if (confirm("Are you sure you want to update " + activeLandmarkTitle + "?")) {
+            this.editedLandmark.title = activeLandmarkTitle;
+            this.editedLandmark.location[0] = this.landmarkEditForm.get('longtitude').value;
+            this.editedLandmark.location[1] = this.landmarkEditForm.get('latitude').value;
+            this.editedLandmark.url = this.landmarkEditForm.get('url').value;
+            this.editedLandmark.short_info = this.landmarkEditForm.get('shortInfo').value;
+            this.editedLandmark.description = this.landmarkEditForm.get('description').value;
+            this.editedLandmark.objectId = this.landmarkEditForm.get('objectId').value;
 
-        this.editedLandmark.title = this.landmarkEditForm.get('title').value;
-        this.editedLandmark.location[0] = this.landmarkEditForm.get('latitude').value;
-        this.editedLandmark.location[1] = this.landmarkEditForm.get('longtitude').value;
-        this.editedLandmark.url = this.landmarkEditForm.get('url').value;
-        this.editedLandmark.short_info = this.landmarkEditForm.get('shortInfo').value;
-        this.editedLandmark.description = this.landmarkEditForm.get('description').value;
-        this.editedLandmark.objectId = this.landmarkEditForm.get('objectId').value;
-
-        this.editFormSubject.next(this.editedLandmark);
-        this.subscribeToEditFormSubject();
-
+            this.editFormSubject.next(this.editedLandmark);
+            this.subscribeToEditFormSubject();
+        }
     }
 
     subscribeToEditFormSubject() {
@@ -104,19 +106,9 @@ export class DashboardComponent implements OnInit {
             )
             .subscribe((response: any) => {
                 this.notificationService.successNotification(response.message);
-
-                // ??TODO fix on first submit !!!
-
-
-                // this.landmarkSelectionForm.setValue({
-                //     landmark: null
-                // })
-                // this.currentUsername = this.loginForm.get("username").value;
-                // this.modalService.dismissAll();
-                // this.notificationService.successNotification(this.currentUsername + ' Successfully Logged In.');
-                // this.loggedIn = true;
-                // this.isLoggedIn.emit(true);
-                // this.loginForm.reset();
+                this.landmarkEditForm.reset();
+                this.landmarkSelectionForm.reset();
+                this.activeLandmarkId = null;
             })
     }
 
