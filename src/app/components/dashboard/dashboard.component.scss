@@ -1,8 +1,49 @@
-
-
 select option {
-    // margin: 40px;
-    background: black;
-    // color: #fff;
-    // text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+    background: black !important;
+}
+
+.header2 {
+    height:130vh !important;
+}
+
+.card-custom{
+    max-width: 600px !important; 
+    top: 50px !important;
+}
+
+.logo {
+    width: 150px !important;
+}
+
+.logo-image {
+    width: 70% !important;
+}
+
+.h4-style {
+    width: max-content !important; 
+    margin-top: 0 !important;
+}
+
+.select-style {
+    border-radius: 30px !important; 
+    font-size: 0.8571em !important; 
+    background-color: rgba(255, 255, 255, 0.1) !important; 
+    margin-bottom: 60px !important; 
+    color: white !important; 
+    height: 46px !important; 
+    border:none !important;
+}
+
+.input-style {
+    display: flex !important; 
+    align-items: center !important;
+}
+
+.input-style2 {
+    margin-bottom: 0 !important; 
+    padding-right: 0 !important;
+}
+
+.textarea-style {
+    border-radius: 30px !important;
 }

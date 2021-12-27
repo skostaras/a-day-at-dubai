@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { LandmarkWithPhotos } from 'app/models/landmark-with-photos';
 import { HttpService } from 'app/services/http.service';
-import { merge, Observable, of, Subject } from 'rxjs';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Observable, of, Subject } from 'rxjs';
+import { FormControl, FormGroup } from '@angular/forms';
 import { LandmarkWithPhotosAndDescription } from '../../models/landmark-with-photos-and-description';
-import { map, startWith, switchMap } from 'rxjs/operators';
+import { switchMap } from 'rxjs/operators';
 import { LandmarkWithDescription } from '../../models/landmark-with-description';
 import { NotificationService } from 'app/services/notification.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -16,29 +16,26 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class DashboardComponent implements OnInit {
 
-    data: Date = new Date();
-    focus;
-    focus1;
+    constructor(
+        private route: ActivatedRoute,
+        private router: Router,
+        private httpService: HttpService,
+        private notificationService: NotificationService,
+
+    ) {
+        this.subscribeToEditFormSubject();
+    }
 
     private editFormSubject = new Subject();
-
-    allLandmarks$: Observable<LandmarkWithPhotos[]>;
-    activeLandmark$: Observable<LandmarkWithPhotosAndDescription>;
-    activeLandmarkId: string = null;
-    editedLandmark: LandmarkWithDescription =
-        {
-            'title': '',
-            'location': [],
-            'url': '',
-            'short_info': '',
-            'description': '',
-            'objectId': '',
-        }
-
+    focus: any;
 
     landmarkSelectionForm = new FormGroup({
         landmarkId: new FormControl(null),
     })
+
+    allLandmarks$: Observable<LandmarkWithPhotos[]>;
+    activeLandmark$: Observable<LandmarkWithPhotosAndDescription>;
+    activeLandmarkId: string = null;
 
     landmarkEditForm = new FormGroup({
         title: new FormControl(''),
@@ -50,26 +47,44 @@ export class DashboardComponent implements OnInit {
         objectId: new FormControl(''),
     })
 
-    constructor(
-        private route: ActivatedRoute,
-        private router: Router,
-        private httpService: HttpService,
-        private notificationService: NotificationService,
+    editedLandmark: LandmarkWithDescription =
+        {
+            'title': '',
+            'location': [],
+            'url': '',
+            'short_info': '',
+            'description': '',
+            'objectId': '',
+        }
 
-    ) {
-        this.subscribeToEditFormSubject();
+    ngOnInit() {
+        this.onDropdownChanges();
 
+        this.httpService.getAllLandmarks().subscribe(
+            landmarks => {
+                this.allLandmarks$ = of(landmarks);
+                this.lookForLandmarkIdUrlParams();
+            }
+        );
     }
 
-    selectedLandmark: any;
+    lookForLandmarkIdUrlParams() {
+        let landmarkId = this.route.snapshot.queryParams['id'];
+
+        if (landmarkId) {
+            setTimeout(() => {
+                this.landmarkSelectionForm.get('landmarkId').setValue(landmarkId)
+            }, 0);
+        }
+    }
+
+    onDropdownChanges(): void {
+        this.landmarkSelectionForm.valueChanges.subscribe(value => {
+            this.landmarkTrigger(value.landmarkId)
+        });
+    }
 
     landmarkTrigger(landmarkId) {
-
-        console.log("landmarkTrigger");
-
-        console.log(landmarkId);
-
-
         this.activeLandmarkId = landmarkId;
         if (landmarkId) {
             this.httpService.getLandmarkById(landmarkId).subscribe(
@@ -123,89 +138,6 @@ export class DashboardComponent implements OnInit {
                 this.landmarkSelectionForm.reset();
                 this.activeLandmarkId = null;
             })
-    }
-
-    ngOnInit() {
-
-        this.onDropdownChanges();
-
-        var body = document.getElementsByTagName('body')[0];
-        body.classList.add('login-page');
-
-        var navbar = document.getElementsByTagName('nav')[0];
-        navbar.classList.add('navbar-transparent');
-
-        this.httpService.getAllLandmarks().subscribe(
-            landmarks => {
-                this.allLandmarks$ = of(landmarks);
-                this.lookForLandmarkIdUrlParams();
-            }
-        );
-
-
-    }
-
-    lookForLandmarkIdUrlParams() {
-        let landmarkId = this.route.snapshot.queryParams['id'];
-
-        if (landmarkId) {
-
-            // LandmarkWithPhotosAndDescription
-            this.httpService.getLandmarkById(landmarkId).subscribe(
-                landmark => {
-                    console.log(landmark);
-
-                    let landmarkAdjusted: LandmarkWithPhotos = {
-                        title: landmark.title,
-                        location: landmark.location,
-                        url: landmark.url,
-                        short_info: landmark.short_info,
-                        objectId: landmark.objectId,
-                        createdAt: landmark.createdAt,
-                        updatedAt: landmark.updatedAt,
-                        photo: {
-                            __type: landmark.photo.__type,
-                            name: landmark.photo.name,
-                            url: landmark.photo.url,
-                        },
-                        photo_thumb: {
-                            __type: landmark.photo_thumb.__type,
-                            name: landmark.photo_thumb.name,
-                            url: landmark.photo_thumb.url,
-                        }
-                    }
-
-                    this.landmarkSelectionForm.get('landmarkId').setValue(
-                        // LandmarkWithPhotos
-                        landmarkId
-                    )
-
-                    console.log(landmarkAdjusted);
-
-                }
-            )
-
-
-            // this.landmarkTrigger(landmarkId);
-
-        }
-    }
-
-
-    onDropdownChanges(): void {
-        this.landmarkSelectionForm.valueChanges.subscribe(value => {
-            console.log(value);
-
-            this.landmarkTrigger(value.landmarkId)
-        });
-    }
-
-    ngOnDestroy() {
-        var body = document.getElementsByTagName('body')[0];
-        body.classList.remove('login-page');
-
-        var navbar = document.getElementsByTagName('nav')[0];
-        navbar.classList.remove('navbar-transparent');
     }
 
 }
