@@ -22,9 +22,9 @@ export class AppComponent implements OnInit {
     constructor(private renderer: Renderer2,
         private router: Router, @Inject(DOCUMENT,) private document: any, private element: ElementRef,
         public location: Location,
-        private authenticationService: HttpService
+        private httpService: HttpService
     ) {
-        this.authenticationService.user.subscribe(user => this.user = user);
+        this.httpService.user.subscribe(user => this.user = user);
     }
 
     changeFavicon() {

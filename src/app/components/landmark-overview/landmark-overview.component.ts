@@ -16,6 +16,8 @@ export class LandmarkOverviewComponent implements OnInit {
   focus;
   focus1;
 
+  loggedIn = this.httpService.userValue ? true : false;
+
   map
   landmarkWithDescription$: Observable<LandmarkWithPhotosAndDescription>;
 
@@ -107,19 +109,17 @@ export class LandmarkOverviewComponent implements OnInit {
   onLoaded(e) {
     this.map = e;
     this.map.zoom = 11;
-    this.map.addEventListener('select', (event) => {
-    });
-
   }
 
   ngOnInit() {
+
     let randomInt = this.getRandomInt(1, 6);
     this.randomImageSource = 'assets/img/dubai' + randomInt + '.jpg';
 
-    let landmarkId = this.route.snapshot.queryParams['id'];
+    this.landmarkId = this.route.snapshot.queryParams['id'];
 
-    if (landmarkId) {
-      this.httpService.getLandmarkById(landmarkId).subscribe(
+    if (this.landmarkId) {
+      this.httpService.getLandmarkById(this.landmarkId).subscribe(
         landmark => {
           this.landmarkWithDescription$ = of(landmark);
 
@@ -130,12 +130,6 @@ export class LandmarkOverviewComponent implements OnInit {
           this.settings.center.latitude = landmark.location[1];
 
           this.annotationOptions.title = landmark.title;
-
-          console.log(landmark);
-
-          setTimeout(() => {
-            console.log(this.map.getAnnotations());
-          }, 2000);
 
         }, (error) => {
           this.router.navigateByUrl('/home');

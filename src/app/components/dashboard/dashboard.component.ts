@@ -7,7 +7,7 @@ import { LandmarkWithPhotosAndDescription } from '../../models/landmark-with-pho
 import { map, startWith, switchMap } from 'rxjs/operators';
 import { LandmarkWithDescription } from '../../models/landmark-with-description';
 import { NotificationService } from 'app/services/notification.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
     selector: 'app-dashboard',
@@ -52,8 +52,10 @@ export class DashboardComponent implements OnInit {
 
     constructor(
         private route: ActivatedRoute,
+        private router: Router,
         private httpService: HttpService,
         private notificationService: NotificationService,
+
     ) {
         this.subscribeToEditFormSubject();
 
@@ -66,7 +68,7 @@ export class DashboardComponent implements OnInit {
         console.log("landmarkTrigger");
 
         console.log(landmarkId);
-        
+
 
         this.activeLandmarkId = landmarkId;
         if (landmarkId) {
@@ -85,7 +87,10 @@ export class DashboardComponent implements OnInit {
                     })
                 }
             )
+            this.router.navigate([], { queryParams: { id: landmarkId }, queryParamsHandling: 'merge' })
         }
+
+
 
     }
 
@@ -101,6 +106,7 @@ export class DashboardComponent implements OnInit {
             this.editedLandmark.objectId = this.landmarkEditForm.get('objectId').value;
 
             this.editFormSubject.next(this.editedLandmark);
+            this.router.navigate([], { queryParams: { id: null }, queryParamsHandling: 'merge' })
             this.subscribeToEditFormSubject();
         }
     }
@@ -122,9 +128,6 @@ export class DashboardComponent implements OnInit {
     ngOnInit() {
 
         this.onDropdownChanges();
-
-        
-
 
         var body = document.getElementsByTagName('body')[0];
         body.classList.add('login-page');
@@ -192,6 +195,7 @@ export class DashboardComponent implements OnInit {
     onDropdownChanges(): void {
         this.landmarkSelectionForm.valueChanges.subscribe(value => {
             console.log(value);
+
             this.landmarkTrigger(value.landmarkId)
         });
     }
