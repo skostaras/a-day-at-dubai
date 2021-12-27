@@ -24,8 +24,7 @@
 
                 <form class="form" [formGroup]="landmarkSelectionForm">
                     <div *ngIf="allLandmarks$ | async as allLandmarks">
-                        <select class="custom-select" formControlName="landmark"
-                            (ngModelChange)="landmarkTrigger($event)"
+                        <select class="custom-select" formControlName="landmarkId"
                             style="border-radius: 30px; font-size: 0.8571em; background-color: rgba(255, 255, 255, 0.1); margin-bottom: 60px; color: white; height: 46px; border:none">
                             <option value="null" disabled="true" [selected]="true">Select Landmark</option>
                             <option *ngFor="let landmark of allLandmarks" [value]="landmark.objectId">

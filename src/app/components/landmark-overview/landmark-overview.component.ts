@@ -1,6 +1,5 @@
 import { Component, Inject, OnInit, Renderer2, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { LandmarkWithPhotos } from '../../models/landmark-with-photos';
 import { Observable, of } from 'rxjs';
 import { LandmarkWithPhotosAndDescription } from 'app/models/landmark-with-photos-and-description';
 import { HttpService } from 'app/services/http.service';
@@ -67,6 +66,7 @@ export class LandmarkOverviewComponent implements OnInit {
 
   closeResult: string;
 
+  //TODO loading
 
   open(content, type, modalDimension) {
 

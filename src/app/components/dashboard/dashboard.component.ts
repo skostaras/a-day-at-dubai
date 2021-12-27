@@ -7,6 +7,7 @@ import { LandmarkWithPhotosAndDescription } from '../../models/landmark-with-pho
 import { map, startWith, switchMap } from 'rxjs/operators';
 import { LandmarkWithDescription } from '../../models/landmark-with-description';
 import { NotificationService } from 'app/services/notification.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-dashboard',
@@ -36,7 +37,7 @@ export class DashboardComponent implements OnInit {
 
 
     landmarkSelectionForm = new FormGroup({
-        landmark: new FormControl(null),
+        landmarkId: new FormControl(null),
     })
 
     landmarkEditForm = new FormGroup({
@@ -50,6 +51,7 @@ export class DashboardComponent implements OnInit {
     })
 
     constructor(
+        private route: ActivatedRoute,
         private httpService: HttpService,
         private notificationService: NotificationService,
     ) {
@@ -60,6 +62,11 @@ export class DashboardComponent implements OnInit {
     selectedLandmark: any;
 
     landmarkTrigger(landmarkId) {
+
+        console.log("landmarkTrigger");
+
+        console.log(landmarkId);
+        
 
         this.activeLandmarkId = landmarkId;
         if (landmarkId) {
@@ -113,6 +120,12 @@ export class DashboardComponent implements OnInit {
     }
 
     ngOnInit() {
+
+        this.onDropdownChanges();
+
+        
+
+
         var body = document.getElementsByTagName('body')[0];
         body.classList.add('login-page');
 
@@ -122,9 +135,67 @@ export class DashboardComponent implements OnInit {
         this.httpService.getAllLandmarks().subscribe(
             landmarks => {
                 this.allLandmarks$ = of(landmarks);
+                this.lookForLandmarkIdUrlParams();
             }
         );
+
+
     }
+
+    lookForLandmarkIdUrlParams() {
+        let landmarkId = this.route.snapshot.queryParams['id'];
+
+        if (landmarkId) {
+
+            // LandmarkWithPhotosAndDescription
+            this.httpService.getLandmarkById(landmarkId).subscribe(
+                landmark => {
+                    console.log(landmark);
+
+                    let landmarkAdjusted: LandmarkWithPhotos = {
+                        title: landmark.title,
+                        location: landmark.location,
+                        url: landmark.url,
+                        short_info: landmark.short_info,
+                        objectId: landmark.objectId,
+                        createdAt: landmark.createdAt,
+                        updatedAt: landmark.updatedAt,
+                        photo: {
+                            __type: landmark.photo.__type,
+                            name: landmark.photo.name,
+                            url: landmark.photo.url,
+                        },
+                        photo_thumb: {
+                            __type: landmark.photo_thumb.__type,
+                            name: landmark.photo_thumb.name,
+                            url: landmark.photo_thumb.url,
+                        }
+                    }
+
+                    this.landmarkSelectionForm.get('landmarkId').setValue(
+                        // LandmarkWithPhotos
+                        landmarkId
+                    )
+
+                    console.log(landmarkAdjusted);
+
+                }
+            )
+
+
+            // this.landmarkTrigger(landmarkId);
+
+        }
+    }
+
+
+    onDropdownChanges(): void {
+        this.landmarkSelectionForm.valueChanges.subscribe(value => {
+            console.log(value);
+            this.landmarkTrigger(value.landmarkId)
+        });
+    }
+
     ngOnDestroy() {
         var body = document.getElementsByTagName('body')[0];
         body.classList.remove('login-page');

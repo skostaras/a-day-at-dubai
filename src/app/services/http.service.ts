@@ -69,6 +69,8 @@ export class HttpService {
     }
 
     getLandmarkById(objectId: string): Observable<LandmarkWithPhotosAndDescription> {
+        console.log(objectId);
+        
         return this.http.get<LandmarkWithPhotosAndDescription>(this.landmarksUrl + '/' + objectId, {});
     }
 

@@ -16,6 +16,10 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-8 ml-auto mr-auto text-center">
+                        
+                        <button class="btn btn-primary btn-round" style="margin-bottom: 25px;" type="button">
+							Edit this landmark
+						</button>
                         <h3 class="title">What you should know</h3>
                         <h5 class="description" [innerText]="landmarkWithDescription.short_info" style="color: unset;">
                         </h5>
@@ -65,8 +69,12 @@
                                 [src]="landmarkWithDescription.photo_thumb.url"
                                 [alt]="landmarkWithDescription.photo_thumb.name"
                                 style="margin-left:unset; cursor:zoom-in;">
+
                             <h3 class="" style="text-align: center;">Learn more
                             </h3>
+
+
+						
                             <!-- <div class="separator separator-primary"></div> -->
                             <p style="text-align: justify;">{{landmarkWithDescription.description}}
                             </p>
