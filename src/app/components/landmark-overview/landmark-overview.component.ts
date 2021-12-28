@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { LandmarkWithPhotosAndDescription } from 'app/models/landmark-with-photos-and-description';
@@ -26,6 +26,7 @@ export class LandmarkOverviewComponent implements OnInit {
   landmarkWithDescription$: Observable<LandmarkWithPhotosAndDescription>;
   landmarkId: string;
   randomImageSource = '';
+  randomImageSource2 = '';
 
   // Map Settings follow
   appleMap: any;
@@ -63,10 +64,25 @@ export class LandmarkOverviewComponent implements OnInit {
   }
 
   ngOnInit() {
-    let randomInt = this.getRandomInt(1, 6);
+    this.getRandomPhotos();
+    this.getLandmarkFromUrl();
+  }
+
+  getRandomPhotos() {
+    let randomInt = this.getRandomInt(1, 12);
     this.randomImageSource = 'assets/img/dubai' + randomInt + '.jpg';
 
-    this.getLandmarkFromUrl();
+    let randomInt2;
+
+    do {
+      randomInt2 = this.getRandomInt(1, 12);
+    }
+    while (randomInt2 === randomInt);
+
+    setTimeout(() => {
+      this.randomImageSource2 = 'assets/img/dubai' + randomInt2 + '.jpg';
+    }, 0);
+
   }
 
   getLandmarkFromUrl() {

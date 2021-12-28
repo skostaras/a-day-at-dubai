@@ -34,6 +34,8 @@
     object-fit: cover; 
     width: -webkit-fill-available; 
     width: -moz-available;
+    -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+    filter: grayscale(100%);
 }
 
 .quote-text {
@@ -42,6 +44,13 @@
     top: 575px !important;
     right: 55px !important; 
     text-align: center !important;
+    position: unset !important;
+}
+
+.quote-div {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 35px;
 }
 
 .modal-body2 {
@@ -79,4 +88,8 @@
 
 .separator-custom {
     margin-bottom: 60px;
+}
+
+.margin-top {
+    margin-top: 60px;
 }

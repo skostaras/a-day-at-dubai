@@ -14,7 +14,7 @@
             </div>
         </div>
 
-        <div class="section section-style">
+        <div class="section section-style" [ngClass]="loggedIn?'':'margin-top'">
             <div class="container">
 
                 <div class="button-container">
@@ -44,12 +44,19 @@
                                     alt="generic dubai image">
                             </div>
 
-                            <p class="blockquote blockquote-primary quote-text">
-                                For detailed information on {{landmarkWithDescription.title}}, visit
-                                <em><a [href]="landmarkWithDescription.url">{{landmarkWithDescription.url |
-                                        urlShortenPipe | urlShortenPipe}}</a></em>
-                                <br>
-                            </p>
+                            <div class="image-container" style="margin-top: 200px;">
+                                <img class="image-container random-image" [src]="randomImageSource2"
+                                    alt="generic dubai image">
+                            </div>
+
+                            <div class="quote-div">
+                                <p class="blockquote blockquote-primary quote-text">
+                                    For detailed information on {{landmarkWithDescription.title}}, visit
+                                    <em><a [href]="landmarkWithDescription.url">{{landmarkWithDescription.url |
+                                            urlShortenPipe | urlShortenPipe}}</a></em>
+                                    <br>
+                                </p>
+                            </div>
 
                         </div>
 
@@ -74,6 +81,12 @@
 
                             <div class="separator separator-primary separator-custom"></div>
 
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-8 ml-auto mr-auto text-center">
+                            <h3 class="title">{{landmarkWithDescription.title}} location</h3>
                         </div>
                     </div>
 
