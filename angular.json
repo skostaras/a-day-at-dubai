@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "now-ui-kit-angular": {
+    "a-day-at-dubai": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -21,8 +21,7 @@
               "rellax"
             ],
             "assets": [
-              "src/assets",
-              "src/favicon.ico"
+              "src/assets"
             ],
             "styles": [
               "src/styles.scss",
@@ -56,18 +55,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "now-ui-kit-angular:build"
+            "browserTarget": "a-day-at-dubai:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "now-ui-kit-angular:build:production"
+              "browserTarget": "a-day-at-dubai:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "now-ui-kit-angular:build"
+            "browserTarget": "a-day-at-dubai:build"
           }
         },
         "test": {
@@ -86,8 +85,7 @@
               "src/assets/css/main.css"
             ],
             "assets": [
-              "src/assets",
-              "src/favicon.ico"
+              "src/assets"
             ]
           }
         },
@@ -103,7 +101,7 @@
         }
       }
     },
-    "now-ui-kit-angular-e2e": {
+    "a-day-at-dubai-e2e": {
       "root": "e2e",
       "sourceRoot": "e2e",
       "projectType": "application",
@@ -112,7 +110,7 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "./protractor.conf.js",
-            "devServerTarget": "now-ui-kit-angular:serve"
+            "devServerTarget": "a-day-at-dubai:serve"
           }
         },
         "lint": {
@@ -127,7 +125,7 @@
       }
     }
   },
-  "defaultProject": "now-ui-kit-angular",
+  "defaultProject": "a-day-at-dubai",
   "schematics": {
     "@schematics/angular:component": {
       "prefix": "app",

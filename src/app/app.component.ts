@@ -5,39 +5,22 @@ import 'rxjs/add/operator/filter';
 import { DOCUMENT } from '@angular/common';
 import { Location } from '@angular/common';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
-import { HttpService } from './services/http.service';
-import { User } from './models/user';
 
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
-    styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
     private _router: Subscription;
     @ViewChild(NavbarComponent) navbar: NavbarComponent | undefined;
 
-    user: User | undefined;
-
     constructor(private renderer: Renderer2,
         private router: Router, @Inject(DOCUMENT,) private document: any, private element: ElementRef,
         public location: Location,
-        private httpService: HttpService
-    ) {
-        this.httpService.user.subscribe(user => this.user = user);
-    }
-
-    changeFavicon() {
-        let favIcon: HTMLLinkElement = document.querySelector('#appIcon');
-        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            favIcon.href = 'assets/img/logo-white.png';
-        } else {
-            favIcon.href = 'assets/img/logo-black.png'
-        }
-    }
+    ) { }
 
     ngOnInit() {
-        this.changeFavicon();
+        this.switchFaviconDarkMode();
 
         var navbar: HTMLElement = this.element.nativeElement.children[0].children[0];
         this._router = this.router.events.filter(event => event instanceof NavigationEnd).subscribe((event: NavigationEnd) => {
@@ -61,6 +44,15 @@ export class AppComponent implements OnInit {
                 }
             });
         });
+    }
+
+    switchFaviconDarkMode() {
+        let favIcon: HTMLLinkElement = document.querySelector('#appIcon');
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            favIcon.href = 'assets/img/logo-white.png';
+        } else {
+            favIcon.href = 'assets/img/logo-black.png'
+        }
     }
 
 }
