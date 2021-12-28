@@ -1,69 +1,59 @@
 <ng-container *ngIf="landmarkWithDescription$ | async as landmarkWithDescription">
 
     <div class="wrapper">
+
         <div class="page-header page-header-small">
             <div class="page-header-image rellax-header" data-rellax-speed="-8"
                 [style.background]="'url(' + landmarkWithDescription.photo.url + ')'"
                 [style.background-position-x]="'center'" [style.background-position-y]="'center'">
             </div>
-            <div class="container">
+            <div class="container containet-index">
                 <div class="content-center">
                     <h1 class="title">{{landmarkWithDescription.title}}</h1>
                 </div>
             </div>
         </div>
 
-        <div class="section" style="padding: 95px 0 30px 0">
+        <div class="section section-style">
             <div class="container">
 
                 <div class="button-container">
-                    <!-- <a href="#button" class="btn btn-primary btn-round btn-lg">Follow</a> -->
                     <button *ngIf="loggedIn" [routerLink]="'/dashboard'" [queryParams]="{id: landmarkId}"
-                        class="btn btn-primary btn-round btn-lg" style="margin-bottom: 25px;" type="button">
+                        class="btn btn-primary btn-round btn-lg button-margin" type="button">
                         Edit this landmark
                     </button>
                 </div>
 
                 <div class="row">
                     <div class="col-md-8 ml-auto mr-auto text-center">
-
                         <h3 class="title">What you should know</h3>
-                        <h5 class="description" [innerText]="landmarkWithDescription.short_info" style="color: unset;">
+                        <h5 class="description h5-style" [innerText]="landmarkWithDescription.short_info">
                         </h5>
                     </div>
                 </div>
 
-                <!-- <div class="separator separator-primary"></div> -->
-                <div class="section-story-overview" style="padding-top: 65px; margin-top: 30px;">
+                <div class="section-story-overview main-view">
                     <div class="row">
                         <div class="col-md-6">
+
+                            <!-- First image on the left side -->
                             <div class="image-container image-left">
-                                <img class="image-container image-left" [src]="randomImageSource"
-                                    alt="generic dubai image"
-                                    style="opacity: 30%; object-fit: cover; width: -webkit-fill-available; width: -moz-available;">
-                                <!-- First image on the left side -->
-
+                                <img class="image-container image-left random-image" [src]="randomImageSource"
+                                    alt="generic dubai image">
                             </div>
-                            <div style="">
-                                <p class="blockquote blockquote-primary"
-                                    style="text-transform: unset; width: 220px;top: 575px;right: 55px; text-align: center;">
-                                    For detailed information on {{landmarkWithDescription.title}}, visit
 
-                                    <em><a [href]="landmarkWithDescription.url">{{landmarkWithDescription.url |
-                                            urlShortenPipe | urlShortenPipe}}</a></em>
-
-                                    <br>
-                                </p>
-                            </div>
+                            <p class="blockquote blockquote-primary quote-text">
+                                For detailed information on {{landmarkWithDescription.title}}, visit
+                                <em><a [href]="landmarkWithDescription.url">{{landmarkWithDescription.url |
+                                        urlShortenPipe | urlShortenPipe}}</a></em>
+                                <br>
+                            </p>
 
                         </div>
+
                         <div class="col-md-5">
                             <!-- First image on the right side, above the article -->
-
-                            <!-- <button class="btn btn-primary" (click)="open(classic,'' , '')">
-                                Launch Modal
-                               </button> -->
-                            <ng-template #classic let-c="close" let-d="dismiss">
+                            <ng-template #classicModal let-c="close" let-d="dismiss">
                                 <div class="modal-body"
                                     style="background: black; padding: 5px; cursor: zoom-out; margin: 0;"
                                     (click)="d('Cross click')">
@@ -73,7 +63,7 @@
                                 </div>
                             </ng-template>
 
-                            <img class="image-container image-right" (click)="open(classic,'' , '')"
+                            <img class="image-container image-right" (click)="open(classicModal,'' , '')"
                                 [src]="landmarkWithDescription.photo_thumb.url"
                                 [alt]="landmarkWithDescription.photo_thumb.name"
                                 style="margin-left:unset; cursor:zoom-in;">
