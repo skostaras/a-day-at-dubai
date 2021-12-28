@@ -32,7 +32,7 @@
                     </div>
                 </div>
 
-                <div class="separator separator-primary"></div>
+                <div class="separator separator-primary separator-custom"></div>
 
                 <div class="section-story-overview main-view">
                     <div class="row">
@@ -59,7 +59,7 @@
                                 [src]="landmarkWithDescription.photo_thumb.url"
                                 [alt]="landmarkWithDescription.photo_thumb.name">
 
-                            <h3 class="learn-more">Learn more
+                            <h3 class="learn-more title">Learn more
                             </h3>
 
                             <ng-template #classicModal let-c="close" let-d="dismiss">
@@ -71,6 +71,9 @@
 
                             <p class="justify">{{landmarkWithDescription.description}}
                             </p>
+
+                            <div class="separator separator-primary separator-custom"></div>
+
                         </div>
                     </div>
 

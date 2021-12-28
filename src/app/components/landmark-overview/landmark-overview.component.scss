@@ -17,6 +17,7 @@
 
 .h5-style {
     color: unset;
+    margin-bottom: 25px !important;
 }
 
 .containet-index {
@@ -24,8 +25,8 @@
 }
 
 .main-view {
-    padding-top: 65px; 
-    margin-top: 30px; 
+    padding-top: 0px; 
+    margin-top: 0px; 
 }
 
 .random-image {
@@ -57,20 +58,25 @@
 
 .learn-more {
     text-align: center;
+    margin-top: unset !important;
 }
 
 .justify {
     text-align: justify;
+    margin-bottom: 45px !important;
 }
 
 .maps-row {
     display: flex; 
     justify-content: center; 
-    margin-top: 62px;
 }
 
 .apple-maps {
     display: block; 
     width: 1000px; 
     height: 500px;
+}
+
+.separator-custom {
+    margin-bottom: 60px;
 }
