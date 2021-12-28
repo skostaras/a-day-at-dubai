@@ -4,7 +4,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms'
 import { Subject } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { HttpService } from 'app/services/http.service';
-import { NotificationService } from '../../../services/notification.service';
+import { NotificationService } from 'app/services/notification.service';
 
 @Component({
     selector: 'app-login-component',
@@ -13,16 +13,10 @@ import { NotificationService } from '../../../services/notification.service';
 })
 export class LoginComponent {
 
-    closeResult: string | undefined;
-    currentUsername: string = '';
-    loggedIn = false;
-
     @Output() isLoggedIn = new EventEmitter();
 
-    focus: any;
-    focus1: any;
-
-    //TODO disabled button doesn't work
+    currentUsername: string = '';
+    loggedIn = false;
 
     loginForm = new FormGroup({
         username: new FormControl(null, Validators.required),
@@ -44,11 +38,10 @@ export class LoginComponent {
 
         if (this.httpService.userValue) {
             this.loggedIn = true;
-            this.isLoggedIn.emit(true);
         } else {
             this.loggedIn = false;
-            this.isLoggedIn.emit(false);
         }
+        this.isLoggedIn.emit(this.loggedIn);
 
         const username = localStorage.getItem("username");
         if (username) {
@@ -70,6 +63,10 @@ export class LoginComponent {
 
         let navbar = document.getElementsByTagName('nav')[0];
         navbar.classList.remove('navbar-transparent');
+    }
+
+    openModal(content: any) {
+        this.modalService.open(content, { windowClass: 'modal-mini', size: 'sm' })
     }
 
     subscribeToLoginFormSubject() {
@@ -111,40 +108,6 @@ export class LoginComponent {
         if (confirm("Are you sure you want to logout?")) {
             this.logoutSubject.next();
             this.subscribeToLogoutSubject();
-        }
-    }
-
-
-    open(content: any, type: string, modalDimension: string | undefined) {
-        if (modalDimension === 'sm' && type === 'modal_mini') {
-            this.modalService.open(content, { windowClass: 'modal-mini', size: 'sm' }).result.then((result) => {
-                this.closeResult = `Closed with: ${result}`;
-            }, (reason) => {
-                this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-            });
-        } else if (modalDimension == undefined && type === 'Login') {
-            this.modalService.open(content, { windowClass: 'modal-login modal-primary' }).result.then((result) => {
-                this.closeResult = `Closed with: ${result}`;
-            }, (reason) => {
-                this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-            });
-        } else {
-            this.modalService.open(content).result.then((result) => {
-                this.closeResult = `Closed with: ${result}`;
-            }, (reason) => {
-                this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-            });
-        }
-
-    }
-
-    private getDismissReason(reason: any): string {
-        if (reason === ModalDismissReasons.ESC) {
-            return 'by pressing ESC';
-        } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-            return 'by clicking on a backdrop';
-        } else {
-            return `with: ${reason}`;
         }
     }
 

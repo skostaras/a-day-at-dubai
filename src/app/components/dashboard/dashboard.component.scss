@@ -11,6 +11,10 @@ select option {
     top: 50px !important;
 }
 
+.top-content {
+    top: 45% !important;
+}
+
 .logo {
     width: 150px !important;
 }
@@ -25,13 +29,13 @@ select option {
 }
 
 .select-style {
-    border-radius: 30px !important; 
-    font-size: 0.8571em !important; 
-    background-color: rgba(255, 255, 255, 0.1) !important; 
-    margin-bottom: 60px !important; 
-    color: white !important; 
-    height: 46px !important; 
-    border:none !important;
+    border-radius: 30px; 
+    font-size: 0.8571em; 
+    background-color: rgba(255, 255, 255, 0.1); 
+    margin-bottom: 60px; 
+    color: white; 
+    height: 46px; 
+    border:none;
 }
 
 .input-style {
