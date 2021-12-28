@@ -12,19 +12,27 @@
                 </div>
             </div>
         </div>
+
         <div class="section" style="padding: 95px 0 30px 0">
             <div class="container">
+
+                <div class="button-container">
+                    <!-- <a href="#button" class="btn btn-primary btn-round btn-lg">Follow</a> -->
+                    <button *ngIf="loggedIn" [routerLink]="'/dashboard'" [queryParams]="{id: landmarkId}"
+                        class="btn btn-primary btn-round btn-lg" style="margin-bottom: 25px;" type="button">
+                        Edit this landmark
+                    </button>
+                </div>
+
                 <div class="row">
                     <div class="col-md-8 ml-auto mr-auto text-center">
-                        
-                        <button *ngIf="loggedIn"  [routerLink]="'/dashboard'" [queryParams]="{id: landmarkId}" class="btn btn-primary btn-round" style="margin-bottom: 25px;" type="button"  >
-							Edit this landmark
-						</button>
+
                         <h3 class="title">What you should know</h3>
                         <h5 class="description" [innerText]="landmarkWithDescription.short_info" style="color: unset;">
                         </h5>
                     </div>
                 </div>
+
                 <!-- <div class="separator separator-primary"></div> -->
                 <div class="section-story-overview" style="padding-top: 65px; margin-top: 30px;">
                     <div class="row">
@@ -74,7 +82,7 @@
                             </h3>
 
 
-						
+
                             <!-- <div class="separator separator-primary"></div> -->
                             <p style="text-align: justify;">{{landmarkWithDescription.description}}
                             </p>

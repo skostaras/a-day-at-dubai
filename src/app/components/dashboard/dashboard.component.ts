@@ -26,15 +26,15 @@ export class DashboardComponent implements OnInit {
         this.subscribeToEditFormSubject();
     }
 
-    private editFormSubject = new Subject();
     focus: any;
+
+    editFormSubject = new Subject();
 
     landmarkSelectionForm = new FormGroup({
         landmarkId: new FormControl(null),
     })
 
     allLandmarks$: Observable<LandmarkWithPhotos[]>;
-    activeLandmark$: Observable<LandmarkWithPhotosAndDescription>;
     activeLandmarkId: string = null;
 
     landmarkEditForm = new FormGroup({
@@ -89,8 +89,6 @@ export class DashboardComponent implements OnInit {
         if (landmarkId) {
             this.httpService.getLandmarkById(landmarkId).subscribe(
                 landmark => {
-                    this.activeLandmark$ = of(landmark);
-
                     this.landmarkEditForm.setValue({
                         title: landmark.title,
                         longtitude: landmark.location[0],
@@ -104,13 +102,10 @@ export class DashboardComponent implements OnInit {
             )
             this.router.navigate([], { queryParams: { id: landmarkId }, queryParamsHandling: 'merge' })
         }
-
-
-
     }
 
     submitEdit() {
-        let activeLandmarkTitle = this.landmarkEditForm.get('title').value;
+        const activeLandmarkTitle = this.landmarkEditForm.get('title').value;
         if (confirm("Are you sure you want to update " + activeLandmarkTitle + "?")) {
             this.editedLandmark.title = activeLandmarkTitle;
             this.editedLandmark.location[0] = this.landmarkEditForm.get('longtitude').value;
@@ -121,7 +116,6 @@ export class DashboardComponent implements OnInit {
             this.editedLandmark.objectId = this.landmarkEditForm.get('objectId').value;
 
             this.editFormSubject.next(this.editedLandmark);
-            this.router.navigate([], { queryParams: { id: null }, queryParamsHandling: 'merge' })
             this.subscribeToEditFormSubject();
         }
     }
@@ -136,6 +130,7 @@ export class DashboardComponent implements OnInit {
                 this.notificationService.successNotification(response.message);
                 this.landmarkEditForm.reset();
                 this.landmarkSelectionForm.reset();
+                this.router.navigate([], { queryParams: { id: null }, queryParamsHandling: 'merge' })
                 this.activeLandmarkId = null;
             })
     }
