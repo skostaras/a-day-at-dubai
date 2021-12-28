@@ -1,10 +1,10 @@
-import { Component, Inject, OnInit, Renderer2, AfterViewInit } from '@angular/core';
-import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { LandmarkWithPhotosAndDescription } from 'app/models/landmark-with-photos-and-description';
 import { HttpService } from 'app/services/http.service';
 import { AnnotationConstructorOptionsInterface, MapConstructorOptions, MapKitInitOptions } from 'ngx-apple-maps/lib/declarations';
-import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-landmark-overview',
@@ -13,53 +13,6 @@ import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 
 export class LandmarkOverviewComponent implements OnInit {
-  focus;
-  focus1;
-
-  loggedIn = this.httpService.userValue ? true : false;
-
-  map
-  landmarkWithDescription$: Observable<LandmarkWithPhotosAndDescription>;
-
-  landmarkId: string;
-
-  imageLoading = true;
-
-  options: MapKitInitOptions = {
-    language: 'en', // default browser language
-    callback: (data, error) => {
-      //   // return map event
-    },
-    JWT: 'eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjQ1S0Q2SzhaVzgifQ.eyJpc3MiOiJXSjM2MzM3NE1ZIiwiaWF0IjoxNjQwMjY1Nzg0LCJleHAiOjE2NzE3NTM2MDB9.IXwpGhGhHI5WFFK5UXvtIXJVjYoPJIKoV4m94Wa9IGmhc4SXvyZs4NPBdEtqbO0hL81drJHXs6cGEEEPsjJzaw' // Json Web token
-  }
-  annotationOptions: AnnotationConstructorOptionsInterface = {
-    title: ""
-  }
-  latitude = 0
-  longitude = 0
-
-  settings: MapConstructorOptions = {
-    center: { // center of the map
-      latitude: 0,
-      longitude: 0
-    },
-    mapType: 'hybrid', // 'mutedStandard' | 'standard' | 'satellite' | 'hybrid'
-    padding: { // map padding
-      top: 10,
-      right: 10,
-      bottom: 0,
-      left: 0
-    },
-    isRotationEnabled: true,
-    showsCompass: 'adaptive', // 'adaptive' (showing always and on the touch screen devices hides if rotationElabled: false and rotation: 0) | 'hidden' | 'visible'
-    isScrollEnabled: true, // A Boolean value that determines whether the user may scroll the map with a pointing device or with gestures on a touchscreen.
-    showsScale: 'adaptive', // 'adaptive' | 'hidden' | 'visible' https://developer.apple.com/documentation/mapkitjs/mapkit/map/2973941-showsscale?changes=latest_minor
-    showsUserLocation: false,
-    tracksUserLocation: false,
-    showsUserLocationControl: false
-  }
-
-  randomImageSource = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -68,50 +21,55 @@ export class LandmarkOverviewComponent implements OnInit {
     private modalService: NgbModal,
   ) { }
 
-  closeResult: string;
+  loggedIn = this.httpService.userValue ? true : false;
 
-  //TODO loading
+  landmarkWithDescription$: Observable<LandmarkWithPhotosAndDescription>;
+  landmarkId: string;
+  randomImageSource = '';
 
-  open(content, type, modalDimension) {
+  // Map Settings follow
+  appleMap: any;
 
-    if (modalDimension === 'sm' && type === 'modal_mini') {
-      this.modalService.open(content, { windowClass: 'modal-mini modal-primary', size: 'sm' }).result.then((result) => {
-      }, (reason) => {
-      });
-    } else if (modalDimension == undefined && type === 'Login') {
-      this.modalService.open(content, { windowClass: 'modal-login modal-primary' }).result.then((result) => {
-      }, (reason) => {
-      });
-    } else {
-      document.getElementsByClassName('modal-dialog')[0].classList.add('modal-xl');
-      this.modalService.open(content).result.then((result) => {
-
-      }, (reason) => {
-      });
-    }
-
+  mapOptions: MapKitInitOptions = {
+    JWT: 'eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjQ1S0Q2SzhaVzgifQ.eyJpc3MiOiJXSjM2MzM3NE1ZIiwiaWF0IjoxNjQwMjY1Nzg0LCJleHAiOjE2NzE3NTM2MDB9.IXwpGhGhHI5WFFK5UXvtIXJVjYoPJIKoV4m94Wa9IGmhc4SXvyZs4NPBdEtqbO0hL81drJHXs6cGEEEPsjJzaw' // Json Web token
   }
 
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return `with: ${reason}`;
-    }
+  mapAnnotationOptions: AnnotationConstructorOptionsInterface = {
+    title: ""
   }
 
-  onLoaded(e) {
-    this.map = e;
-    this.map.zoom = 11;
+  latitude = 0
+  longitude = 0
+
+  mapSettings: MapConstructorOptions = {
+    center: {
+      latitude: 0,
+      longitude: 0
+    },
+    mapType: 'hybrid',
+    padding: {
+      top: 10,
+      right: 10,
+      bottom: 0,
+      left: 0
+    },
+    isRotationEnabled: true,
+    showsCompass: 'adaptive',
+    isScrollEnabled: true,
+    showsScale: 'adaptive',
+    showsUserLocation: false,
+    tracksUserLocation: false,
+    showsUserLocationControl: false
   }
 
   ngOnInit() {
-
     let randomInt = this.getRandomInt(1, 6);
     this.randomImageSource = 'assets/img/dubai' + randomInt + '.jpg';
 
+    this.getLandmarkFromUrl();
+  }
+
+  getLandmarkFromUrl() {
     this.landmarkId = this.route.snapshot.queryParams['id'];
 
     if (this.landmarkId) {
@@ -120,12 +78,12 @@ export class LandmarkOverviewComponent implements OnInit {
           this.landmarkWithDescription$ = of(landmark);
 
           this.longitude = landmark.location[0];
-          this.settings.center.longitude = landmark.location[0];
+          this.mapSettings.center.longitude = landmark.location[0];
 
           this.latitude = landmark.location[1];
-          this.settings.center.latitude = landmark.location[1];
+          this.mapSettings.center.latitude = landmark.location[1];
 
-          this.annotationOptions.title = landmark.title;
+          this.mapAnnotationOptions.title = landmark.title;
 
         }, (error) => {
           this.router.navigateByUrl('/home');
@@ -135,11 +93,18 @@ export class LandmarkOverviewComponent implements OnInit {
       this.router.navigateByUrl('/home');
     }
 
+  }
 
-    var body = document.getElementsByTagName('body')[0];
-    body.classList.add('landing-page');
-    var navbar = document.getElementsByTagName('nav')[0];
-    navbar.classList.add('navbar-transparent');
+  onMapLoad(map) {
+    this.appleMap = map;
+    this.appleMap.zoom = 11;
+  }
+
+  openModal(content) {
+    this.modalService.open(content);
+    setTimeout(() => {
+      document.getElementsByClassName('modal-dialog')[0].classList.add('modal-xl');
+    }, 0);
   }
 
   getRandomInt(min, max) {
@@ -148,10 +113,4 @@ export class LandmarkOverviewComponent implements OnInit {
     return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
   }
 
-  ngOnDestroy() {
-    var body = document.getElementsByTagName('body')[0];
-    body.classList.remove('landing-page');
-    var navbar = document.getElementsByTagName('nav')[0];
-    navbar.classList.remove('navbar-transparent');
-  }
 }

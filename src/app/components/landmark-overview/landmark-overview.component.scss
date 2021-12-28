@@ -42,3 +42,35 @@
     right: 55px !important; 
     text-align: center !important;
 }
+
+.modal-body2 {
+    background: black; 
+    padding: 5px; 
+    cursor: zoom-out; 
+    margin: 0;
+}
+
+.image-for-zoom {
+    margin-left:unset; 
+    cursor:zoom-in;
+}
+
+.learn-more {
+    text-align: center;
+}
+
+.justify {
+    text-align: justify;
+}
+
+.maps-row {
+    display: flex; 
+    justify-content: center; 
+    margin-top: 62px;
+}
+
+.apple-maps {
+    display: block; 
+    width: 1000px; 
+    height: 500px;
+}

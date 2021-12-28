@@ -32,6 +32,8 @@
                     </div>
                 </div>
 
+                <div class="separator separator-primary"></div>
+
                 <div class="section-story-overview main-view">
                     <div class="row">
                         <div class="col-md-6">
@@ -53,42 +55,36 @@
 
                         <div class="col-md-5">
                             <!-- First image on the right side, above the article -->
-                            <ng-template #classicModal let-c="close" let-d="dismiss">
-                                <div class="modal-body"
-                                    style="background: black; padding: 5px; cursor: zoom-out; margin: 0;"
-                                    (click)="d('Cross click')">
+                            <img class="image-container image-right image-for-zoom" (click)="openModal(classicModal)"
+                                [src]="landmarkWithDescription.photo_thumb.url"
+                                [alt]="landmarkWithDescription.photo_thumb.name">
 
+                            <h3 class="learn-more">Learn more
+                            </h3>
+
+                            <ng-template #classicModal let-c="close" let-d="dismiss">
+                                <div class="modal-body modal-body2" (click)="d('Cross click')">
                                     <img [src]="landmarkWithDescription.photo.url"
                                         [alt]="landmarkWithDescription.photo.name">
                                 </div>
                             </ng-template>
 
-                            <img class="image-container image-right" (click)="open(classicModal,'' , '')"
-                                [src]="landmarkWithDescription.photo_thumb.url"
-                                [alt]="landmarkWithDescription.photo_thumb.name"
-                                style="margin-left:unset; cursor:zoom-in;">
-
-                            <h3 class="" style="text-align: center;">Learn more
-                            </h3>
-
-
-
-                            <!-- <div class="separator separator-primary"></div> -->
-                            <p style="text-align: justify;">{{landmarkWithDescription.description}}
+                            <p class="justify">{{landmarkWithDescription.description}}
                             </p>
                         </div>
                     </div>
-                    <div class="row" style="display: flex; justify-content: center; margin-top: 62px;">
-                        <ngx-apple-maps id="map" style="display: block; width: 1000px; height: 500px;"
-                            [options]="options" [settings]="settings" (onLoaded)="onLoaded($event)">
+
+                    <div class="row maps-row">
+                        <ngx-apple-maps id="map" class="apple-maps" [options]="mapOptions" [settings]="mapSettings"
+                            (onLoaded)="onMapLoad($event)">
 
                             <ngx-apple-maps-annotation [latitude]="latitude" [longitude]="longitude"
-                                [options]="annotationOptions">
+                                [options]="mapAnnotationOptions">
                             </ngx-apple-maps-annotation>
 
                         </ngx-apple-maps>
-
                     </div>
+
                 </div>
             </div>
         </div>
