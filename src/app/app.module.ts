@@ -15,12 +15,12 @@ import { CommonModule } from '@angular/common';
 import { NouisliderModule } from 'ng2-nouislider';
 import { JwBootstrapSwitchNg2Module } from 'jw-bootstrap-switch-ng2';
 import { LandmarkOverviewComponent } from './components/landmark-overview/landmark-overview.component';
-import { HomeComponent } from './components/home.component';
 import { LoginComponent } from './components/shared/login/login.component';
 import { AllLandmarksComponent } from './components/all-landmarks/all-landmarks.component';
 import { FooterComponent } from './components/shared/footer/footer.component';
 import { UrlShortenPipe } from './components/shared/url-shorten-pipe';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
     declarations: [

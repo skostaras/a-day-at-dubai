@@ -1,0 +1,20 @@
+.section-style {
+    padding: 30px 0; 
+}
+
+.description-style {
+    margin-bottom: 25px !important;
+}
+
+.separator-custom {
+    margin-bottom: 60px;
+}
+
+.image-style {
+    display: flex; 
+    justify-content: center;
+}
+
+.popular-style {
+    padding-top: 30px
+}

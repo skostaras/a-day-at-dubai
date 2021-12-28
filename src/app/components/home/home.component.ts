@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpService } from '../services/http.service';
-import { LandmarkWithPhotos } from '../models/landmark-with-photos';
+import { LandmarkWithPhotos } from 'app/models/landmark-with-photos';
+import { HttpService } from 'app/services/http.service';
 import { Observable, of } from 'rxjs';
 
 @Component({
     selector: 'app-components',
     templateUrl: './home.component.html',
+    styleUrls: ['./home.component.css']
 })
 
 export class HomeComponent implements OnInit {
