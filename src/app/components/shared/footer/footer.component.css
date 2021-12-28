@@ -1,0 +1,21 @@
+.footer-padding {
+    padding: 10px 0
+}
+
+.footer-container {
+    display: flex; 
+    align-items: center; 
+    justify-content: end;
+}
+
+.text-margin {
+    margin: 0;   
+}
+
+.li-margin1 {
+    margin-left: 15px;
+}
+
+.li-margin2 {
+    margin-left: 5px;
+}

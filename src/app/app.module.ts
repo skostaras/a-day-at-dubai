@@ -6,21 +6,21 @@ import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app.routing';
 
 import { AppComponent } from './app.component';
-import { NavbarComponent } from './shared/navbar/navbar.component';
+import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './services/auth.interceptor';
 import { ErrorInterceptor } from './services/error.interceptor';
-import { NotificationComponent } from './components/notification/notification.component';
+import { NotificationComponent } from './components/shared/notification/notification.component';
 import { AppleMapsModule } from 'ngx-apple-maps';
 import { CommonModule } from '@angular/common';
 import { NouisliderModule } from 'ng2-nouislider';
 import { JwBootstrapSwitchNg2Module } from 'jw-bootstrap-switch-ng2';
 import { LandmarkOverviewComponent } from './components/landmark-overview/landmark-overview.component';
 import { HomeComponent } from './components/home.component';
-import { LoginComponent } from './shared/login/login.component';
+import { LoginComponent } from './components/shared/login/login.component';
 import { AllLandmarksComponent } from './components/all-landmarks/all-landmarks.component';
-import { FooterComponent } from './shared/footer/footer.component';
-import { UrlShortenPipe } from './shared/url-shorten-pipe';
+import { FooterComponent } from './components/shared/footer/footer.component';
+import { UrlShortenPipe } from './components/shared/url-shorten-pipe';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 @NgModule({

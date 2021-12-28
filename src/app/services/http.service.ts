@@ -49,7 +49,6 @@ export class HttpService {
                     localStorage.removeItem('username');
                     this.userSubject.next(null);
 
-                    
                     if (this.router.url.includes('dashboard')) {
                         this.router.navigate(['/']);
                     }
@@ -69,8 +68,6 @@ export class HttpService {
     }
 
     getLandmarkById(objectId: string): Observable<LandmarkWithPhotosAndDescription> {
-        console.log(objectId);
-        
         return this.http.get<LandmarkWithPhotosAndDescription>(this.landmarksUrl + '/' + objectId, {});
     }
 

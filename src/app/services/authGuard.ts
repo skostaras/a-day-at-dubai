@@ -13,14 +13,13 @@ export class AuthGuard implements CanActivate {
     ) { }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        //TODO dummy? need to check token status irl   
+
         const user = this.authenticationService.userValue;
         if (user) {
             return true;
         }
 
         this.notificationService.errorNotification("You don't have permissions to access this page.")
-
         this.router.navigate(['/']);
         return false;
     }

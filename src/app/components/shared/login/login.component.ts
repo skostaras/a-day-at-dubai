@@ -4,7 +4,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms'
 import { Subject } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { HttpService } from 'app/services/http.service';
-import { NotificationService } from '../../services/notification.service';
+import { NotificationService } from '../../../services/notification.service';
 
 @Component({
     selector: 'app-login-component',

@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/filter';
 import { DOCUMENT } from '@angular/common';
 import { Location } from '@angular/common';
-import { NavbarComponent } from './shared/navbar/navbar.component';
+import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { HttpService } from './services/http.service';
 import { User } from './models/user';
 
@@ -30,15 +30,15 @@ export class AppComponent implements OnInit {
     changeFavicon() {
         let favIcon: HTMLLinkElement = document.querySelector('#appIcon');
         if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            favIcon.href ='assets/img/logo-white.png';
+            favIcon.href = 'assets/img/logo-white.png';
         } else {
-            favIcon.href ='assets/img/logo-black.png'
+            favIcon.href = 'assets/img/logo-black.png'
         }
     }
 
     ngOnInit() {
         this.changeFavicon();
-        
+
         var navbar: HTMLElement = this.element.nativeElement.children[0].children[0];
         this._router = this.router.events.filter(event => event instanceof NavigationEnd).subscribe((event: NavigationEnd) => {
             if (window.outerWidth > 991) {

@@ -1,6 +1,6 @@
 import { Component, OnInit, ElementRef, Input } from '@angular/core';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
-import { HttpService } from '../../services/http.service';
+import { HttpService } from '../../../services/http.service';
 import { Subject } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
