@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { IAlert } from 'app/components/notification/notification.component';
 import { Observable, Subject } from 'rxjs';
+import { NotificationCustom } from '../models/notification-custom';
 
 @Injectable({ providedIn: 'root' })
 export class NotificationService {
@@ -11,8 +11,8 @@ export class NotificationService {
     }
 
     successNotification(message: string) {
-        let successAlert: IAlert;
-        successAlert = {
+        let successNotification: NotificationCustom;
+        successNotification = {
             id: 1,
             type: 'success',
             strong: 'Success',
@@ -20,16 +20,16 @@ export class NotificationService {
             icon: 'ui-1_check',
         }
 
-        this.subject.next({ alert: successAlert });
+        this.subject.next({ notification: successNotification });
 
         setTimeout(() => {
-            this.subject.next({ alert: null });
+            this.subject.next({ notification: null });
         }, 5000);
     }
 
     errorNotification(message: string) {
-        let errorAlert: IAlert;
-        errorAlert = {
+        let errorNotification: NotificationCustom;
+        errorNotification = {
             id: 2,
             type: 'danger',
             strong: 'Error',
@@ -37,16 +37,15 @@ export class NotificationService {
             icon: 'business_bulb-63',
         }
 
-        this.subject.next({ alert: errorAlert });
+        this.subject.next({ notification: errorNotification });
         setTimeout(() => {
-            this.subject.next({ alert: null });
+            this.subject.next({ notification: null });
         }, 8000);
     }
 
-
     infoNotification(message: string) {
-        let infoAlert: IAlert;
-        infoAlert = {
+        let infoNotification: NotificationCustom;
+        infoNotification = {
             id: 3,
             type: 'info',
             strong: 'Heads up',
@@ -54,14 +53,14 @@ export class NotificationService {
             icon: 'travel_info',
         }
 
-        this.subject.next({ alert: infoAlert });
+        this.subject.next({ notification: infoNotification });
 
         setTimeout(() => {
-            this.subject.next({ alert: null });
+            this.subject.next({ notification: null });
         }, 5000);
     }
 
-    getAlert(): Observable<any> {
+    getNotification(): Observable<any> {
         return this.subject.asObservable();
     }
 }

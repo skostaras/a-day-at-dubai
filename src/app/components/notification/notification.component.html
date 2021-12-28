@@ -1,18 +1,18 @@
-<ngb-alert *ngIf="alert" [type]="alert.type" [dismissible]="false" class="notification-alert">
+<ngb-alert *ngIf="notification" [type]="notification.type" [dismissible]="false" class="notification-alert">
     <div class="container">
         <div class="alert-wrapper">
-            <button type="button" name="button" class="close" (click)="closeAlert()">
+            <button type="button" name="button" class="close" (click)="closeNotification()">
                 <span aria-hidden="true">
                     <i class="now-ui-icons ui-1_simple-remove"></i>
                 </span>
             </button>
             <div class="message">
-                <ng-container *ngIf="alert.icon">
+                <ng-container *ngIf="notification.icon">
                     <div class="alert-icon">
-                        <i class="now-ui-icons {{alert.icon}}"></i>
+                        <i class="now-ui-icons {{notification.icon}}"></i>
                     </div>
                 </ng-container>
-                <strong>{{alert.strong}} </strong>{{ alert.message }}
+                <strong>{{notification.strong}} </strong>{{ notification.message }}
             </div>
         </div>
     </div>

@@ -1,5 +1,6 @@
 import { Input, Component, OnInit } from '@angular/core';
 import { NotificationService } from 'app/services/notification.service';
+import { NotificationCustom } from '../../models/notification-custom';
 
 @Component({
     selector: 'app-notification',
@@ -10,27 +11,19 @@ import { NotificationService } from 'app/services/notification.service';
 export class NotificationComponent implements OnInit {
 
     @Input()
-    public alert: IAlert;
+    public notification: NotificationCustom;
 
     constructor(
         private notificationService: NotificationService
-    ) {}
+    ) { }
 
     ngOnInit() {
-        this.notificationService.getAlert().subscribe((response) => {
-            this.alert = response.alert;
+        this.notificationService.getNotification().subscribe((response) => {
+            this.notification = response.notification;
         });
     }
 
-    public closeAlert() {
-        this.alert = null;
+    public closeNotification() {
+        this.notification = null;
     }
-}
-
-export interface IAlert {
-    id: number;
-    type: string;
-    strong?: string;
-    message: string;
-    icon?: string;
 }
