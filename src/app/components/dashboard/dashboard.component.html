@@ -1,0 +1,104 @@
+<div class="wrapper">
+    <div class="page-header header2" filter-color="orange">
+        <div class="page-header-image" style="background-image:url(assets/img/dubatiAtDay.jpg)"></div>
+
+        <div class="container">
+            <div class="col-md-4 content-center top-content">
+                <div class="card card-login card-plain card-custom">
+
+                    <div class="header header-primary text-center">
+                        <div class="logo-container logo">
+                            <img src="assets/img/logo-white.png" alt="logo" class="logo-image">
+                            <h4 class="h4-style">Edit Landmark</h4>
+                        </div>
+                    </div>
+
+                    <form class="form" [formGroup]="landmarkSelectionForm">
+                        <div *ngIf="allLandmarks$ | async as allLandmarks">
+                            <select class="custom-select select-style" formControlName="landmarkId">
+                                <option value="null" disabled="true" [selected]="true">Select Landmark</option>
+                                <option *ngFor="let landmark of allLandmarks" [value]="landmark.objectId">
+                                    {{landmark.title}}</option>
+                            </select>
+                        </div>
+                    </form>
+
+                    <form class="form" [formGroup]="landmarkEditForm" (ngSubmit)="submitEdit()">
+                        <div class="content">
+
+                            <div class="input-group form-group-no-border input-lg row input-style"
+                                [ngClass]="{'input-group-focus':focus===true}">
+                                <label class="col-sm-3 col-form-label" for="title">Title</label>
+                                <div class="input-group col-sm-9 input-style2">
+                                    <input type="text" class="form-control" id="title" placeholder="..."
+                                        formControlName="title" (focus)="focus=true" (blur)="focus=false">
+                                </div>
+                            </div>
+
+                            <div class="input-group form-group-no-border input-lg row input-style"
+                                [ngClass]="{'input-group-focus':focus===true}">
+                                <label class="col-sm-3 col-form-label" for="longitude">Longtitude</label>
+                                <div class="input-group col-sm-9 input-style2">
+                                    <input type="number" formControlName="longtitude" step="0.00001"
+                                        class="form-control" id="longitude" placeholder="..." (focus)="focus=true"
+                                        (blur)="focus=false">
+                                </div>
+                            </div>
+
+                            <div class="input-group form-group-no-border input-lg row input-style"
+                                [ngClass]="{'input-group-focus':focus===true}">
+                                <label class="col-sm-3 col-form-label" for="latitude">Latitude</label>
+                                <div class="input-group col-sm-9 input-style2">
+                                    <input type="number" formControlName="latitude" step="0.00001" class="form-control"
+                                        id="latitude" placeholder="..." (focus)="focus=true" (blur)="focus=false">
+                                </div>
+                            </div>
+
+                            <div class="input-group form-group-no-border input-lg row input-style"
+                                [ngClass]="{'input-group-focus':focus===true}">
+                                <label class="col-sm-3 col-form-label" for="url">URL</label>
+                                <div class="input-group col-sm-9 input-style2">
+                                    <input type="text" formControlName="url" class="form-control" id="url"
+                                        placeholder="..." (focus)="focus=true" (blur)="focus=false">
+                                </div>
+                            </div>
+
+                            <div class="input-group form-group-no-border input-lg row input-style"
+                                [ngClass]="{'input-group-focus':focus===true}">
+                                <label class="col-sm-3 col-form-label" for="shortInfo">Short Info</label>
+                                <div class="input-group col-sm-9 input-style2">
+                                    <textarea class="form-control textarea-style" formControlName="shortInfo"
+                                        id="shortInfo" placeholder="..." (focus)="focus=true" (blur)="focus=false"
+                                        rows="3"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="input-group form-group-no-border input-lg row input-style"
+                                [ngClass]="{'input-group-focus':focus===true}">
+                                <label class="col-sm-3 col-form-label" for="description">Description</label>
+                                <div class="input-group col-sm-9 input-style2">
+                                    <textarea class="form-control textarea-style" formControlName="description"
+                                        id="description" placeholder="..." (focus)="focus=true" (blur)="focus=false"
+                                        rows="5"></textarea>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="text-center" style="margin-bottom: 0">
+                            <button [ngClass]="activeLandmarkId !==null?'':'disabledCustom'"
+                                [disabled]="activeLandmarkId === null" type="submit"
+                                class="btn btn-primary btn-round btn-lg btn-block">Submit</button>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <app-footer></app-footer>
+
+</div>

@@ -1,0 +1,61 @@
+<div class="wrapper">
+
+    <div class="page-header clear-filter" filter-color="orange">
+        <div class="page-header-image rellax-header rellax" data-rellax-speed="-14"
+            style="background-image: url('assets/img/header.jpg');">
+        </div>
+
+        <div class="container">
+            <div class="content-center brand">
+                <img class="n-logo" src="assets/img/logo-white.png" alt="logo">
+                <h1 class="h1-seo">A Day At Dubai</h1>
+                <h4>Discover the most vibrant of cities, where avant-garde architecture blends harmoniously with the
+                    mystique and culture of Arabia.</h4>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="main">
+
+        <div class="wrapper">
+            <div class="section section-style">
+                <div class="container">
+                    <h3 class="title">...a day you'll remember</h3>
+                    <h5 class="description description-style ">Largest. Tallest. Biggest. Dubai does everything to
+                        the extreme, standing out for its uber-modern design in a historically conservative country. The
+                        soaring
+                        skyscrapers, palm-shaped islands, and golden beaches, paired with vibrant nightlife, luxury
+                        shopping,
+                        and world-class dining, make the city a sight to behold and be explored. </h5>
+
+                    <div class="separator separator-primary separator-custom"></div>
+
+                    <div class="image-style">
+                        <img src="assets/img/dubaiFromSea.jpg" class="rounded img-raised" style="width: 650px;">
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3 class="title text-center popular-style">Popular landmarks</h3>
+                            <h5 class="description description-style">Dubai is
+                                filled with awe-inspiring landmarks that ooze luxury, history, and culture. All Dubai
+                                landmarks
+                                are an
+                                experience that one must indulge in when visiting this luxurious but small city. </h5>
+
+                            <div class="separator separator-primary"></div>
+
+                            <app-all-landmarks [landmarks]="allLandmarks$ | async"></app-all-landmarks>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <app-footer></app-footer>
+
+</div>

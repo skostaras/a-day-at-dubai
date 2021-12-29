@@ -1,0 +1,111 @@
+<ng-container *ngIf="landmarkWithDescription$ | async as landmarkWithDescription">
+
+    <div class="wrapper">
+
+        <div class="page-header page-header-small">
+            <div class="page-header-image" [style.background]="'url(' + landmarkWithDescription.photo.url + ')'"
+                [style.background-position-x]="'center'" [style.background-position-y]="'center'">
+            </div>
+            <div class="container containet-index">
+                <div class="content-center">
+                    <h1 class="title">{{landmarkWithDescription.title}}</h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="section section-style" [ngClass]="loggedIn?'':'margin-top'">
+            <div class="container">
+
+                <div class="button-container">
+                    <button *ngIf="loggedIn" [routerLink]="'/dashboard'" [queryParams]="{id: landmarkId}"
+                        class="btn btn-primary btn-round btn-lg button-margin" type="button">
+                        Edit this landmark
+                    </button>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-8 ml-auto mr-auto text-center">
+                        <h3 class="title">What you should know</h3>
+                        <h5 class="description h5-style" [innerText]="landmarkWithDescription.short_info">
+                        </h5>
+                    </div>
+                </div>
+
+                <div class="separator separator-primary separator-custom"></div>
+
+                <div class="section-story-overview main-view">
+                    <div class="row">
+                        <div class="col-md-6">
+
+                            <!-- First image on the left side -->
+                            <div class="image-container image-left">
+                                <img class="image-container image-left random-image" [src]="randomImageSource"
+                                    alt="generic dubai image">
+                            </div>
+
+                            <div class="image-container random-div" style="margin-top: 200px;">
+                                <img class="image-container random-image" [src]="randomImageSource2"
+                                    alt="generic dubai image">
+                            </div>
+
+                            <div class="quote-div">
+                                <p class="blockquote blockquote-primary quote-text">
+                                    For detailed information on {{landmarkWithDescription.title}}, visit
+                                    <em><a [href]="landmarkWithDescription.url">{{landmarkWithDescription.url |
+                                            urlShortenPipe | urlShortenPipe}}</a></em>
+                                    <br>
+                                </p>
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-5">
+                            <!-- First image on the right side, above the article -->
+                            <img class="image-container image-right image-for-zoom" (click)="openModal(classicModal)"
+                                [src]="landmarkWithDescription.photo_thumb.url"
+                                [alt]="landmarkWithDescription.photo_thumb.name">
+
+                            <h3 class="learn-more title">Learn more
+                            </h3>
+
+                            <ng-template #classicModal let-c="close" let-d="dismiss">
+                                <div class="modal-body modal-body2" (click)="d('Cross click')">
+                                    <img [src]="landmarkWithDescription.photo.url"
+                                        [alt]="landmarkWithDescription.photo.name">
+                                </div>
+                            </ng-template>
+
+                            <p class="justify">{{landmarkWithDescription.description}}
+                            </p>
+
+                            <div class="separator separator-primary separator-custom"></div>
+
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-8 ml-auto mr-auto text-center">
+                            <h3 class="title">{{landmarkWithDescription.title}} location</h3>
+                        </div>
+                    </div>
+
+                    <div class="row maps-row">
+                        <ngx-apple-maps id="map" class="apple-maps" [options]="mapOptions" [settings]="mapSettings"
+                            (onLoaded)="onMapLoad($event)">
+
+                            <ngx-apple-maps-annotation [latitude]="latitude" [longitude]="longitude"
+                                [options]="mapAnnotationOptions">
+                            </ngx-apple-maps-annotation>
+
+                        </ngx-apple-maps>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <app-footer></app-footer>
+
+    </div>
+
+</ng-container>
