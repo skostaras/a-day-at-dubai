@@ -14,15 +14,13 @@ export class NavbarComponent implements OnInit {
 
     constructor(public location: Location, private element: ElementRef,
         private httpService: HttpService
-    ) { }
+    ) {
+        this.httpService.userValue.subscribe((user) => {
+            user ? this.loggedIn = true : this.loggedIn = false;
+        });
+    }
 
     ngOnInit() {
-        if (this.httpService.userValue) {
-            this.loggedIn = true;
-        } else {
-            this.loggedIn = false;
-        }
-
         const navbar: HTMLElement = this.element.nativeElement;
         this.toggleButton = navbar.getElementsByClassName('navbar-toggler')[0];
     }

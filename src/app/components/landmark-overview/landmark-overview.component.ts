@@ -19,9 +19,13 @@ export class LandmarkOverviewComponent implements OnInit {
     private httpService: HttpService,
     private router: Router,
     private modalService: NgbModal,
-  ) { }
+  ) {
+    this.httpService.userValue.subscribe((user) => {
+      user ? this.loggedIn = true : this.loggedIn = false;
+    });
+  }
 
-  loggedIn = this.httpService.userValue ? true : false;
+  loggedIn: boolean;
 
   landmarkWithDescription$: Observable<LandmarkWithPhotosAndDescription>;
   landmarkId: string;

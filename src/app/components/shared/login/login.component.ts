@@ -13,10 +13,22 @@ import { NotificationService } from 'app/services/notification.service';
 })
 export class LoginComponent {
 
+    constructor(
+        private modalService: NgbModal,
+        private httpService: HttpService,
+        private notificationService: NotificationService) {
+        this.subscribeToLoginFormSubject();
+        this.subscribeToLogoutSubject();
+        this.httpService.userValue.subscribe((user) => {
+            user ? this.loggedIn = true : this.loggedIn = false;
+            console.log(this.loggedIn);
+        });
+    }
+
     @Output() isLoggedIn = new EventEmitter();
 
     currentUsername: string = '';
-    loggedIn = false;
+    loggedIn: boolean;
 
     loginForm = new FormGroup({
         username: new FormControl(null, Validators.required),
@@ -26,22 +38,8 @@ export class LoginComponent {
     private loginFormSubject = new Subject();
     private logoutSubject = new Subject();
 
-    constructor(
-        private modalService: NgbModal,
-        private httpService: HttpService,
-        private notificationService: NotificationService) {
-        this.subscribeToLoginFormSubject();
-        this.subscribeToLogoutSubject();
-    }
-
     ngOnInit() {
-
-        if (this.httpService.userValue) {
-            this.loggedIn = true;
-        } else {
-            this.loggedIn = false;
-        }
-        this.isLoggedIn.emit(this.loggedIn);
+        // this.isLoggedIn.emit(this.loggedIn);
 
         const username = localStorage.getItem("username");
         if (username) {

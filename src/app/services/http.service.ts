@@ -25,8 +25,8 @@ export class HttpService {
         this.user = this.userSubject.asObservable();
     }
 
-    public get userValue(): User {
-        return this.userSubject.value;
+    public get userValue(): Observable<User> {
+        return this.userSubject.asObservable();
     }
 
     loginRequest(data: any) {
