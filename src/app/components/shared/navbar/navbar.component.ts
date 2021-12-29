@@ -50,8 +50,4 @@ export class NavbarComponent implements OnInit {
         html.classList.remove('nav-open');
     }
 
-    isLoggedIn(loggedIn: boolean) {
-        this.loggedIn = loggedIn;
-    }
-
 }
